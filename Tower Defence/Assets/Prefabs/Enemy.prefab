@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3228034231705895695}
   - component: {fileID: 6007008912492709641}
   - component: {fileID: 5330339504109346882}
-  - component: {fileID: 1781817720575120983}
   - component: {fileID: 4703315545298393483}
   - component: {fileID: 4771577392321671922}
+  - component: {fileID: 8157802494880825048}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -81,19 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &1781817720575120983
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756855281915617764}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &4703315545298393483
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -107,7 +94,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 444444
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -115,7 +102,7 @@ NavMeshAgent:
   m_Height: 0.99999994
   m_BaseOffset: 0.49999997
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &4771577392321671922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,3 +116,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 4703315545298393483}
+--- !u!136 &8157802494880825048
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756855281915617764}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.49999994
+  m_Height: 1.3537647
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.17688245, z: 0}

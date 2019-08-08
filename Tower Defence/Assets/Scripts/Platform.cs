@@ -17,11 +17,6 @@ public class Platform : MonoBehaviour
         startColor = rend.material.color;
     }
 
-    void OnMouseEnter()
-    {
-        rend.material.color = hoverColor;
-    }
-
     void OnMouseDown()
     {
         if (turret != null)
@@ -29,13 +24,16 @@ public class Platform : MonoBehaviour
             Debug.Log("WTF NIGGA ARE YOU DUMB?? tHeRe IS ALREAADY A TURRET!");
             return;
         }
-
-        GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
-        turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
+        rend.material.color = Color.yellow;
+        BuildManager.instance.onTurretChoose += InstantiateTurret;
+        BuildManager.instance.OpenCloseShop(true);
     }
 
-    void OnMouseExit()
+    public void InstantiateTurret()
     {
+        GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
+        turret = Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
+        BuildManager.instance.onTurretChoose -= InstantiateTurret;
         rend.material.color = startColor;
     }
 }
