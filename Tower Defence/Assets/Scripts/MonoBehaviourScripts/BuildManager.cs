@@ -31,6 +31,7 @@ public class BuildManager : MonoBehaviour
     public GameObject[] turrets;
 
     private GameObject turretToBuild;
+    // private Platform chosenPlatform;
 
     public void ChooseTurret(int index)
     {

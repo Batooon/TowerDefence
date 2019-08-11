@@ -29,7 +29,7 @@ public class Platform : MonoBehaviour
         BuildManager.instance.OpenCloseShop(true);
     }
 
-    public void InstantiateTurret()
+    public void InstantiateTurret()//Стоит ли перенести это в BuildManager?
     {
         GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
         turret = Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);

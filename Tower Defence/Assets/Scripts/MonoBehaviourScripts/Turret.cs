@@ -5,20 +5,21 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
+    public TurretObject turret;
     private Transform target;
 
-    [Header("Attributes")]
+    /*[Header("Attributes")]
 
     [Range(2f,4f)]
     public float range = 3f;
     [Range(1f,5f)]
     public float fireRate = 1f;
-    public float fireCountdown = 0f;
+    public float fireCountdown = 0f;*/
 
     [Header("Unity Setup Fields")]
 
-    [HideInInspector]
-    public float speedRotation = 10f;
+    /*[HideInInspector]
+    public float speedRotation = 10f;*/
     [HideInInspector]
     private string enemyTag = "Enemy";
     [HideInInspector]
@@ -27,18 +28,10 @@ public class Turret : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
 
-
-    /*public GameObject turret;
-    public Transform spawnPoint;
-    [HideInInspector]
-    public GameObject enemy;
-    public GameObject bullet;*/
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("SearchForEnemy", 0f, 0.5f);
-        //enemy = GameObject.FindGameObjectWithTag("Enemy");
-        //InvokeRepeating("Attack", 3f, 1f);
     }
 
     void SearchForEnemy()
@@ -59,7 +52,7 @@ public class Turret : MonoBehaviour
             }
         }
 
-        if (nearestEnemy != null && shortestDistance <= range)
+        if (nearestEnemy != null && shortestDistance <= turret.range)
             target = nearestEnemy.transform;
         else
             target = null;
@@ -73,12 +66,12 @@ public class Turret : MonoBehaviour
 
         RotateToEnemy();
 
-        if (fireCountdown <= 0f)
+        if (turret.fireCountdown <= 0f)
         {
             Shoot();
-            fireCountdown = 1f / fireRate;
+            turret.fireCountdown = 1f / turret.fireRate;
         }
-        fireCountdown -= Time.deltaTime;
+        turret.fireCountdown -= Time.deltaTime;
     }
 
     private void Shoot()
@@ -94,24 +87,13 @@ public class Turret : MonoBehaviour
     {
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
-        Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * speedRotation).eulerAngles;
+        Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turret.speedRotation).eulerAngles;
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
-
-    /*private void Attack()
-    {
-        if (WaveSpawner.IsWaveIncoming)
-        {
-            enemy = GameObject.FindGameObjectWithTag("Enemy");
-            GameObject go = Instantiate(bullet, spawnPoint);
-            go.transform.parent = null;
-            go.GetComponent<Bullet>()?.Init(enemy.transform);
-        }
-    }*/
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.DrawWireSphere(transform.position, turret.range);
     }
 }

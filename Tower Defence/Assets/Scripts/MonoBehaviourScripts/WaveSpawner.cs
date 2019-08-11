@@ -20,24 +20,31 @@ public class WaveSpawner : MonoBehaviour
 
     public Text wavecountdownText;
 
-
+    void Start()
+    {
+        countdown = waves[0].countdown;
+    }
     void Update()
     {
-        if (countdown <= 0f)
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            if (waveNumber < waves.Length && !isWaveIncoming)
+            Time.timeScale = 0;
+        }
+
+        if (!isWaveIncoming)
+        {
+            countdown -= Time.deltaTime;
+
+            if (waveNumber < waves.Length && countdown < 0)
             {
                 isWaveIncoming = true;
                 StartCoroutine(SpawnWave());
-                countdown = waves[waveNumber].countdown;
             }
         }
-
-        countdown -= Time.deltaTime;
-        if (!isWaveIncoming)
-            wavecountdownText.text = Mathf.CeilToInt(countdown).ToString();
         else
-            wavecountdownText.text = 0.ToString();
+            countdown = 0f;
+
+        wavecountdownText.text = Mathf.CeilToInt(countdown).ToString();
     }
 
     private IEnumerator SpawnWave()
@@ -47,9 +54,14 @@ public class WaveSpawner : MonoBehaviour
             SpawnEnemy(i);
             yield return new WaitForSeconds(spawnBetweenEnemies);
         }
-        yield return new WaitForSeconds(10f);//TODO: сделать проверку, когда волна заканчивается и врагов нет на поле, чтобы начать отсчет до новой волны
-        isWaveIncoming = false;
+
         waveNumber++;
+
+        if (waveNumber < waves.Length)
+        {
+            countdown = waves[waveNumber].countdown;
+            isWaveIncoming = false;
+        }
     }
 
     private void SpawnEnemy(int index)
