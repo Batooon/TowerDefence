@@ -769,6 +769,7 @@ GameObject:
   - component: {fileID: 589487238}
   - component: {fileID: 589487239}
   - component: {fileID: 589487240}
+  - component: {fileID: 589487241}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -802,6 +803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fca83966d3a734d8eb71854c0d2b97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   waves:
   - countdown: 10
     waveData:
@@ -838,7 +840,6 @@ MonoBehaviour:
     type: 3}
   isWaveIncoming: 0
   countdown: 10
-  wavecountdownText: {fileID: 1224669752}
 --- !u!114 &589487239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851,108 +852,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28afc34a4c4a5b4ab8566fa3bef6e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 0
   shop: {fileID: 1291952929}
   standardTurretPrefab: {fileID: 9097131140760233713, guid: 1b13322ccc9a9f742a445d01b811fd80,
     type: 3}
   turrets:
   - {fileID: 9097131140760233713, guid: 1b13322ccc9a9f742a445d01b811fd80, type: 3}
   - {fileID: 4117155316014652884, guid: 770d2ada6fb654d4288dd67135d6956a, type: 3}
---- !u!82 &589487240
-AudioSource:
+--- !u!114 &589487240
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589487236}
   m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0b3943eb8864d41965b9bd37ed51f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildManager: {fileID: 589487239}
+  waveSpawner: {fileID: 589487238}
+  state: 0
+  Hp: 10
+--- !u!114 &589487241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589487236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57cf22326d387614f9228d375dcea2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveText: {fileID: 1224669752}
+  level: {fileID: 589487240}
 --- !u!4 &624548827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9211516706350970412, guid: 187c32ce31ae4474ea924ece81e39a6d,

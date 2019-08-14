@@ -11,6 +11,8 @@ public class BuildManager : MonoBehaviour
 
     public static BuildManager instance;
 
+    public float money;
+
     public GameObject shop;
 
     void Awake()

@@ -4,8 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum State
+{
+    COUNTDOWN,
+    SPAWN,
+    END
+}
 public class WaveSpawner : MonoBehaviour
 {
+    public delegate void onWaveStateAction();
+    public event onWaveStateAction onWaveStateChanged;
+
+    public State state;
     public Wave[] waves;
     private int waveNumber = 0;
 
@@ -18,7 +28,7 @@ public class WaveSpawner : MonoBehaviour
     public float countdown;
     private float spawnBetweenEnemies = 0.5f;
 
-    public Text wavecountdownText;
+    //public Text wavecountdownText;
 
     void Start()
     {
@@ -26,17 +36,19 @@ public class WaveSpawner : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        /*if (Input.GetKeyDown(KeyCode.T))
         {
             Time.timeScale = 0;
-        }
+        }*/
 
         if (!isWaveIncoming)
         {
+            state = State.COUNTDOWN;
             countdown -= Time.deltaTime;
 
             if (waveNumber < waves.Length && countdown < 0)
             {
+                state = State.SPAWN;
                 isWaveIncoming = true;
                 StartCoroutine(SpawnWave());
             }
@@ -44,7 +56,7 @@ public class WaveSpawner : MonoBehaviour
         else
             countdown = 0f;
 
-        wavecountdownText.text = Mathf.CeilToInt(countdown).ToString();
+        //wavecountdownText.text = Mathf.CeilToInt(countdown).ToString();
     }
 
     private IEnumerator SpawnWave()
@@ -62,6 +74,8 @@ public class WaveSpawner : MonoBehaviour
             countdown = waves[waveNumber].countdown;
             isWaveIncoming = false;
         }
+        else
+            state = State.END;
     }
 
     private void SpawnEnemy(int index)
