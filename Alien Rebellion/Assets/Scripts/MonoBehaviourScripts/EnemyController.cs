@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     private Transform target;
     private int waypointIndex = 0;
 
-    public NavMeshAgent agent;
+    public float speed = 2f;
 
     void Start()
     {
@@ -19,8 +19,9 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(target.position);
-        if (Vector3.Distance(transform.position, target.position) <= 0.4f)
+        Vector3 dir = target.position - transform.position;
+        transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+        if (Vector3.Distance(transform.position, target.position) <= 0.1f)
         {
             GetNextWaypoint();
         }
