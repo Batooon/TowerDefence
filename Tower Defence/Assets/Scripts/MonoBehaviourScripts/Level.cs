@@ -28,7 +28,6 @@ public class Level : MonoBehaviour
         switch (state)
         {
             case GlobalState.GAME:
-
                 break;
             case GlobalState.PAUSE:
                 Time.timeScale = 0;
@@ -36,5 +35,15 @@ public class Level : MonoBehaviour
             case GlobalState.END:
                 break;
         }
+    }
+
+    public void ChangeGameSpeed(float speed)
+    {
+        Time.timeScale = speed;
+    }
+
+    public void OnPause()
+    {
+        state = GlobalState.PAUSE;
     }
 }

@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-    public TurretObject standardTurret;
-    public TurretObject anotherTurret;
-
     BuildManager buildManager;
+
+    void Awake()
+    {
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        buildManager = BuildManager.instance;
+        buildManager = BuildManager.singleton;
     }
 
     public void SelectStandardTurret()
     {
-        buildManager.ChooseTurret(0);
+        buildManager.ChooseTurret(buildManager.standardTurret);
     }
 }

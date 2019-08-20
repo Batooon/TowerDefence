@@ -11,29 +11,38 @@ public class Platform : MonoBehaviour
 
     private Renderer rend;
     private Color startColor;
+
+    BuildManager buildManager;
     void Start()
     {
+        buildManager = BuildManager.singleton;
         rend = GetComponent<Renderer>();
         startColor = rend.material.color;
     }
 
     void OnMouseDown()
     {
+        if (buildManager.GetTurretToBuild() == null)
+            return;
+
         if (turret != null)
         {
             Debug.Log("WTF DUDE ARE YOU DUMB?? tHeRe IS ALREAADY A TURRET!");
             return;
         }
         rend.material.color = Color.yellow;
-        BuildManager.instance.onTurretChoose += InstantiateTurret;
-        BuildManager.instance.OpenCloseShop(true);
+        buildManager.onTurretBuild += InstantiateTurret;
     }
 
-    public void InstantiateTurret()//Стоит ли перенести это в BuildManager?
+    void OnMouseExit()
     {
-        GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
-        turret = Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
-        BuildManager.instance.onTurretChoose -= InstantiateTurret;
         rend.material.color = startColor;
+    }
+
+    public void InstantiateTurret()
+    {
+        GameObject turretToBuild = buildManager.GetTurretToBuild();
+        turret = Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
+        buildManager.onTurretBuild -= InstantiateTurret;
     }
 }

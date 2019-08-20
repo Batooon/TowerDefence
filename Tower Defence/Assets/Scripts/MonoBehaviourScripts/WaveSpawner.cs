@@ -28,7 +28,6 @@ public class WaveSpawner : MonoBehaviour
     public float countdown;
     private float spawnBetweenEnemies = 0.5f;
 
-    //public Text wavecountdownText;
 
     void Start()
     {
@@ -37,10 +36,6 @@ public class WaveSpawner : MonoBehaviour
     void Update()
     {
         onWaveStateChanged?.Invoke();
-        /*if (Input.GetKeyDown(KeyCode.T))
-        {
-            Time.timeScale = 0;
-        }*/
 
         if (!isWaveIncoming)
         {

@@ -7,49 +7,36 @@ using UnityEngine.UI;
 public class BuildManager : MonoBehaviour
 {
     public delegate void ClickAction();
-    public event ClickAction onTurretChoose;
+    public event ClickAction onTurretBuild;
+    public event ClickAction onTurretNull;
 
-    public static BuildManager instance;
+    public static BuildManager singleton;
 
     public float money;
 
-    public GameObject shop;
+    public GameObject standardTurret;
+    private GameObject turretToBuild;
 
     void Awake()
     {
-        if (instance != null)
+        if (singleton != null)
         {
             Debug.LogError("More than one BuildManager in scene!");
             return;
         }
-        if (shop == null)
-        {
-            Debug.LogError("Turret shop is equal to null!!!");
-        }
-        instance = this;
+        singleton = this;
     }
 
-    public GameObject standardTurretPrefab;
-    public GameObject[] turrets;
-
-    private GameObject turretToBuild;
-    // private Platform chosenPlatform;
-
-    public void ChooseTurret(int index)
+    void Update()
     {
-        turretToBuild = turrets[index];
-        onTurretChoose?.Invoke();
-        OpenCloseShop(false);
+        onTurretNull?.Invoke();
+        onTurretBuild?.Invoke();
     }
 
-    void Start()
+
+    public void ChooseTurret(GameObject turret)
     {
-        if (turrets == null)
-        {
-            turrets = new GameObject[1];
-            turrets[0] = standardTurretPrefab;
-            Debug.LogError("No turrets!");
-        }
+        turretToBuild = turret;
     }
 
 
@@ -58,8 +45,8 @@ public class BuildManager : MonoBehaviour
         return turretToBuild;
     }
 
-    public void OpenCloseShop(bool isOpen)
+    public void BuildTurret()
     {
-        shop.SetActive(isOpen);
+
     }
 }

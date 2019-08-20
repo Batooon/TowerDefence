@@ -5,25 +5,22 @@ using UnityEngine.UI;
 
 public class LevelUI : MonoBehaviour
 {
+    public Text chooseTurretAlertText;
     public Text waveText;
 
     public Level level;
     // Start is called before the first frame update
     void Start()
     {
-        level.waveSpawner.onWaveStateChanged += ChangeText;
+        level.waveSpawner.onWaveStateChanged += ChangeWaveText;
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*if (level.waveSpawner.state == State.COUNTDOWN)
-        {
-
-        }*/
     }
 
-    public void ChangeText()
+    public void ChangeWaveText()
     {
         switch (level.waveSpawner.state)
         {
@@ -37,8 +34,13 @@ public class LevelUI : MonoBehaviour
                 break;
             case State.END:
                 Destroy(gameObject);
-                level.waveSpawner.onWaveStateChanged -= ChangeText;
+                level.waveSpawner.onWaveStateChanged -= ChangeWaveText;
                 break;
         }
+    }
+
+    public void ShowTurretAlertText()
+    {
+        chooseTurretAlertText.enabled = true;
     }
 }
