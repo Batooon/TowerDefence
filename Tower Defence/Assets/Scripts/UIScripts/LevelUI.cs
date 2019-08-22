@@ -5,14 +5,20 @@ using UnityEngine.UI;
 
 public class LevelUI : MonoBehaviour
 {
-    public Text chooseTurretAlertText;
+    public Camera cam;
+    public static LevelUI singletonUI;
+    public GameObject turretAlertText;
+    public Vector3 turretAllertOffset;
     public Text waveText;
+
+    public float fadeSpeed = 2f;
 
     public Level level;
     // Start is called before the first frame update
     void Start()
     {
         level.waveSpawner.onWaveStateChanged += ChangeWaveText;
+        BuildManager.singleton.onTurretNull += ShowTurretAlertText;
     }
 
     // Update is called once per frame
@@ -39,8 +45,11 @@ public class LevelUI : MonoBehaviour
         }
     }
 
-    public void ShowTurretAlertText()
+    public void ShowTurretAlertText(Transform position)
     {
-        chooseTurretAlertText.enabled = true;
+        Vector3 pos2D = cam.WorldToScreenPoint(position.position);
+        GameObject AlertText = Instantiate(turretAlertText, pos2D + turretAllertOffset, Quaternion.identity);
+        AlertText.transform.SetParent(transform);
+        AlertText.transform.localScale = Vector3.one;
     }
 }

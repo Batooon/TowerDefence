@@ -8,7 +8,8 @@ public class BuildManager : MonoBehaviour
 {
     public delegate void ClickAction();
     public event ClickAction onTurretBuild;
-    public event ClickAction onTurretNull;
+    public event Action<Transform> onTurretNull;
+    public void OnTurretNull(Transform t) { onTurretNull.Invoke(t); }
 
     public static BuildManager singleton;
 
@@ -16,6 +17,7 @@ public class BuildManager : MonoBehaviour
 
     public GameObject standardTurret;
     private GameObject turretToBuild;
+    private GameObject selectedTurretUI;
 
     void Awake()
     {
@@ -29,7 +31,6 @@ public class BuildManager : MonoBehaviour
 
     void Update()
     {
-        onTurretNull?.Invoke();
         onTurretBuild?.Invoke();
     }
 
@@ -45,8 +46,13 @@ public class BuildManager : MonoBehaviour
         return turretToBuild;
     }
 
-    public void BuildTurret()
+    public void SelectTurret(GameObject turret)
     {
+        selectedTurretUI = turret;
+    }
 
+    public GameObject GetSelectedTurretUI()
+    {
+        return selectedTurretUI;
     }
 }

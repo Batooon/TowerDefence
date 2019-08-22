@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Platform : MonoBehaviour
 {
-    public Color hoverColor;
     public Vector3 positionOffset;
 
     private GameObject turret;
@@ -13,17 +13,22 @@ public class Platform : MonoBehaviour
     private Color startColor;
 
     BuildManager buildManager;
+    LevelUI ui;
     void Start()
     {
+        ui = LevelUI.singletonUI;
         buildManager = BuildManager.singleton;
         rend = GetComponent<Renderer>();
         startColor = rend.material.color;
     }
 
-    void OnMouseDown()
+    public void OnMouseDown()
     {
-        if (buildManager.GetTurretToBuild() == null)
+        if (buildManager.GetTurretToBuild() == null) 
+        {
+            buildManager.OnTurretNull(transform);
             return;
+        }
 
         if (turret != null)
         {
