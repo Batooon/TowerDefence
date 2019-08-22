@@ -37,16 +37,16 @@ public class BuildManager : MonoBehaviour
 
     public void BuildTurretOn(Platform platform)
     {
-        if (turretData.cost < money)
+        if (money<turretData.cost)
         {
-            Debug.Log("Not enough money! TODO: вывести надпись на экран");
+            Debug.Log("Not enough money!");
             return;
         }
 
         money -= turretData.cost;
         GameObject turret = Instantiate(turretToBuild, platform.GetBuildPosition(), Quaternion.identity);
         platform.turret = turret;
-        Debug.Log("Turret build! Money left: " + turretData.cost);
+        Debug.Log("Turret build! Money left: " + money);
     }
 
     public bool CanBuild
