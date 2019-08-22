@@ -5,14 +5,15 @@ using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
-    public Sprite standardTurretSelected;
     BuildManager buildManager;
 
+    [Header("Standard Turret Attributes")]
+    public Sprite standardTurretSelected;
+    public Sprite standardTurretDeselected;
+    public Image standardTurretImage;
+    public GameObject standardTurretUI;
 
-    void Awake()
-    {
-
-    }
+    //[Space(20f)]
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +21,23 @@ public class Shop : MonoBehaviour
         buildManager = BuildManager.singleton;
     }
 
-    public void SelectStandardTurret()
+    void SelectStandardTurret()
     {
-        buildManager.SelectTurret(GameObject.Find("StandardTurret"));
-        buildManager.GetSelectedTurretUI().GetComponent<Image>().sprite = standardTurretSelected;
         buildManager.ChooseTurret(buildManager.standardTurret);
+        standardTurretImage.sprite = standardTurretSelected;
+    }
+
+    void DeselectStandardTurret()
+    {
+        buildManager.ChooseTurret(null);
+        standardTurretImage.sprite = standardTurretDeselected;
+    }
+
+    public void SelectStandardTurretManager()
+    {
+        if (standardTurretImage.sprite == standardTurretSelected)
+            DeselectStandardTurret();
+        else
+            SelectStandardTurret();
     }
 }

@@ -46,7 +46,7 @@ public class BuildManager : MonoBehaviour
         return turretToBuild;
     }
 
-    public void SelectTurret(GameObject turret)
+    /*public void SelectTurret(GameObject turret)
     {
         selectedTurretUI = turret;
     }
@@ -54,5 +54,5 @@ public class BuildManager : MonoBehaviour
     public GameObject GetSelectedTurretUI()
     {
         return selectedTurretUI;
-    }
+    }*/
 }

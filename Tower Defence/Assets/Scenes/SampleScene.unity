@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -247,6 +248,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -345,6 +347,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -391,6 +394,36 @@ Transform:
   m_Father: {fileID: 1507798107}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &175353795 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
+    type: 3}
+  m_PrefabInstance: {fileID: 4523229094147515670}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978756fb5603cb34c818e037d92cc0b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &214921990 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4523229093652570111, guid: be28bdf709c00514cbd96388ba9c50da,
+    type: 3}
+  m_PrefabInstance: {fileID: 4523229094147515670}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &214921994 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4523229093652570106, guid: be28bdf709c00514cbd96388ba9c50da,
+    type: 3}
+  m_PrefabInstance: {fileID: 4523229094147515670}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214921990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &322086173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -517,6 +550,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1085,8 +1119,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -1672,6 +1707,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1875,6 +1911,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1988,6 +2025,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2185,6 +2223,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4523229093168551893, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4523229092938962517, guid: be28bdf709c00514cbd96388ba9c50da,
         type: 3}
       propertyPath: m_Name
@@ -2385,11 +2428,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 148399126}
-    - target: {fileID: 4523229093168551893, guid: be28bdf709c00514cbd96388ba9c50da,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4523229094318311208, guid: be28bdf709c00514cbd96388ba9c50da,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2555,6 +2593,48 @@ PrefabInstance:
         type: 3}
       propertyPath: turretAllertOffset.y
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: standardTurretSelected
+      value: 
+      objectReference: {fileID: 21300000, guid: 9d6f52f4008de954b94a77e36c82a0c8,
+        type: 3}
+    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: standardTurretDeselected
+      value: 
+      objectReference: {fileID: 21300000, guid: c327b78425e5fd8458e256893dfa4e93,
+        type: 3}
+    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: standardTurretImage
+      value: 
+      objectReference: {fileID: 214921994}
+    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: standardTurretUI
+      value: 
+      objectReference: {fileID: 214921990}
+    - target: {fileID: 4523229093652570109, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 175353795}
+    - target: {fileID: 4523229093652570109, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectStandardTurretManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523229093652570109, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523229093652570109, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be28bdf709c00514cbd96388ba9c50da, type: 3}
