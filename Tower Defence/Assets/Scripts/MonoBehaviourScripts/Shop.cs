@@ -8,12 +8,13 @@ public class Shop : MonoBehaviour
     BuildManager buildManager;
 
     [Header("Turrets")]
+
     [Space(20f)]
+
     [Header("Standard Turret")]
     public TurretObject standardTurret;
     public GameObject standardTurretUI;
 
-    // Start is called before the first frame update
     void Start()
     {
         buildManager = BuildManager.singleton;
@@ -33,7 +34,7 @@ public class Shop : MonoBehaviour
 
     public void SelectTurretManager(GameObject turret)
     {
-        if (buildManager.CanBuild/*buildManager.GetTurretToBuild() == turret*/)
+        if (buildManager.CanBuild)
             DeselectTurret(turret);
         else
             SelectTurret(turret);

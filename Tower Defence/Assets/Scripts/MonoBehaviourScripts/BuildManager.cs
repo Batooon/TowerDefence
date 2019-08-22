@@ -2,23 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BuildManager : MonoBehaviour
 {
-    public delegate void ClickAction();
-    //public event ClickAction onTurretBuild;
     public event Action<Transform> onTurretNull;
     public void OnTurretNull(Transform t) { onTurretNull.Invoke(t); }
 
     public static BuildManager singleton;
 
-    public float money;
-
-    //public GameObject standardTurret;
+    public int money = 400;
 
     private GameObject turretToBuild;
-    //private GameObject selectedTurretUI;
+    private TurretObject turretData;
 
     void Awake()
     {
@@ -30,21 +25,28 @@ public class BuildManager : MonoBehaviour
         singleton = this;
     }
 
-    void Update()
-    {
-        //onTurretBuild?.Invoke();
-    }
-
-
     public void ChooseTurret(GameObject turret)
     {
         turretToBuild = turret;
     }
 
-    internal void BuildTurretOn(Platform platform)
+    public void GetTurretData(TurretObject data)
     {
+        turretData = data;
+    }
+
+    public void BuildTurretOn(Platform platform)
+    {
+        if (turretData.cost < money)
+        {
+            Debug.Log("Not enough money! TODO: вывести надпись на экран");
+            return;
+        }
+
+        money -= turretData.cost;
         GameObject turret = Instantiate(turretToBuild, platform.GetBuildPosition(), Quaternion.identity);
         platform.turret = turret;
+        Debug.Log("Turret build! Money left: " + turretData.cost);
     }
 
     public bool CanBuild
@@ -54,19 +56,4 @@ public class BuildManager : MonoBehaviour
             return turretToBuild != null;
         }
     }
-
-    /*public GameObject GetTurretToBuild()
-    {
-        return turretToBuild;
-    }*/
-
-    /*public void SelectTurret(GameObject turret)
-    {
-        selectedTurretUI = turret;
-    }
-
-    public GameObject GetSelectedTurretUI()
-    {
-        return selectedTurretUI;
-    }*/
 }

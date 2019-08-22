@@ -28,31 +28,19 @@ public class Platform : MonoBehaviour
     public void OnMouseDown()
     {
         if (turret != null)
-        {
-            //Debug.Log("WTF DUDE ARE YOU DUMB?? tHeRe IS ALREAADY A TURRET!");
+            return;//Сделать меню продажи турели и апгрейда
 
-            return;
-        }
-
-        if (!buildManager.CanBuild/*buildManager.GetTurretToBuild() == null*/)
+        if (!buildManager.CanBuild)
         {
             buildManager.OnTurretNull(transform);
             return;
         }
         rend.material.color = Color.yellow;
         buildManager.BuildTurretOn(this);
-        //buildManager.onTurretBuild += InstantiateTurret;
     }
 
     void OnMouseExit()
     {
         rend.material.color = startColor;
     }
-
-    /*public void InstantiateTurret()
-    {
-        GameObject turretToBuild = buildManager.GetTurretToBuild();
-        turret = Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
-        buildManager.onTurretBuild -= InstantiateTurret;
-    }*/
 }
