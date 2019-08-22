@@ -904,8 +904,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   money: 0
-  standardTurret: {fileID: 9097131140760233713, guid: 1b13322ccc9a9f742a445d01b811fd80,
-    type: 3}
 --- !u!114 &589487240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2616,6 +2614,12 @@ PrefabInstance:
       propertyPath: standardTurretUI
       value: 
       objectReference: {fileID: 214921990}
+    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: standardTurret
+      value: 
+      objectReference: {fileID: 11400000, guid: 35d1a79dcbadcbf498f2fc0f781f40d4,
+        type: 2}
     - target: {fileID: 4523229093652570109, guid: be28bdf709c00514cbd96388ba9c50da,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2624,18 +2628,24 @@ PrefabInstance:
     - target: {fileID: 4523229093652570109, guid: be28bdf709c00514cbd96388ba9c50da,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectStandardTurretManager
+      value: SelectTurretManager
       objectReference: {fileID: 0}
     - target: {fileID: 4523229093652570109, guid: be28bdf709c00514cbd96388ba9c50da,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4523229093652570109, guid: be28bdf709c00514cbd96388ba9c50da,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4523229093652570109, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 9097131140760233713, guid: 1b13322ccc9a9f742a445d01b811fd80,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be28bdf709c00514cbd96388ba9c50da, type: 3}
 --- !u!1001 &7806489740912491109

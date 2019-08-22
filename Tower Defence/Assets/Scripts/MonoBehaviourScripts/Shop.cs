@@ -7,13 +7,11 @@ public class Shop : MonoBehaviour
 {
     BuildManager buildManager;
 
-    [Header("Standard Turret Attributes")]
-    public Sprite standardTurretSelected;
-    public Sprite standardTurretDeselected;
-    public Image standardTurretImage;
+    [Header("Turrets")]
+    [Space(20f)]
+    [Header("Standard Turret")]
+    public TurretObject standardTurret;
     public GameObject standardTurretUI;
-
-    //[Space(20f)]
 
     // Start is called before the first frame update
     void Start()
@@ -21,23 +19,23 @@ public class Shop : MonoBehaviour
         buildManager = BuildManager.singleton;
     }
 
-    void SelectStandardTurret()
+    void SelectTurret(GameObject turret)
     {
-        buildManager.ChooseTurret(buildManager.standardTurret);
-        standardTurretImage.sprite = standardTurretSelected;
+        buildManager.ChooseTurret(turret);
+        standardTurretUI.GetComponent<Image>().sprite = standardTurret.selectedTurretUI;
     }
 
-    void DeselectStandardTurret()
+    void DeselectTurret(GameObject turret)
     {
         buildManager.ChooseTurret(null);
-        standardTurretImage.sprite = standardTurretDeselected;
+        standardTurretUI.GetComponent<Image>().sprite = standardTurret.deselectedTurretUI;
     }
 
-    public void SelectStandardTurretManager()
+    public void SelectTurretManager(GameObject turret)
     {
-        if (standardTurretImage.sprite == standardTurretSelected)
-            DeselectStandardTurret();
+        if (buildManager.CanBuild/*buildManager.GetTurretToBuild() == turret*/)
+            DeselectTurret(turret);
         else
-            SelectStandardTurret();
+            SelectTurret(turret);
     }
 }

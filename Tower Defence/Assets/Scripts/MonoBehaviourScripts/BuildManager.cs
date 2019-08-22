@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class BuildManager : MonoBehaviour
 {
     public delegate void ClickAction();
-    public event ClickAction onTurretBuild;
+    //public event ClickAction onTurretBuild;
     public event Action<Transform> onTurretNull;
     public void OnTurretNull(Transform t) { onTurretNull.Invoke(t); }
 
@@ -15,9 +15,10 @@ public class BuildManager : MonoBehaviour
 
     public float money;
 
-    public GameObject standardTurret;
+    //public GameObject standardTurret;
+
     private GameObject turretToBuild;
-    private GameObject selectedTurretUI;
+    //private GameObject selectedTurretUI;
 
     void Awake()
     {
@@ -31,7 +32,7 @@ public class BuildManager : MonoBehaviour
 
     void Update()
     {
-        onTurretBuild?.Invoke();
+        //onTurretBuild?.Invoke();
     }
 
 
@@ -40,11 +41,24 @@ public class BuildManager : MonoBehaviour
         turretToBuild = turret;
     }
 
+    internal void BuildTurretOn(Platform platform)
+    {
+        GameObject turret = Instantiate(turretToBuild, platform.GetBuildPosition(), Quaternion.identity);
+        platform.turret = turret;
+    }
 
-    public GameObject GetTurretToBuild()
+    public bool CanBuild
+    {
+        get
+        {
+            return turretToBuild != null;
+        }
+    }
+
+    /*public GameObject GetTurretToBuild()
     {
         return turretToBuild;
-    }
+    }*/
 
     /*public void SelectTurret(GameObject turret)
     {

@@ -18,4 +18,8 @@ public class TurretObject : ScriptableObject
     public float damage;
 
     public int cost;
+
+    public Sprite selectedTurretUI;
+
+    public Sprite deselectedTurretUI;
 }
