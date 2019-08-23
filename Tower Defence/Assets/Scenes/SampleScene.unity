@@ -2226,6 +2226,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: standardTurretSelected
+      value: 
+      objectReference: {fileID: 21300000, guid: 9d6f52f4008de954b94a77e36c82a0c8,
+        type: 3}
+    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: standardTurretDeselected
+      value: 
+      objectReference: {fileID: 21300000, guid: c327b78425e5fd8458e256893dfa4e93,
+        type: 3}
+    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: standardTurretImage
+      value: 
+      objectReference: {fileID: 214921994}
+    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: standardTurretUI
+      value: 
+      objectReference: {fileID: 214921990}
+    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: standardTurret
+      value: 
+      objectReference: {fileID: 11400000, guid: 35d1a79dcbadcbf498f2fc0f781f40d4,
+        type: 2}
     - target: {fileID: 4523229092938962517, guid: be28bdf709c00514cbd96388ba9c50da,
         type: 3}
       propertyPath: m_Name
@@ -2426,6 +2454,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 148399126}
+    - target: {fileID: 4523229094590231306, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseProcessing
+      objectReference: {fileID: 0}
     - target: {fileID: 4523229094318311208, guid: be28bdf709c00514cbd96388ba9c50da,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2496,6 +2529,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 589487240}
+    - target: {fileID: 4523229093868679809, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4523229093241787055, guid: be28bdf709c00514cbd96388ba9c50da,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2531,6 +2569,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 589487240}
+    - target: {fileID: 4523229093241787053, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4523229093845108384, guid: be28bdf709c00514cbd96388ba9c50da,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2592,34 +2635,6 @@ PrefabInstance:
       propertyPath: turretAllertOffset.y
       value: 25
       objectReference: {fileID: 0}
-    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
-        type: 3}
-      propertyPath: standardTurretSelected
-      value: 
-      objectReference: {fileID: 21300000, guid: 9d6f52f4008de954b94a77e36c82a0c8,
-        type: 3}
-    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
-        type: 3}
-      propertyPath: standardTurretDeselected
-      value: 
-      objectReference: {fileID: 21300000, guid: c327b78425e5fd8458e256893dfa4e93,
-        type: 3}
-    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
-        type: 3}
-      propertyPath: standardTurretImage
-      value: 
-      objectReference: {fileID: 214921994}
-    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
-        type: 3}
-      propertyPath: standardTurretUI
-      value: 
-      objectReference: {fileID: 214921990}
-    - target: {fileID: 4523229094201197583, guid: be28bdf709c00514cbd96388ba9c50da,
-        type: 3}
-      propertyPath: standardTurret
-      value: 
-      objectReference: {fileID: 11400000, guid: 35d1a79dcbadcbf498f2fc0f781f40d4,
-        type: 2}
     - target: {fileID: 4523229093652570109, guid: be28bdf709c00514cbd96388ba9c50da,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -2682,6 +2697,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 35d1a79dcbadcbf498f2fc0f781f40d4,
         type: 2}
+    - target: {fileID: 4523229093212266272, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: m_Name
+      value: WaveCountdownText
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523229093168551891, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523229093241787054, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: m_Name
+      value: 2x
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523229093868679810, guid: be28bdf709c00514cbd96388ba9c50da,
+        type: 3}
+      propertyPath: m_Name
+      value: 1.5x
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be28bdf709c00514cbd96388ba9c50da, type: 3}
 --- !u!1001 &7806489740912491109

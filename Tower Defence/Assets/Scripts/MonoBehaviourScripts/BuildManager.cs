@@ -32,7 +32,7 @@ public class BuildManager : MonoBehaviour
 
     public void GetTurretData(TurretObject data)
     {
-        turretData = data;
+        turretData = data; 
     }
 
     public void BuildTurretOn(Platform platform)
