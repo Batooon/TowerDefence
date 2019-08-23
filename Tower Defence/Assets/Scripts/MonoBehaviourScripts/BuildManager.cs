@@ -6,6 +6,7 @@ using UnityEngine;
 public class BuildManager : MonoBehaviour
 {
     public event Action<Transform> onTurretNull;
+    public event Action onMoneyChanged;
     public void OnTurretNull(Transform t) { onTurretNull.Invoke(t); }
 
     public static BuildManager singleton;
@@ -44,9 +45,9 @@ public class BuildManager : MonoBehaviour
         }
 
         money -= turretData.cost;
+        onMoneyChanged.Invoke();
         GameObject turret = Instantiate(turretToBuild, platform.GetBuildPosition(), Quaternion.identity);
         platform.turret = turret;
-        Debug.Log("Turret build! Money left: " + money);
     }
 
     public bool CanBuild

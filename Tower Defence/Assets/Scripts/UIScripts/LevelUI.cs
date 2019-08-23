@@ -2,28 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LevelUI : MonoBehaviour
 {
     public Camera cam;
-    public static LevelUI singletonUI;
+
+    [Header("Attributes for turret alert text")]
+    [Space(20)]
     public GameObject turretAlertText;
+    public float fadeSpeed = 2f;
     public Vector3 turretAllertOffset;
+
+
+    [Header("Wave countdown text")]
+    [Space(20)]
     public Text waveText;
 
-    public float fadeSpeed = 2f;
+    [Header("Money Text")]
+    [Space(20)]
+    public TextMeshProUGUI money;
+
+    [Space(20)]
 
     public Level level;
+
     // Start is called before the first frame update
     void Start()
     {
+        money.text = level.buildManager.money.ToString();
+        level.buildManager.onMoneyChanged += MoneyManager;
         level.waveSpawner.onWaveStateChanged += ChangeWaveText;
-        BuildManager.singleton.onTurretNull += ShowTurretAlertText;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        level.buildManager.onTurretNull += ShowTurretAlertText;
     }
 
     public void ChangeWaveText()
@@ -51,5 +61,10 @@ public class LevelUI : MonoBehaviour
         GameObject AlertText = Instantiate(turretAlertText, pos2D + turretAllertOffset, Quaternion.identity);
         AlertText.transform.SetParent(transform);
         AlertText.transform.localScale = Vector3.one;
+    }
+
+    public void MoneyManager()
+    {
+        money.text = level.buildManager.money.ToString();
     }
 }

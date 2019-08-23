@@ -8,18 +8,8 @@ public class Turret : MonoBehaviour
     public TurretObject turret;
     private Transform target;
 
-    /*[Header("Attributes")]
-
-    [Range(2f,4f)]
-    public float range = 3f;
-    [Range(1f,5f)]
-    public float fireRate = 1f;
-    public float fireCountdown = 0f;*/
-
     [Header("Unity Setup Fields")]
 
-    /*[HideInInspector]
-    public float speedRotation = 10f;*/
     [HideInInspector]
     private string enemyTag = "Enemy";
     [HideInInspector]
@@ -28,7 +18,6 @@ public class Turret : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
 
-    // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("SearchForEnemy", 0f, 0.5f);
@@ -58,7 +47,6 @@ public class Turret : MonoBehaviour
             target = null;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (target == null)
