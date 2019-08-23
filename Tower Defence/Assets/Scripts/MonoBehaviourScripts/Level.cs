@@ -78,4 +78,9 @@ public class Level : MonoBehaviour
                 break;
         }
     }
+
+    public void ClickQuitButton()
+    {
+        Application.Quit();
+    }
 }
