@@ -3,10 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class Turret : MonoBehaviour
 {
+    [Range(0, 50)]
+    public int segments = 50;
+
+    [HideInInspector]
+    public LineRenderer line;
+
+    private bool ShowRadius = true;
+
     public TurretObject turret;
-    private Transform target;
+    private GameObject target;
 
     [Header("Unity Setup Fields")]
 
@@ -17,6 +26,32 @@ public class Turret : MonoBehaviour
 
     public GameObject bulletPrefab;
     public Transform firePoint;
+
+    void Awake()
+    {
+        line = gameObject.GetComponent<LineRenderer>();
+
+        line.positionCount = segments + 1;
+        line.useWorldSpace = false;
+        CreateRadius();
+    }
+
+    public void CreateRadius()
+    {
+        float x, z;
+
+        float angle = 20f;
+
+        for (int i = 0; i < (segments+1); i++)
+        {
+            x = Mathf.Sin(Mathf.Deg2Rad * angle) * turret.range;
+            z = Mathf.Cos(Mathf.Deg2Rad * angle) * turret.range;
+
+            line.SetPosition(i, new Vector3(x, 0, z));
+
+            angle += (360f / segments);
+        }
+    }
 
     void Start()
     {
@@ -42,10 +77,16 @@ public class Turret : MonoBehaviour
         }
 
         if (nearestEnemy != null && shortestDistance <= turret.range)
-            target = nearestEnemy.transform;
+            target = nearestEnemy;
         else
             target = null;
     }
+
+    /*public void OnMouseDown()
+    {
+        ShowRadius = !ShowRadius;
+        line.enabled = ShowRadius;
+    }*/
 
     void Update()
     {
@@ -73,7 +114,7 @@ public class Turret : MonoBehaviour
 
     private void RotateToEnemy()
     {
-        Vector3 dir = target.position - transform.position;
+        Vector3 dir = target.transform.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turret.speedRotation).eulerAngles;
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);

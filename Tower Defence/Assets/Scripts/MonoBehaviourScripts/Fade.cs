@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
-public class TurretAlertText : MonoBehaviour
+public class Fade : MonoBehaviour
 {
     private float Lifetime;
     public float TimeToLive;
@@ -13,7 +13,7 @@ public class TurretAlertText : MonoBehaviour
     void Start()
     {
         if (text == null)
-            Debug.Log("Alert Text is equal to null!!!");
+            Debug.Log("Text is equal to null!!!");
         Lifetime = 0;
     }
 

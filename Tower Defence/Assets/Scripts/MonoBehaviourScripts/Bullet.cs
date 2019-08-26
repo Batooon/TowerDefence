@@ -5,15 +5,17 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Transform target;
+    private GameObject target;
+    private EnemyController enemy;
 
     [Range(10, 100)]
     public float speed = 70f;
     public GameObject impactEffect;
 
-    public void FindTarget(Transform _target)
+    public void FindTarget(GameObject _target)
     {
         target = _target;
+        enemy = target.GetComponent<EnemyController>();
     }
 
 
@@ -21,13 +23,7 @@ public class Bullet : MonoBehaviour
     float LifeTime = 0;
 
     Vector3 A, B;*/
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -37,7 +33,7 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        Vector3 dir = target.position - transform.position;
+        Vector3 dir = target.transform.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
 
         if (dir.magnitude <= distanceThisFrame)
@@ -70,10 +66,20 @@ public class Bullet : MonoBehaviour
 
     private void HitTarget()
     {
+        //Сделать проверку на смерть
+        if (enemy.enemyObject.Hp <= 0)
+        {
+
+        }
+
         GameObject effect = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(effect, 2f);
-        Destroy(target.gameObject);
+
+        Destroy(target);
+
         Destroy(gameObject);
+
+        BuildManager.singleton.AddMoney(enemy.enemyObject.moneyBonus);
     }
 
     /*public void Init(Transform target)

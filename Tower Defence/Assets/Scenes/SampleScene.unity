@@ -863,7 +863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28afc34a4c4a5b4ab8566fa3bef6e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 400
+  money: 100
 --- !u!114 &589487240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1586,18 +1586,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1214704170}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1284435294 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1284435294, guid: be28bdf709c00514cbd96388ba9c50da,
-    type: 3}
-  m_PrefabInstance: {fileID: 4523229094147515670}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1355671196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2758927053942533831, guid: 1837471d52c764a4dbec900e9e4d1fa5,
@@ -2439,19 +2427,15 @@ PrefabInstance:
       objectReference: {fileID: 589487240}
     - target: {fileID: 6672214818274673511, guid: be28bdf709c00514cbd96388ba9c50da,
         type: 3}
-      propertyPath: money
+      propertyPath: notEnoughMoneyText
       value: 
-      objectReference: {fileID: 1284435294}
+      objectReference: {fileID: 5594068409191862331, guid: 112a70409c3bc1444b69cab909554dfc,
+        type: 3}
     - target: {fileID: 4523229093652570109, guid: be28bdf709c00514cbd96388ba9c50da,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 589487239}
-    - target: {fileID: 4523229093212266273, guid: be28bdf709c00514cbd96388ba9c50da,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7301282476543001386, guid: be28bdf709c00514cbd96388ba9c50da,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

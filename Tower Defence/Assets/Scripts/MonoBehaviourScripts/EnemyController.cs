@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     private Transform target;
     private int waypointIndex = 0;
 
-    public float speed = 2f;
+    public EnemyObject enemyObject;
 
     void Start()
     {
@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         Vector3 dir = target.position - transform.position;
-        transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+        transform.Translate(dir.normalized * enemyObject.speed * Time.deltaTime, Space.World);
         if (Vector3.Distance(transform.position, target.position) <= 0.1f)
         {
             GetNextWaypoint();

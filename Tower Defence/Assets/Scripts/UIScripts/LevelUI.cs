@@ -11,8 +11,11 @@ public class LevelUI : MonoBehaviour
     [Header("Attributes for turret alert text")]
     [Space(20)]
     public GameObject turretAlertText;
-    public float fadeSpeed = 2f;
+    public GameObject notEnoughMoneyText;
     public Vector3 turretAllertOffset;
+
+    [Space(20)]
+    public char currency;
 
 
     [Header("Wave countdown text")]
@@ -27,13 +30,17 @@ public class LevelUI : MonoBehaviour
 
     public Level level;
 
+    void Awake()
+    {
+        money.text = currency + level.buildManager.money.ToString();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        money.text = level.buildManager.money.ToString();
-        level.buildManager.onMoneyChanged += MoneyManager;
+        level.buildManager.MoneyUpdate += OnMoneyUpdate;
         level.waveSpawner.onWaveStateChanged += ChangeWaveText;
-        level.buildManager.onTurretNull += ShowTurretAlertText;
+        level.buildManager.TurretAlert += ShowTurretAlertText; 
     }
 
     public void ChangeWaveText()
@@ -42,7 +49,7 @@ public class LevelUI : MonoBehaviour
         {
             case State.COUNTDOWN:
                 waveText.color = Color.white;
-                waveText.text = Mathf.CeilToInt(level.waveSpawner.countdown).ToString();
+                waveText.text = string.Format("{0:00.00}", level.waveSpawner.countdown);//Mathf.CeilToInt(level.waveSpawner.countdown).ToString();
                 break;
             case State.SPAWN:
                 waveText.color = Color.red;
@@ -58,13 +65,24 @@ public class LevelUI : MonoBehaviour
     public void ShowTurretAlertText(Transform position)
     {
         Vector3 pos2D = cam.WorldToScreenPoint(position.position);
-        GameObject AlertText = Instantiate(turretAlertText, pos2D + turretAllertOffset, Quaternion.identity);
-        AlertText.transform.SetParent(transform);
-        AlertText.transform.localScale = Vector3.one;
+        if (!level.buildManager.CanBuild)
+        {
+            GameObject AlertText = Instantiate(turretAlertText, pos2D + turretAllertOffset, Quaternion.identity);
+            AlertText.transform.SetParent(transform);
+            AlertText.transform.localScale = Vector3.one;
+            return;
+        }
+        if (!level.buildManager.IsEnoughMoney)
+        {
+            GameObject Text = Instantiate(notEnoughMoneyText, pos2D + turretAllertOffset, Quaternion.identity);
+            Text.transform.SetParent(transform);
+            Text.transform.localScale = Vector3.one;
+            return;
+        }
     }
 
-    public void MoneyManager()
+    public void OnMoneyUpdate()
     {
-        money.text = level.buildManager.money.ToString();
+        money.text = currency + level.buildManager.money.ToString();
     }
 }

@@ -12,8 +12,9 @@ public enum State
 }
 public class WaveSpawner : MonoBehaviour
 {
-    public delegate void onWaveStateAction();
-    public event onWaveStateAction onWaveStateChanged;
+    public event Action onWaveStateChanged;
+
+    public int EnemiesAlive = 0;
 
     public State state;
     public Wave[] waves;
@@ -41,8 +42,9 @@ public class WaveSpawner : MonoBehaviour
         {
             state = State.COUNTDOWN;
             countdown -= Time.deltaTime;
+            countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
 
-            if (waveNumber < waves.Length && countdown < 0)
+            if (waveNumber < waves.Length && countdown <= 0)
             {
                 state = State.SPAWN;
                 isWaveIncoming = true;
@@ -51,8 +53,6 @@ public class WaveSpawner : MonoBehaviour
         }
         else
             countdown = 0f;
-
-        //wavecountdownText.text = Mathf.CeilToInt(countdown).ToString();
     }
 
     private IEnumerator SpawnWave()
@@ -79,6 +79,7 @@ public class WaveSpawner : MonoBehaviour
         GameObject newEnemy = waves[waveNumber].GetNextEnemy(index);
 
         Instantiate(newEnemy, spawnPoint.position, spawnPoint.rotation);
+        EnemiesAlive++;
     }
 
 }

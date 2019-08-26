@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
-    public event Action<Transform> onTurretNull;
-    public event Action onMoneyChanged;
-    public void OnTurretNull(Transform t) { onTurretNull.Invoke(t); }
+    public event Action<Transform> TurretAlert;
+    public event Action MoneyUpdate;
+    public void TurretError(Transform t) { TurretAlert.Invoke(t); }
 
     public static BuildManager singleton;
 
@@ -15,6 +15,7 @@ public class BuildManager : MonoBehaviour
 
     private GameObject turretToBuild;
     private TurretObject turretData;
+    private Platform selectedPlatform;
 
     void Awake()
     {
@@ -29,6 +30,12 @@ public class BuildManager : MonoBehaviour
     public void ChooseTurret(GameObject turret)
     {
         turretToBuild = turret;
+        selectedPlatform = null;
+    }
+    public void ChoosePatform(Platform platform)
+    {
+        selectedPlatform = platform;
+        turretToBuild = null;
     }
 
     public void GetTurretData(TurretObject data)
@@ -45,9 +52,22 @@ public class BuildManager : MonoBehaviour
         }
 
         money -= turretData.cost;
-        onMoneyChanged.Invoke();
+        MoneyUpdate.Invoke();
         GameObject turret = Instantiate(turretToBuild, platform.GetBuildPosition(), Quaternion.identity);
+        turret.transform.SetParent(platform.transform);
         platform.turret = turret;
+    }
+
+    public void ExtractMoney(int amount)
+    {
+        money -= amount;
+        MoneyUpdate.Invoke();
+    }
+
+    public void AddMoney(int amount)
+    {
+        money += amount;
+        MoneyUpdate.Invoke();
     }
 
     public bool CanBuild
@@ -55,6 +75,14 @@ public class BuildManager : MonoBehaviour
         get
         {
             return turretToBuild != null;
+        }
+    }
+
+    public bool IsEnoughMoney
+    {
+        get
+        {
+            return money >= turretData.cost;
         }
     }
 }

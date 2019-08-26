@@ -46,11 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061b78d790a8ded4ea5aad377967c044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretAlertPosition: {fileID: 0}
   positionOffset: {x: 0, y: 0.55, z: 0}
-  fadeSpeed: 2
-  turretAlert: {fileID: 1919322428438552196, guid: 2d6fa6097ed6a2d47bfa7419ee859f02,
-    type: 3}
+  turret: {fileID: 0}
 --- !u!33 &1540891535395799695
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -105,7 +102,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7828677028954945315}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
