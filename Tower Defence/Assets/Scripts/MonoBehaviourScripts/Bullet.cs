@@ -5,12 +5,19 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    BuildManager buildManager;
+
     private GameObject target;
     private EnemyController enemy;
 
     [Range(10, 100)]
     public float speed = 70f;
     public GameObject impactEffect;
+
+    void Awake()
+    {
+        buildManager = BuildManager.singleton;
+    }
 
     public void FindTarget(GameObject _target)
     {
@@ -67,7 +74,7 @@ public class Bullet : MonoBehaviour
     private void HitTarget()
     {
         //Сделать проверку на смерть
-        if (enemy.enemyObject.Hp <= 0)
+        if (enemy.enemyObject.Hp <= 0)//Перенести в Enemy
         {
 
         }
@@ -79,7 +86,7 @@ public class Bullet : MonoBehaviour
 
         Destroy(gameObject);
 
-        BuildManager.singleton.AddMoney(enemy.enemyObject.moneyBonus);
+        buildManager.AddMoney(enemy.enemyObject.moneyBonus);
     }
 
     /*public void Init(Transform target)

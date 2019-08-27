@@ -30,12 +30,10 @@ public class BuildManager : MonoBehaviour
     public void ChooseTurret(GameObject turret)
     {
         turretToBuild = turret;
-        selectedPlatform = null;
     }
     public void ChoosePatform(Platform platform)
     {
         selectedPlatform = platform;
-        turretToBuild = null;
     }
 
     public void GetTurretData(TurretObject data)

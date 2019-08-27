@@ -12,8 +12,6 @@ public class Turret : MonoBehaviour
     [HideInInspector]
     public LineRenderer line;
 
-    private bool ShowRadius = true;
-
     public TurretObject turret;
     private GameObject target;
 

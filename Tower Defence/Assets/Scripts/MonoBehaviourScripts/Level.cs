@@ -24,7 +24,8 @@ public class Level : MonoBehaviour
         }
     }
 
-    public int Hp;
+    public int Hp = 5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,5 +83,10 @@ public class Level : MonoBehaviour
     public void ClickQuitButton()
     {
         Application.Quit();
+    }
+
+    public void OpenInstagram()
+    {
+        Application.OpenURL("https://www.instagram.com/rozumanton/");
     }
 }

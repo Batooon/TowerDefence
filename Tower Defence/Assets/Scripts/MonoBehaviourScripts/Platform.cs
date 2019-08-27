@@ -45,11 +45,13 @@ public class Platform : MonoBehaviour
             buildManager.TurretError(transform);
             return;
         }
+        
         if (!buildManager.IsEnoughMoney)
         {
             buildManager.TurretError(transform);
             return;
         }
+
         rend.material.color = Color.yellow;
         buildManager.BuildTurretOn(this);
     }
