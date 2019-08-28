@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3228034231705895695}
+  - component: {fileID: 3137155923650306954}
   - component: {fileID: 6007008912492709641}
   - component: {fileID: 5330339504109346882}
-  - component: {fileID: 4771577392321671922}
   - component: {fileID: 8157802494880825048}
   m_Layer: 0
   m_Name: Enemy
@@ -34,6 +34,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3137155923650306954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756855281915617764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94233df7146875e4db308289ef98822e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyObject: {fileID: 11400000, guid: a8f4c6c4e64d67847bbcc6388ab281e5, type: 2}
 --- !u!33 &6007008912492709641
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -80,19 +93,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4771577392321671922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756855281915617764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94233df7146875e4db308289ef98822e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyObject: {fileID: 11400000, guid: a8f4c6c4e64d67847bbcc6388ab281e5, type: 2}
 --- !u!136 &8157802494880825048
 CapsuleCollider:
   m_ObjectHideFlags: 0

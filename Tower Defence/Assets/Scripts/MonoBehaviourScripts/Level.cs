@@ -13,6 +13,8 @@ public class Level : MonoBehaviour
     public BuildManager buildManager;
     public WaveSpawner waveSpawner;
 
+    public string instagramAccountUrl;
+
     private GlobalState _state;
     public GlobalState state
     {
@@ -46,6 +48,12 @@ public class Level : MonoBehaviour
                 Time.timeScale = 0;
                 break;
         }
+    }
+
+    public void GameOver(GameObject gameOverScreen)
+    {
+        state = GlobalState.END;
+        gameOverScreen.SetActive(true);
     }
 
     public void ChangeGameSpeed(float speed)
@@ -87,6 +95,6 @@ public class Level : MonoBehaviour
 
     public void OpenInstagram()
     {
-        Application.OpenURL("https://www.instagram.com/rozumanton/");
+        Application.OpenURL(instagramAccountUrl);
     }
 }

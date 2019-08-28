@@ -7,13 +7,14 @@ public class BuildManager : MonoBehaviour
 {
     public event Action<Transform> TurretAlert;
     public event Action MoneyUpdate;
+    public event Action LivesUpdate;
     public void TurretError(Transform t) { TurretAlert.Invoke(t); }
 
     public static BuildManager singleton;
 
     public int money = 400;
 
-    private GameObject turretToBuild;
+    private GameObject selectedTurret;
     private TurretObject turretData;
     private Platform selectedPlatform;
 
@@ -27,11 +28,11 @@ public class BuildManager : MonoBehaviour
         singleton = this;
     }
 
-    public void ChooseTurret(GameObject turret)
+    public void SelectTurret(GameObject turret)
     {
-        turretToBuild = turret;
+        selectedTurret = turret;
     }
-    public void ChoosePatform(Platform platform)
+    public void SelectPlatform(Platform platform)
     {
         selectedPlatform = platform;
     }
@@ -43,17 +44,22 @@ public class BuildManager : MonoBehaviour
 
     public void BuildTurretOn(Platform platform)
     {
-        if (money<turretData.cost)
+        /*if (money<turretData.cost)
         {
             Debug.Log("Not enough money!");
             return;
-        }
+        }*/
 
         money -= turretData.cost;
         MoneyUpdate.Invoke();
-        GameObject turret = Instantiate(turretToBuild, platform.GetBuildPosition(), Quaternion.identity);
+        GameObject turret = Instantiate(selectedTurret, platform.GetBuildPosition(), Quaternion.identity);
         turret.transform.SetParent(platform.transform);
         platform.turret = turret;
+    }
+
+    internal void UpdateLives()
+    {
+        LivesUpdate?.Invoke();
     }
 
     public void ExtractMoney(int amount)
@@ -72,7 +78,7 @@ public class BuildManager : MonoBehaviour
     {
         get
         {
-            return turretToBuild != null;
+            return selectedTurret != null;
         }
     }
 

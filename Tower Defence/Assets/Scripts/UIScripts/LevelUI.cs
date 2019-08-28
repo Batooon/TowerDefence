@@ -20,11 +20,14 @@ public class LevelUI : MonoBehaviour
 
     [Header("Wave countdown text")]
     [Space(20)]
-    public Text waveText;
+    public TextMeshProUGUI waveText;
 
     [Header("Money Text")]
     [Space(20)]
     public TextMeshProUGUI money;
+
+    [Header("Lives Text")]
+    public TextMeshProUGUI livesText;
 
     [Space(20)]
 
@@ -32,6 +35,7 @@ public class LevelUI : MonoBehaviour
 
     void Awake()
     {
+        livesText.text = level.Hp.ToString();
         money.text = currency + level.buildManager.money.ToString();
     }
 
@@ -40,7 +44,8 @@ public class LevelUI : MonoBehaviour
     {
         level.buildManager.MoneyUpdate += OnMoneyUpdate;
         level.waveSpawner.onWaveStateChanged += ChangeWaveText;
-        level.buildManager.TurretAlert += ShowTurretAlertText; 
+        level.buildManager.TurretAlert += ShowTurretAlertText;
+        level.buildManager.LivesUpdate += OnLivesUpdate;
     }
 
     public void ChangeWaveText()
@@ -48,7 +53,7 @@ public class LevelUI : MonoBehaviour
         switch (level.waveSpawner.state)
         {
             case State.COUNTDOWN:
-                waveText.color = Color.white;
+                waveText.color = Color.black;
                 waveText.text = string.Format("{0:00.00}", level.waveSpawner.countdown);//Mathf.CeilToInt(level.waveSpawner.countdown).ToString();
                 break;
             case State.SPAWN:
@@ -84,5 +89,10 @@ public class LevelUI : MonoBehaviour
     public void OnMoneyUpdate()
     {
         money.text = currency + level.buildManager.money.ToString();
+    }
+
+    public void OnLivesUpdate()
+    {
+        livesText.text = level.Hp.ToString();
     }
 }

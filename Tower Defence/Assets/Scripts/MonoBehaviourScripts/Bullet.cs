@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     BuildManager buildManager;
 
     private GameObject target;
-    private EnemyController enemy;
+    private Enemy enemy;
 
     [Range(10, 100)]
     public float speed = 70f;
@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
     public void FindTarget(GameObject _target)
     {
         target = _target;
-        enemy = target.GetComponent<EnemyController>();
+        enemy = target.GetComponent<Enemy>();
     }
 
 

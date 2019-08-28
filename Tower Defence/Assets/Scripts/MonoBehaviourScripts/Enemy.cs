@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     private Transform target;
     private int waypointIndex = 0;
 
     public EnemyObject enemyObject;
-
     void Start()
     {
         target = Waypoints.waypoints[0];
@@ -27,14 +26,20 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void GetNextWaypoint()
+    void GetNextWaypoint()
     {
         if (waypointIndex >= Waypoints.waypoints.Length - 1)
         {
-            Destroy(gameObject);
+            EndPath();
             return;
         }
         waypointIndex++;
         target = Waypoints.waypoints[waypointIndex];
+    }
+
+    void EndPath()
+    {
+        BuildManager.singleton.UpdateLives();
+        Destroy(gameObject);
     }
 }

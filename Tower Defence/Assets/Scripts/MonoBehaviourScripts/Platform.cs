@@ -30,7 +30,7 @@ public class Platform : MonoBehaviour
     {
         if (turret != null)
         {
-            buildManager.ChoosePatform(this);
+            buildManager.SelectPlatform(this);
             Turret TurretScript = turret.GetComponent<Turret>();
             if (TurretScript != null)
             {
