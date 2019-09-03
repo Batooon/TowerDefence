@@ -13,7 +13,7 @@ public class Platform : MonoBehaviour
     [Header("Optional")]
     public GameObject turret;
 
-    private bool ShowRadius = true;
+    public bool IsTurretActive = false;
 
     private Renderer rend;
     private Color startColor;
@@ -28,32 +28,33 @@ public class Platform : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (turret != null)
+        buildManager.SelectPlatform(this);
+        /*if (turret != null)
         {
             buildManager.SelectPlatform(this);
-            Turret TurretScript = turret.GetComponent<Turret>();
+            /*Turret TurretScript = turret.GetComponent<Turret>();
             if (TurretScript != null)
             {
                 TurretScript.line.enabled = ShowRadius;
                 ShowRadius = !ShowRadius;
             }
             return;
-        }
+        }*/
 
-        if (!buildManager.CanBuild)
+        /*if (!buildManager.CanBuild())
         {
             buildManager.TurretError(transform);
             return;
-        }
+        }*/
         
-        if (!buildManager.IsEnoughMoney)
+        /*if (!buildManager.IsEnoughMoney())
         {
             buildManager.TurretError(transform);
             return;
-        }
+        }*/
 
-        rend.material.color = Color.yellow;
-        buildManager.BuildTurretOn(this);
+        /*rend.material.color = Color.yellow;
+        buildManager.BuildTurretOn(this);*/
     }
 
     void OnMouseExit()

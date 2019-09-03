@@ -10,8 +10,8 @@ public class Bullet : MonoBehaviour
     private GameObject target;
     private Enemy enemy;
 
-    [Range(10, 100)]
-    public float speed = 70f;
+    [Range(1, 30)]
+    public float speed = 20f;
     public GameObject impactEffect;
 
     void Awake()

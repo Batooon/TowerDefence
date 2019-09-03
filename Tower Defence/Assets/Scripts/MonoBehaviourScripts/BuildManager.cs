@@ -16,6 +16,7 @@ public class BuildManager : MonoBehaviour
 
     private GameObject selectedTurret;
     private TurretObject turretData;
+
     private Platform selectedPlatform;
 
     void Awake()
@@ -30,11 +31,55 @@ public class BuildManager : MonoBehaviour
 
     public void SelectTurret(GameObject turret)
     {
+        if (turret == selectedTurret)
+            return;
+
+        selectedTurret = null;
+        // 1) disselect turret
+
+        // 2) =
         selectedTurret = turret;
+
+        // select
     }
     public void SelectPlatform(Platform platform)
     {
+        if (selectedPlatform == platform)
+        {
+            if (platform.IsTurretActive)
+                platform.turret.GetComponent<Turret>().Activate();
+            else
+                platform.turret.GetComponent<Turret>().Deactivate();
+            return;
+        }
+
+        if (platform.turret != null)
+        {
+
+            if (selectedPlatform != null)
+            {
+                selectedPlatform.turret.GetComponent<Turret>().Deactivate();
+
+                selectedPlatform = null;
+            }
+
+            selectedPlatform = platform;
+
+            selectedPlatform.turret.GetComponent<Turret>().Activate();
+
+            return;
+        }
+
+        if (selectedPlatform != null)
+        {
+            selectedPlatform.turret.GetComponent<Turret>().Deactivate();
+
+            selectedPlatform = null;
+        }
+
         selectedPlatform = platform;
+
+        BuildTurretOn(platform);
     }
 
     public void GetTurretData(TurretObject data)
@@ -44,12 +89,6 @@ public class BuildManager : MonoBehaviour
 
     public void BuildTurretOn(Platform platform)
     {
-        /*if (money<turretData.cost)
-        {
-            Debug.Log("Not enough money!");
-            return;
-        }*/
-
         money -= turretData.cost;
         MoneyUpdate.Invoke();
         GameObject turret = Instantiate(selectedTurret, platform.GetBuildPosition(), Quaternion.identity);
@@ -74,19 +113,13 @@ public class BuildManager : MonoBehaviour
         MoneyUpdate.Invoke();
     }
 
-    public bool CanBuild
+    public bool CanBuild()
     {
-        get
-        {
-            return selectedTurret != null;
-        }
+        return selectedTurret != null;
     }
-
-    public bool IsEnoughMoney
+    //TODO: объединить в один метод
+    public bool IsEnoughMoney()
     {
-        get
-        {
-            return money >= turretData.cost;
-        }
+        return money >= turretData.cost;
     }
 }

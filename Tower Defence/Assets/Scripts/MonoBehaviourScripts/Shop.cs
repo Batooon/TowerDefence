@@ -30,7 +30,7 @@ public class Shop : MonoBehaviour
 
     public void SelectTurretManager(GameObject turret)
     {
-        if (buildManager.CanBuild)
+        if (buildManager.CanBuild())
             DeselectTurret(turret);
         else
             SelectTurret(turret);

@@ -15,7 +15,6 @@ public class Enemy : MonoBehaviour
         target = Waypoints.waypoints[0];
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 dir = target.position - transform.position;
@@ -23,6 +22,7 @@ public class Enemy : MonoBehaviour
         if (Vector3.Distance(transform.position, target.position) <= 0.1f)
         {
             GetNextWaypoint();
+            transform.LookAt(target.position);
         }
     }
 

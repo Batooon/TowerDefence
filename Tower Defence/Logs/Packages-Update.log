@@ -29,3 +29,11 @@ The following packages were updated:
   com.unity.test-framework from version 1.0.13 to 1.0.17
 The following packages were removed:
   com.unity.package-manager-ui@2.2.0
+
+=== Tue Sep  3 21:13:44 2019
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.ide.vscode from version 1.0.7 to 1.1.0

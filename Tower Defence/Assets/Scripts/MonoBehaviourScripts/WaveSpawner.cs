@@ -20,7 +20,7 @@ public class WaveSpawner : MonoBehaviour
     public Wave[] waves;
     private int waveNumber = 0;
 
-    public Transform enemyPrefab;
+    //public Transform enemyPrefab;
 
     public Transform spawnPoint;
 

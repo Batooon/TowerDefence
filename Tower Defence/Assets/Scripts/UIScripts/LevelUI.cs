@@ -54,7 +54,7 @@ public class LevelUI : MonoBehaviour
         {
             case State.COUNTDOWN:
                 waveText.color = Color.black;
-                waveText.text = string.Format("{0:00.00}", level.waveSpawner.countdown);//Mathf.CeilToInt(level.waveSpawner.countdown).ToString();
+                waveText.text = string.Format("{0:00.00}", level.waveSpawner.countdown);
                 break;
             case State.SPAWN:
                 waveText.color = Color.red;
@@ -70,14 +70,14 @@ public class LevelUI : MonoBehaviour
     public void ShowTurretAlertText(Transform position)
     {
         Vector3 pos2D = cam.WorldToScreenPoint(position.position);
-        if (!level.buildManager.CanBuild)
+        if (!level.buildManager.CanBuild())
         {
             GameObject AlertText = Instantiate(turretAlertText, pos2D + turretAllertOffset, Quaternion.identity);
             AlertText.transform.SetParent(transform);
             AlertText.transform.localScale = Vector3.one;
             return;
         }
-        if (!level.buildManager.IsEnoughMoney)
+        if (!level.buildManager.IsEnoughMoney())
         {
             GameObject Text = Instantiate(notEnoughMoneyText, pos2D + turretAllertOffset, Quaternion.identity);
             Text.transform.SetParent(transform);

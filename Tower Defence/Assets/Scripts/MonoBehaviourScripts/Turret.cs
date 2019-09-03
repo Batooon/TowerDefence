@@ -80,12 +80,6 @@ public class Turret : MonoBehaviour
             target = null;
     }
 
-    /*public void OnMouseDown()
-    {
-        ShowRadius = !ShowRadius;
-        line.enabled = ShowRadius;
-    }*/
-
     void Update()
     {
         if (target == null)
@@ -103,11 +97,26 @@ public class Turret : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bulletGO = Instantiate(bulletPrefab, GetFirePointTransform());
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
         if (bullet != null)
             bullet.FindTarget(target);
+    }
+
+    public void Activate()
+    {
+        line.enabled = true;
+    }
+
+    public void Deactivate()
+    {
+        line.enabled = false;
+    }
+
+    public virtual Transform GetFirePointTransform()
+    {
+        return firePoint;
     }
 
     private void RotateToEnemy()
