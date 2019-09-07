@@ -8,6 +8,8 @@ public class BuildManager : MonoBehaviour
     public event Action<Transform> TurretAlert;
     public event Action MoneyUpdate;
     public event Action LivesUpdate;
+    public event Action<Sprite> ShopUIUpdate;
+
     public void TurretError(Transform t) { TurretAlert.Invoke(t); }
 
     public static BuildManager singleton;
@@ -29,19 +31,24 @@ public class BuildManager : MonoBehaviour
         singleton = this;
     }
 
-    public void SelectTurret(GameObject turret)
+    public void SelectTurret(GameObject turretGO)
     {
-        if (turret == selectedTurret)
+        if (turretGO == selectedTurret)
+        {
+            ShopUIUpdate?.Invoke(turretData.deselectedTurretUI);
             return;
-
-        selectedTurret = null;
+        }
         // 1) disselect turret
 
         // 2) =
-        selectedTurret = turret;
+        selectedTurret = turretGO;
 
         // select
+        ShopUIUpdate?.Invoke(turretData.selectedTurretUI);
     }
+
+    public TurretObject GetTurretData() => turretData;
+
     public void SelectPlatform(Platform platform)
     {
         if (selectedPlatform == platform)
@@ -82,10 +89,12 @@ public class BuildManager : MonoBehaviour
         BuildTurretOn(platform);
     }
 
-    public void GetTurretData(TurretObject data)
+    public void SetTurretData(TurretObject data)
     {
-        turretData = data; 
+        turretData = data;
     }
+
+    public GameObject GetSelectedTurret() => selectedTurret;
 
     public void BuildTurretOn(Platform platform)
     {
@@ -113,13 +122,6 @@ public class BuildManager : MonoBehaviour
         MoneyUpdate.Invoke();
     }
 
-    public bool CanBuild()
-    {
-        return selectedTurret != null;
-    }
-    //TODO: объединить в один метод
-    public bool IsEnoughMoney()
-    {
-        return money >= turretData.cost;
-    }
+    public bool CanBuild() => selectedTurret != null;
+    public bool IsEnoughMoney() => money >= turretData.cost;
 }

@@ -19,7 +19,6 @@ public class Turret : MonoBehaviour
 
     [HideInInspector]
     private string enemyTag = "Enemy";
-    [HideInInspector]
     public Transform partToRotate;
 
     public GameObject bulletPrefab;
@@ -98,10 +97,14 @@ public class Turret : MonoBehaviour
     private void Shoot()
     {
         GameObject bulletGO = Instantiate(bulletPrefab, GetFirePointTransform());
+        bulletGO.transform.localScale = Vector3.one;
+        bulletGO.transform.parent = null;
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
         if (bullet != null)
-            bullet.FindTarget(target);
+        {
+            bullet.FindTarget(target,turret.bulletTrajectory);
+        }
     }
 
     public void Activate()
@@ -114,10 +117,7 @@ public class Turret : MonoBehaviour
         line.enabled = false;
     }
 
-    public virtual Transform GetFirePointTransform()
-    {
-        return firePoint;
-    }
+    public virtual Transform GetFirePointTransform() => firePoint;
 
     private void RotateToEnemy()
     {

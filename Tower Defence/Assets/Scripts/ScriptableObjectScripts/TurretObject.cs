@@ -22,4 +22,9 @@ public class TurretObject : ScriptableObject
     public Sprite selectedTurretUI;
 
     public Sprite deselectedTurretUI;
+
+    public TrajectoryType bulletTrajectory;
+
+    [Header("Only if Area Damage")]
+    public float area;
 }

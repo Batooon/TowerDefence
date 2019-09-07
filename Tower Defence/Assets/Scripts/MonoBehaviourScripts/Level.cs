@@ -28,12 +28,6 @@ public class Level : MonoBehaviour
 
     public int Hp = 5;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     void OnStateChanged()
     {
         switch (state)

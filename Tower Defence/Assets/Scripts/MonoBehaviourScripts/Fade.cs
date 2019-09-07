@@ -9,7 +9,6 @@ public class Fade : MonoBehaviour
     private float Lifetime;
     public float TimeToLive;
     public TextMeshProUGUI text;
-    // Start is called before the first frame update
     void Start()
     {
         if (text == null)
@@ -17,7 +16,6 @@ public class Fade : MonoBehaviour
         Lifetime = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Lifetime >= TimeToLive)

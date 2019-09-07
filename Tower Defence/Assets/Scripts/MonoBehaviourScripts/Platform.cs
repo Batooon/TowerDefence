@@ -5,10 +5,7 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     public Vector3 positionOffset;
-    public Vector3 GetBuildPosition()
-    {
-        return transform.position + positionOffset;
-    }
+    public Vector3 GetBuildPosition() => transform.position + positionOffset;
 
     [Header("Optional")]
     public GameObject turret;
@@ -29,32 +26,6 @@ public class Platform : MonoBehaviour
     public void OnMouseDown()
     {
         buildManager.SelectPlatform(this);
-        /*if (turret != null)
-        {
-            buildManager.SelectPlatform(this);
-            /*Turret TurretScript = turret.GetComponent<Turret>();
-            if (TurretScript != null)
-            {
-                TurretScript.line.enabled = ShowRadius;
-                ShowRadius = !ShowRadius;
-            }
-            return;
-        }*/
-
-        /*if (!buildManager.CanBuild())
-        {
-            buildManager.TurretError(transform);
-            return;
-        }*/
-        
-        /*if (!buildManager.IsEnoughMoney())
-        {
-            buildManager.TurretError(transform);
-            return;
-        }*/
-
-        /*rend.material.color = Color.yellow;
-        buildManager.BuildTurretOn(this);*/
     }
 
     void OnMouseExit()
