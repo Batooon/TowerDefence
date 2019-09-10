@@ -77,6 +77,7 @@ public class LevelUI : MonoBehaviour
             AlertText.transform.localScale = Vector3.one;
             return;
         }
+
         if (!level.buildManager.IsEnoughMoney())
         {
             GameObject Text = Instantiate(notEnoughMoneyText, pos2D + turretAllertOffset, Quaternion.identity);

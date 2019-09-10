@@ -7,11 +7,26 @@ public class Shop : MonoBehaviour
 {
     BuildManager buildManager;
 
-    //private GameObject turret;
+    public GameObject TurretButton;
 
-    void Start()
+    //private GameObject turret
+
+    private void Start()
     {
         buildManager = BuildManager.singleton;
+        buildManager.InitTurretsEvent += SetTurrets;
+    }
+
+    public void SetTurrets(TurretObject[] turrets)
+    {
+        foreach(TurretObject t in turrets)
+        {
+            GameObject newTurretButton = Instantiate(TurretButton);
+            newTurretButton.transform.SetParent(transform);
+
+            ShopButtonUI sbui = newTurretButton.GetComponent<ShopButtonUI>();
+            sbui?.Init(t);
+        }
     }
 
     /*void SelectTurret(GameObject turretGO)
@@ -31,8 +46,8 @@ public class Shop : MonoBehaviour
         /*Sprite selectedTurretUI = buildManager.GetSelectedTurret().GetComponent<Turret>().turret.selectedTurretUI;
         turretUI.GetComponent<Image>().sprite = selectedTurretUI;*/
 
-        gameObject.transform.GetChild(0).GetComponent<Image>().sprite = turretUI;
-        buildManager.ShopUIUpdate -= ActivateTurretUI;
+        gameObject.transform.GetChild(buildManager.GetSelectedTurret().GetComponent<Turret>().index).GetComponent<Image>().sprite = turretUI;
+        buildManager.ActivateShopUI -= ActivateTurretUI;
     }
 
     void DeactivateTurretUI(Sprite turretUI)
@@ -40,20 +55,21 @@ public class Shop : MonoBehaviour
         /*Sprite deselectedTurretUI = buildManager.GetSelectedTurret().GetComponent<Turret>().turret.deselectedTurretUI;
         turretUI.GetComponent<Image>().sprite = deselectedTurretUI;*/
 
-        gameObject.transform.GetChild(0).GetComponent<Image>().sprite = turretUI;
-        buildManager.ShopUIUpdate -= DeactivateTurretUI;
+        gameObject.transform.GetChild(buildManager.GetSelectedTurret().GetComponent<Turret>().index).GetComponent<Image>().sprite = turretUI;
+        buildManager.ActivateShopUI -= DeactivateTurretUI;
     }
 
     public void TurretPressed(GameObject newTurret)
     {
         if (buildManager.GetSelectedTurret() != newTurret)
         {
-            buildManager.ShopUIUpdate += ActivateTurretUI;
+            buildManager.ActivateShopUI += DeactivateTurretUI;
             buildManager.SelectTurret(newTurret);
+            buildManager.ActivateShopUI += ActivateTurretUI;
         }
         else
         {
-            buildManager.ShopUIUpdate += DeactivateTurretUI;
+            buildManager.ActivateShopUI += DeactivateTurretUI;
             buildManager.SelectTurret(null);
         }
     }

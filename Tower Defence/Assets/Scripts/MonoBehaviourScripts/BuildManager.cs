@@ -8,9 +8,13 @@ public class BuildManager : MonoBehaviour
     public event Action<Transform> TurretAlert;
     public event Action MoneyUpdate;
     public event Action LivesUpdate;
-    public event Action<Sprite> ShopUIUpdate;
+    public event Action<Sprite> ActivateShopUI;
+    public event Action<Sprite> DeactivateShopUI;
+    public event Action<TurretObject[]> InitTurretsEvent;  
 
     public void TurretError(Transform t) { TurretAlert.Invoke(t); }
+
+    public TurretObject[] turrets;
 
     public static BuildManager singleton;
 
@@ -30,21 +34,35 @@ public class BuildManager : MonoBehaviour
         }
         singleton = this;
     }
+    
+    private void Start()
+    {
+        InitTurretsEvent?.Invoke(turrets);
+    }
 
     public void SelectTurret(GameObject turretGO)
     {
         if (turretGO == selectedTurret)
         {
-            ShopUIUpdate?.Invoke(turretData.deselectedTurretUI);
+            //ActivateShopUI?.Invoke(turretData.deselectedTurretUI);
+            selectedTurret = null;
             return;
         }
+
         // 1) disselect turret
+        //if (selectedTurret != null)
+            //ActivateShopUI?.Invoke(turretData.deselectedTurretUI);
 
         // 2) =
         selectedTurret = turretGO;
 
+        Turret turret = selectedTurret.GetComponent<Turret>();
+        SetTurretData(turret != null ? turret.turret : null);
+
         // select
-        ShopUIUpdate?.Invoke(turretData.selectedTurretUI);
+       // ActivateShopUI?.Invoke(turretData.selectedTurretUI);
+
+        void SetTurretData(TurretObject data) => turretData = data;
     }
 
     public TurretObject GetTurretData() => turretData;
@@ -62,7 +80,6 @@ public class BuildManager : MonoBehaviour
 
         if (platform.turret != null)
         {
-
             if (selectedPlatform != null)
             {
                 selectedPlatform.turret.GetComponent<Turret>().Deactivate();
@@ -84,14 +101,21 @@ public class BuildManager : MonoBehaviour
             selectedPlatform = null;
         }
 
+        if (selectedTurret == null)
+        {
+            TurretError(platform.transform);
+            return;
+        }
+
+        if (!IsEnoughMoney())
+        {
+            TurretError(platform.transform);
+            return;
+        }
+
         selectedPlatform = platform;
 
         BuildTurretOn(platform);
-    }
-
-    public void SetTurretData(TurretObject data)
-    {
-        turretData = data;
     }
 
     public GameObject GetSelectedTurret() => selectedTurret;

@@ -15,6 +15,8 @@ public class Turret : MonoBehaviour
     public TurretObject turret;
     private GameObject target;
 
+    public int index;
+
     [Header("Unity Setup Fields")]
 
     [HideInInspector]
@@ -103,7 +105,7 @@ public class Turret : MonoBehaviour
 
         if (bullet != null)
         {
-            bullet.FindTarget(target,turret.bulletTrajectory);
+            bullet.FindTarget(target, turret.bulletTrajectory, turret.area);
         }
     }
 

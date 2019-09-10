@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public enum TrajectoryType
 {
     DEFAULT,
     MISSILE
 }
+
 public class Bullet : MonoBehaviour
 {
     BuildManager buildManager;
@@ -24,14 +24,16 @@ public class Bullet : MonoBehaviour
 
     private float TotalLifetime;
     private Vector3 A, B;
+    private float explosionRadius;
 
     void Awake()
     {
         buildManager = BuildManager.singleton;
     }
 
-    public void FindTarget(GameObject _target,TrajectoryType type)
+    public void FindTarget(GameObject _target,TrajectoryType type,float explR)
     {
+        explosionRadius = explR;
         target = _target;
         if (type == TrajectoryType.MISSILE)
             InitMissileData();
@@ -44,8 +46,8 @@ public class Bullet : MonoBehaviour
     {
         SetTrajectoryType(TrajectoryType.MISSILE);
         TotalLifetime = Vector3.Distance(transform.position, target.transform.position) / speed;
-        A = Vector3.Lerp(transform.position, target.transform.position, 0.3f) + UnityEngine.Random.onUnitSphere * UnityEngine.Random.Range(2f, 4f) + Vector3.up;
-        B = Vector3.Lerp(transform.position, target.transform.position, 0.6f) + UnityEngine.Random.onUnitSphere * UnityEngine.Random.Range(3f, 5f) + Vector3.up * 2;
+        A = Vector3.Lerp(transform.position, target.transform.position, 0.3f);
+        B = Vector3.Lerp(transform.position, target.transform.position, 0.6f);
     }
 
     public void SetTrajectoryType(TrajectoryType type) => trajectoryType = type;
@@ -65,6 +67,7 @@ public class Bullet : MonoBehaviour
                 }
 
                 transform.Translate(direction.normalized * distanceThisFrame, Space.World);
+                transform.LookAt(target.transform);
                 break;
 
             case TrajectoryType.MISSILE:
@@ -94,7 +97,6 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-
         if (target == null)
         {
             Destroy(gameObject);
@@ -106,19 +108,45 @@ public class Bullet : MonoBehaviour
 
     private void HitTarget()
     {
+        if (trajectoryType == TrajectoryType.MISSILE)
+        {
+            Explode();
+        }
+        else
+        {
+
+            GameObject effect = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
+            Destroy(effect, 2f);
+
+            Damage(target.transform);
+
+            Destroy(gameObject);
+
+            buildManager.AddMoney(enemy.enemyObject.moneyBonus);
+        }
+
         //Сделать проверку на смерть
         if (enemy.enemyObject.Hp <= 0)//Перенести в Enemy
         {
 
         }
+    }
 
-        GameObject effect = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(effect, 2f);
+    void Damage(Transform enemy)
+    {
+        Destroy(enemy.gameObject);
+    }
 
-        Destroy(target);
+    void Explode()
+    {
+        Collider[] hitObjects= Physics.OverlapSphere(transform.position, explosionRadius);
 
-        Destroy(gameObject);
-
-        buildManager.AddMoney(enemy.enemyObject.moneyBonus);
+        foreach(Collider collider in hitObjects)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                Damage(collider.transform);
+            }
+        }
     }
 }

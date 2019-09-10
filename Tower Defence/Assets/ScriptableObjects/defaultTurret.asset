@@ -15,8 +15,12 @@ MonoBehaviour:
   range: 3
   fireRate: 1
   speedRotation: 10
-  fireCountdown: 0
+  fireCountdown: 0.59163404
   damage: 10
   cost: 100
   selectedTurretUI: {fileID: 21300000, guid: 9d6f52f4008de954b94a77e36c82a0c8, type: 3}
   deselectedTurretUI: {fileID: 21300000, guid: c327b78425e5fd8458e256893dfa4e93, type: 3}
+  TurretPrefab: {fileID: 204359281809251372, guid: ca8c9bc11fdb7d440bb401655a846c1a,
+    type: 3}
+  bulletTrajectory: 0
+  area: 0

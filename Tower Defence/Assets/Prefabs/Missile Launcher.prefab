@@ -264,7 +264,6 @@ GameObject:
   - component: {fileID: -8236410452594935730}
   - component: {fileID: 4589338745553749707}
   - component: {fileID: 7821646638901951026}
-  - component: {fileID: 3979894639111946598}
   m_Layer: 2
   m_Name: Missile Launcher
   m_TagString: Untagged
@@ -302,6 +301,7 @@ MonoBehaviour:
   segments: 50
   line: {fileID: 0}
   turret: {fileID: 11400000, guid: ce292565cefb247449f59cd3ddefed1c, type: 2}
+  index: 1
   partToRotate: {fileID: 3750310341949839527}
   bulletPrefab: {fileID: 4852800682188333554, guid: 6732c7e707ac6794cb8167cb982c1936,
     type: 3}
@@ -463,18 +463,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!111 &3979894639111946598
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8408436154272239342}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0

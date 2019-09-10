@@ -23,6 +23,9 @@ public class TurretObject : ScriptableObject
 
     public Sprite deselectedTurretUI;
 
+    //Нужно было распределить, но пофиг
+    public GameObject TurretPrefab;
+
     public TrajectoryType bulletTrajectory;
 
     [Header("Only if Area Damage")]

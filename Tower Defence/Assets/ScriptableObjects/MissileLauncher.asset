@@ -20,5 +20,7 @@ MonoBehaviour:
   cost: 250
   selectedTurretUI: {fileID: 21300000, guid: 9d6f52f4008de954b94a77e36c82a0c8, type: 3}
   deselectedTurretUI: {fileID: 21300000, guid: c327b78425e5fd8458e256893dfa4e93, type: 3}
+  TurretPrefab: {fileID: 8408436154272239342, guid: 75e5c6b2dd0369740b93d8bda6d14b79,
+    type: 3}
   bulletTrajectory: 1
   area: 2.5
