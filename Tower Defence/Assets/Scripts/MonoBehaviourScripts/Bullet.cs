@@ -23,11 +23,13 @@ public class Bullet : MonoBehaviour
     public GameObject impactEffect;
 
     private float TotalLifetime;
+    private float Lifetime;
     private Vector3 A, B;
     private float explosionRadius;
 
     void Awake()
     {
+        Lifetime = 0;
         buildManager = BuildManager.singleton;
     }
 
@@ -36,16 +38,20 @@ public class Bullet : MonoBehaviour
         explosionRadius = explR;
         target = _target;
         if (type == TrajectoryType.MISSILE)
-            InitMissileData();
+        {
+            SetTrajectoryType(TrajectoryType.MISSILE);
+            CalculateTotalLifetime();
+        }
         else
             SetTrajectoryType(TrajectoryType.DEFAULT);
         enemy = target.GetComponent<Enemy>();
     }
 
-    private void InitMissileData()
+    private void CalculateTotalLifetime() => TotalLifetime = Vector3.Distance(transform.position, target.transform.position) / speed;
+
+    private void UpdateMissileData()
     {
-        SetTrajectoryType(TrajectoryType.MISSILE);
-        TotalLifetime = Vector3.Distance(transform.position, target.transform.position) / speed;
+        //TotalLifetime = Vector3.Distance(transform.position, target.transform.position) / speed;
         A = Vector3.Lerp(transform.position, target.transform.position, 0.3f);
         B = Vector3.Lerp(transform.position, target.transform.position, 0.6f);
     }
@@ -71,10 +77,11 @@ public class Bullet : MonoBehaviour
                 break;
 
             case TrajectoryType.MISSILE:
-                float LifeTime = 0;
 
-                LifeTime += Time.deltaTime;
-                float t = LifeTime / TotalLifetime;
+                UpdateMissileData();
+
+                Lifetime += Time.deltaTime;
+                float t = Lifetime / TotalLifetime;
 
                 if (t >= 1)
                 {
@@ -114,7 +121,6 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-
             GameObject effect = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(effect, 2f);
 

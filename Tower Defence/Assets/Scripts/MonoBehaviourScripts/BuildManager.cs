@@ -8,9 +8,9 @@ public class BuildManager : MonoBehaviour
     public event Action<Transform> TurretAlert;
     public event Action MoneyUpdate;
     public event Action LivesUpdate;
-    public event Action<Sprite> ActivateShopUI;
-    public event Action<Sprite> DeactivateShopUI;
-    public event Action<TurretObject[]> InitTurretsEvent;  
+    public event Action ActivateShopUI;
+    public event Action DeactivateShopUI;
+    public event Action<TurretObject[]> InitTurretsEvent;
 
     public void TurretError(Transform t) { TurretAlert.Invoke(t); }
 
@@ -22,6 +22,7 @@ public class BuildManager : MonoBehaviour
 
     private GameObject selectedTurret;
     private TurretObject turretData;
+    private ShopButtonUI selectedButtonUI;
 
     private Platform selectedPlatform;
 
@@ -34,33 +35,38 @@ public class BuildManager : MonoBehaviour
         }
         singleton = this;
     }
-    
+
     private void Start()
     {
         InitTurretsEvent?.Invoke(turrets);
     }
 
-    public void SelectTurret(GameObject turretGO)
+    public void SelectTurret(GameObject turretGO, ShopButtonUI button)
     {
-        if (turretGO == selectedTurret)
+        if (turretGO == selectedTurret) 
         {
-            //ActivateShopUI?.Invoke(turretData.deselectedTurretUI);
+            //DeactivateShopUI?.Invoke();
+            selectedButtonUI.Deselect();
             selectedTurret = null;
+            button = null;
             return;
         }
 
         // 1) disselect turret
-        //if (selectedTurret != null)
-            //ActivateShopUI?.Invoke(turretData.deselectedTurretUI);
+        if (selectedButtonUI != null)
+            selectedButtonUI.Deselect();
+        //DeactivateShopUI?.Invoke();
 
         // 2) =
         selectedTurret = turretGO;
-
-        Turret turret = selectedTurret.GetComponent<Turret>();
-        SetTurretData(turret != null ? turret.turret : null);
+        selectedButtonUI = button;
 
         // select
-       // ActivateShopUI?.Invoke(turretData.selectedTurretUI);
+        Turret turret = selectedTurret.GetComponent<Turret>();
+        SetTurretData(turret?.turret);
+        selectedButtonUI.Select();
+        //ActivateShopUI?.Invoke();
+        
 
         void SetTurretData(TurretObject data) => turretData = data;
     }
@@ -129,10 +135,11 @@ public class BuildManager : MonoBehaviour
         platform.turret = turret;
     }
 
-    internal void UpdateLives()
-    {
-        LivesUpdate?.Invoke();
-    }
+    internal void UpdateLives() => LivesUpdate?.Invoke();
+
+    //public void ActivateShopButton() => ActivateShopUI?.Invoke();
+
+    //public void DeactivateShopButton() => DeactivateShopUI?.Invoke();
 
     public void ExtractMoney(int amount)
     {
