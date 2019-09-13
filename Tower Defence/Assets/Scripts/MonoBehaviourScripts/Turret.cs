@@ -99,7 +99,7 @@ public class Turret : MonoBehaviour
     {
         GameObject bulletGO = Instantiate(bulletPrefab, GetFirePointTransform());
         bulletGO.transform.parent = null;
-        bulletGO.transform.localScale = Vector3.one;
+        bulletGO.transform.localScale = bulletPrefab.transform.localScale;
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
         if (bullet != null)
