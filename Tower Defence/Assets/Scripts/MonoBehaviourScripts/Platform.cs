@@ -10,7 +10,7 @@ public class Platform : MonoBehaviour
     [Header("Optional")]
     public GameObject turret;
 
-    public bool IsTurretActive = false;
+    //public bool IsTurretActive = false;
 
     private Renderer rend;
     private Color startColor;

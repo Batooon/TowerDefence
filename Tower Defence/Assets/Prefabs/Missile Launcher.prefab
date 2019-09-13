@@ -298,7 +298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df4200c84e91701429a9ae741f7965b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segments: 50
   line: {fileID: 0}
   turret: {fileID: 11400000, guid: ce292565cefb247449f59cd3ddefed1c, type: 2}
   index: 1
@@ -356,7 +355,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.2
+        value: 0.12857056
         inSlope: 0
         outSlope: 0
         tangentMode: 0

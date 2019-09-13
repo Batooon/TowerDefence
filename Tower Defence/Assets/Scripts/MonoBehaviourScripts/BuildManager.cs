@@ -8,8 +8,8 @@ public class BuildManager : MonoBehaviour
     public event Action<Transform> TurretAlert;
     public event Action MoneyUpdate;
     public event Action LivesUpdate;
-    public event Action ActivateShopUI;
-    public event Action DeactivateShopUI;
+    /*public event Action ActivateShopUI;
+    public event Action DeactivateShopUI;*/
     public event Action<TurretObject[]> InitTurretsEvent;
 
     public void TurretError(Transform t) { TurretAlert.Invoke(t); }
@@ -77,10 +77,10 @@ public class BuildManager : MonoBehaviour
     {
         if (selectedPlatform == platform)
         {
-            if (platform.IsTurretActive)
-                platform.turret.GetComponent<Turret>().Activate();
-            else
+            if (platform.turret.GetComponent<LineRenderer>().isVisible)
                 platform.turret.GetComponent<Turret>().Deactivate();
+            else
+                platform.turret.GetComponent<Turret>().Activate();
             return;
         }
 

@@ -6,9 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class Turret : MonoBehaviour
 {
-    [Range(0, 50)]
-    public int segments = 50;
-
+    //Radius
+    private int segments = 50;
     [HideInInspector]
     public LineRenderer line;
 
@@ -99,8 +98,8 @@ public class Turret : MonoBehaviour
     private void Shoot()
     {
         GameObject bulletGO = Instantiate(bulletPrefab, GetFirePointTransform());
-        /*bulletGO.transform.localScale = Vector3.one;*/
         bulletGO.transform.parent = null;
+        bulletGO.transform.localScale = Vector3.one;
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
         if (bullet != null)

@@ -125,9 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b110ded0adcd94ebc4fd38f2cbe7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segments: 50
   line: {fileID: 6970397248265174906, guid: 1b13322ccc9a9f742a445d01b811fd80, type: 3}
   turret: {fileID: 11400000, guid: 35d1a79dcbadcbf498f2fc0f781f40d4, type: 2}
+  index: 0
   partToRotate: {fileID: 1916912150601773045}
   bulletPrefab: {fileID: 4852800682188333554, guid: 6732c7e707ac6794cb8167cb982c1936,
     type: 3}

@@ -820,6 +820,7 @@ MonoBehaviour:
   turrets:
   - {fileID: 11400000, guid: 35d1a79dcbadcbf498f2fc0f781f40d4, type: 2}
   - {fileID: 11400000, guid: ce292565cefb247449f59cd3ddefed1c, type: 2}
+  - {fileID: 11400000, guid: 1a19f9c7120e1064b9553e60799bd944, type: 2}
   money: 500
 --- !u!114 &589487240
 MonoBehaviour:
