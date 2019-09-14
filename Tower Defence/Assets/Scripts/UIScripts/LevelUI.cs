@@ -35,7 +35,7 @@ public class LevelUI : MonoBehaviour
 
     void Awake()
     {
-        livesText.text = level.Hp.ToString();
+        livesText.text = "HP " + level.Hp.ToString();
         money.text = currency + level.buildManager.money.ToString();
     }
 
@@ -94,6 +94,6 @@ public class LevelUI : MonoBehaviour
 
     public void OnLivesUpdate()
     {
-        livesText.text = level.Hp.ToString();
+        livesText.text = "HP " + level.Hp.ToString();
     }
 }

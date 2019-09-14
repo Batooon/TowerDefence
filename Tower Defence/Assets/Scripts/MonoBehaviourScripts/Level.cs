@@ -26,7 +26,13 @@ public class Level : MonoBehaviour
         }
     }
 
-    public int Hp = 5;
+    public int Hp;
+
+    private void Awake()
+    {
+        Hp = (int)Mathf.Clamp(Hp, 0f, Mathf.Infinity);
+        buildManager.LivesUpdate += DecreaseHp;
+    }
 
     void OnStateChanged()
     {
@@ -90,5 +96,10 @@ public class Level : MonoBehaviour
     public void OpenInstagram()
     {
         Application.OpenURL(instagramAccountUrl);
+    }
+
+    public void DecreaseHp()
+    {
+        Hp -= 1;
     }
 }
