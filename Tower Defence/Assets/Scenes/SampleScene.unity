@@ -557,6 +557,12 @@ Transform:
   m_Father: {fileID: 1507798107}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &484494603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 20030892, guid: be28bdf709c00514cbd96388ba9c50da,
+    type: 3}
+  m_PrefabInstance: {fileID: 775237800}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &537266437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -777,7 +783,8 @@ MonoBehaviour:
   buildManager: {fileID: 589487239}
   waveSpawner: {fileID: 589487238}
   instagramAccountUrl: https://www.instagram.com/rozumanton/
-  Hp: 15
+  GameOverScreen: {fileID: 484494603}
+  Hp: 3
 --- !u!114 &589487242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1394,6 +1401,34 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3524642908612344381, guid: 89a5c9f7e1b19fa45b0a738b57040f41,
         type: 3}
+    - target: {fileID: 20030892, guid: be28bdf709c00514cbd96388ba9c50da, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1839380773, guid: be28bdf709c00514cbd96388ba9c50da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1839380773, guid: be28bdf709c00514cbd96388ba9c50da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1839380773, guid: be28bdf709c00514cbd96388ba9c50da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1839380773, guid: be28bdf709c00514cbd96388ba9c50da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 589487240}
+    - target: {fileID: 1839380773, guid: be28bdf709c00514cbd96388ba9c50da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RetryButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1839380773, guid: be28bdf709c00514cbd96388ba9c50da, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be28bdf709c00514cbd96388ba9c50da, type: 3}
 --- !u!1001 &939421314

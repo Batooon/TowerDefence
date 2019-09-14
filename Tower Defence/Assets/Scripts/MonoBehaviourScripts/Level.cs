@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GlobalState
 {
@@ -14,6 +16,7 @@ public class Level : MonoBehaviour
     public WaveSpawner waveSpawner;
 
     public string instagramAccountUrl;
+    public GameObject GameOverScreen;
 
     private GlobalState _state;
     public GlobalState state
@@ -32,6 +35,11 @@ public class Level : MonoBehaviour
     {
         Hp = (int)Mathf.Clamp(Hp, 0f, Mathf.Infinity);
         buildManager.LivesUpdate += DecreaseHp;
+    }
+
+    private void Start()
+    {
+        state = GlobalState.GAME;
     }
 
     void OnStateChanged()
@@ -79,7 +87,6 @@ public class Level : MonoBehaviour
         switch (state)
         {
             case GlobalState.GAME:
-            case GlobalState.END:
                 OnPause(PauseMenu);
                 break;
             case GlobalState.PAUSE:
@@ -88,9 +95,19 @@ public class Level : MonoBehaviour
         }
     }
 
+    void ActivateGameOverMenu()
+    {
+        GameOverScreen.SetActive(true);
+    }
+
     public void ClickQuitButton()
     {
         Application.Quit();
+    }
+
+    public void RetryButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void OpenInstagram()
@@ -101,5 +118,16 @@ public class Level : MonoBehaviour
     public void DecreaseHp()
     {
         Hp -= 1;
+        if (Hp <= 0)
+        {
+            EndGame();
+        }
+    }
+
+    private void EndGame()
+    {
+        state = GlobalState.END;
+        ActivateGameOverMenu();
+        //SceneManager.LoadScene(0);
     }
 }
