@@ -25,11 +25,31 @@ public class Platform : MonoBehaviour
 
     public void OnMouseDown()
     {
-        buildManager.SelectPlatform(this);
+        if (buildManager.selectedPlatform != this)
+            buildManager.TrySelectPlatform(this);
+        else
+            buildManager.TrySelectPlatform(null);
     }
 
     void OnMouseExit()
     {
         rend.material.color = startColor;
+    }
+
+    public void Choose()
+    {
+        if (turret != null)
+            turret.GetComponent<Turret>().Activate();
+    }
+
+    public void Unchoose()
+    {
+        if (turret != null)
+            turret.GetComponent<Turret>().Deactivate();
+    }
+
+    public bool IsEmpty()
+    {
+        return turret == null;
     }
 }

@@ -24,7 +24,7 @@ public class BuildManager : MonoBehaviour
     private TurretObject turretData;
     private ShopButtonUI selectedButtonUI;
 
-    private Platform selectedPlatform;
+    public Platform selectedPlatform { get; private set; }
 
     void Awake()
     {
@@ -39,6 +39,24 @@ public class BuildManager : MonoBehaviour
     private void Start()
     {
         InitTurretsEvent?.Invoke(turrets);
+    }
+
+    public void TrySelectPlatform(Platform platform)
+    {
+        if (platform !=null && platform.IsEmpty())
+        {
+            if (!IsEnoughMoney())
+            {
+                TurretError(platform.transform);
+                return;
+            }
+            if (!CanBuild())
+            {
+                TurretError(platform.transform);
+                return;
+            }
+        }
+        SelectPlatform(platform);
     }
 
     public void SelectTurret(GameObject turretGO, ShopButtonUI button)
@@ -75,53 +93,20 @@ public class BuildManager : MonoBehaviour
 
     public void SelectPlatform(Platform platform)
     {
-        if (selectedPlatform == platform)
-        {
-            if (platform.turret.GetComponent<LineRenderer>().isVisible)
-                platform.turret.GetComponent<Turret>().Deactivate();
-            else
-                platform.turret.GetComponent<Turret>().Activate();
-            return;
-        }
-
-        if (platform.turret != null)
-        {
-            if (selectedPlatform != null)
-            {
-                selectedPlatform.turret.GetComponent<Turret>().Deactivate();
-
-                selectedPlatform = null;
-            }
-
-            selectedPlatform = platform;
-
-            selectedPlatform.turret.GetComponent<Turret>().Activate();
-
-            return;
-        }
-
         if (selectedPlatform != null)
         {
-            selectedPlatform.turret.GetComponent<Turret>().Deactivate();
-
-            selectedPlatform = null;
-        }
-
-        if (selectedTurret == null)
-        {
-            TurretError(platform.transform);
-            return;
-        }
-
-        if (!IsEnoughMoney())
-        {
-            TurretError(platform.transform);
-            return;
+            selectedPlatform.Unchoose();
         }
 
         selectedPlatform = platform;
 
-        BuildTurretOn(platform);
+        if (selectedPlatform != null)
+        {
+            if (selectedPlatform.IsEmpty())
+                BuildTurretOn(platform);
+
+            selectedPlatform.Choose();
+        }
     }
 
     public GameObject GetSelectedTurret() => selectedTurret;
