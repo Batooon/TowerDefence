@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Platform : MonoBehaviour
 {
@@ -25,6 +26,9 @@ public class Platform : MonoBehaviour
 
     public void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         if (buildManager.selectedPlatform != this)
             buildManager.TrySelectPlatform(this);
         else

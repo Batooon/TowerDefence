@@ -48,7 +48,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionOffset: {x: 0, y: 0.55, z: 0}
   turret: {fileID: 0}
-  IsTurretActive: 0
 --- !u!33 &1540891535395799695
 MeshFilter:
   m_ObjectHideFlags: 0

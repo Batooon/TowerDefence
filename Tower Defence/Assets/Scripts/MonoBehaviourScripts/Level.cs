@@ -107,7 +107,7 @@ public class Level : MonoBehaviour
 
     public void RetryButton()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(0);
     }
 
     public void OpenInstagram()
@@ -128,6 +128,6 @@ public class Level : MonoBehaviour
     {
         state = GlobalState.END;
         ActivateGameOverMenu();
-        //SceneManager.LoadScene(0);
+        buildManager.ClearEvents();
     }
 }

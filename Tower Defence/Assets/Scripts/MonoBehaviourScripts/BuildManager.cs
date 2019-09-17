@@ -36,7 +36,7 @@ public class BuildManager : MonoBehaviour
         singleton = this;
     }
 
-    private void Start()
+    public void InitTurrets()
     {
         InitTurretsEvent?.Invoke(turrets);
     }
@@ -45,12 +45,12 @@ public class BuildManager : MonoBehaviour
     {
         if (platform !=null && platform.IsEmpty())
         {
-            if (!IsEnoughMoney())
+            if (!CanBuild())
             {
                 TurretError(platform.transform);
                 return;
             }
-            if (!CanBuild())
+            if (!IsEnoughMoney())
             {
                 TurretError(platform.transform);
                 return;
@@ -118,6 +118,11 @@ public class BuildManager : MonoBehaviour
         GameObject turret = Instantiate(selectedTurret, platform.GetBuildPosition(), Quaternion.identity);
         turret.transform.SetParent(platform.transform);
         platform.turret = turret;
+    }
+
+    public void ClearEvents()
+    {
+        InitTurretsEvent = null;
     }
 
     internal void UpdateLives() => LivesUpdate?.Invoke();

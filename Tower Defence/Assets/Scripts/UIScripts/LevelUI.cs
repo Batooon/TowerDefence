@@ -28,6 +28,8 @@ public class LevelUI : MonoBehaviour
 
     [Header("Lives Text")]
     public TextMeshProUGUI livesText;
+    public Color startColor;
+    public Color loseLifeColor;
 
     [Space(20)]
 

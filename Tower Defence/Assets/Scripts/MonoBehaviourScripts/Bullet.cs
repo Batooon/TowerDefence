@@ -33,9 +33,15 @@ public class Bullet : MonoBehaviour
         buildManager = BuildManager.singleton;
     }
 
-    public void FindTarget(GameObject _target,TrajectoryType type,float explR)
+    public void FindTarget(GameObject _target, TrajectoryType type, float explR)
     {
         explosionRadius = explR;
+        target = _target;
+        SetTrajectoryType(type);
+
+        enemy = target.GetComponent<Enemy>();
+
+        /*explosionRadius = explR;
         target = _target;
         if (type == TrajectoryType.MISSILE)
         {
@@ -44,7 +50,7 @@ public class Bullet : MonoBehaviour
         }
         else
             SetTrajectoryType(TrajectoryType.DEFAULT);
-        enemy = target.GetComponent<Enemy>();
+        enemy = target.GetComponent<Enemy>();*/
     }
 
     private void CalculateTotalLifetime() => TotalLifetime = Vector3.Distance(transform.position, target.transform.position) / speed;
@@ -58,48 +64,40 @@ public class Bullet : MonoBehaviour
 
     public void SetTrajectoryType(TrajectoryType type) => trajectoryType = type;
 
-    void Fly(TrajectoryType type,Vector3 direction)
+    void Fly(Vector3 direction)
     {
-        switch (type)
+        float distanceThisFrame = speed * Time.deltaTime;
+
+        if (direction.magnitude <= distanceThisFrame)
         {
-            case TrajectoryType.DEFAULT:
-
-                float distanceThisFrame = speed * Time.deltaTime;
-
-                if (direction.magnitude <= distanceThisFrame)
-                {
-                    HitTarget();
-                    return;
-                }
-
-                transform.Translate(direction.normalized * distanceThisFrame, Space.World);
-                transform.LookAt(target.transform);
-                break;
-
-            case TrajectoryType.MISSILE:
-
-                UpdateMissileData();
-
-                Lifetime += Time.deltaTime;
-                float t = Lifetime / TotalLifetime;
-
-                if (t >= 1)
-                {
-                    HitTarget();
-                    return;
-                }
-
-                Vector3 SA = Vector3.Lerp(transform.position, A, t);
-                Vector3 AB = Vector3.Lerp(A, B, t);
-                Vector3 BT = Vector3.Lerp(B, target.transform.position, t);
-
-                Vector3 SAB = Vector3.Lerp(SA, AB, t);
-                Vector3 ABT = Vector3.Lerp(AB, BT, t);
-
-                Vector3 SABT = Vector3.Lerp(SAB, ABT, t);
-                transform.position = SABT;
-                break;
+            HitTarget();
+            return;
         }
+
+        transform.Translate(direction.normalized * distanceThisFrame, Space.World);
+        //transform.LookAt(target.transform);
+
+        /*
+        UpdateMissileData();
+
+        Lifetime += Time.deltaTime;
+        float t = Lifetime / TotalLifetime;
+
+        if (t >= 1)
+        {
+            HitTarget();
+            return;
+        }
+
+        Vector3 SA = Vector3.Lerp(transform.position, A, t);
+        Vector3 AB = Vector3.Lerp(A, B, t);
+        Vector3 BT = Vector3.Lerp(B, target.transform.position + Vector3.up, t);
+
+        Vector3 SAB = Vector3.Lerp(SA, AB, t);
+        Vector3 ABT = Vector3.Lerp(AB, BT, t);
+
+        Vector3 SABT = Vector3.Lerp(SAB, ABT, t);
+        transform.position = SABT;*/
     }
 
     void Update()
@@ -110,17 +108,11 @@ public class Bullet : MonoBehaviour
             return;
         }
         Vector3 dir = target.transform.position - transform.position;
-        Fly(trajectoryType, dir);
+        Fly(dir);
     }
 
     private void HitTarget()
     {
-        if (trajectoryType == TrajectoryType.MISSILE)
-        {
-            Explode();
-        }
-        else
-        {
             GameObject effect = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(effect, 2f);
 
@@ -129,7 +121,6 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
 
             buildManager.AddMoney(enemy.enemyObject.moneyBonus);
-        }
 
         //Сделать проверку на смерть
         if (enemy.enemyObject.Hp <= 0)//Перенести в Enemy

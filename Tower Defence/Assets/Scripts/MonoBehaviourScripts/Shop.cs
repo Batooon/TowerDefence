@@ -9,21 +9,31 @@ public class Shop : MonoBehaviour
 
     public GameObject TurretButton;
 
+    private List<ShopButtonUI> turretButtons = new List<ShopButtonUI>();
+
     private void Start()
     {
+        foreach(Transform child in transform)
+        {
+            turretButtons.Add(child.GetComponent<ShopButtonUI>());
+        }
         buildManager = BuildManager.singleton;
         buildManager.InitTurretsEvent += SetTurrets;
+        buildManager.InitTurrets();
     }
 
     public void SetTurrets(TurretObject[] turrets)
     {
+        int i = 0;
         foreach(TurretObject t in turrets)
         {
-            GameObject newTurretButton = Instantiate(TurretButton);
+            turretButtons[i].Init(t);
+            i++;
+            /*GameObject newTurretButton = Instantiate(TurretButton);
             newTurretButton.transform.SetParent(transform);
 
-            ShopButtonUI sbui = newTurretButton.GetComponent<ShopButtonUI>();
-            sbui?.Init(t);
+            ShopButtonUI sbui = newTurretButton.GetComponent<ShopButtonUI>();*/
+            //sbui?.Init(t);
         }
     }
 
