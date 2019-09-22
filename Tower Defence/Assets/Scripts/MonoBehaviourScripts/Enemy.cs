@@ -6,35 +6,44 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    private Transform target;
-    private int waypointIndex = 0;
+    private Vector3 target;
+    private IWayPoint _nextWaypoint;
+    private IWayPoint wayPoint
+    {
+        get => _nextWaypoint;
+        set
+        {
+            _nextWaypoint = value;
+            target = _nextWaypoint.GetWayPointLocation();
+        }
+    }
 
     public EnemyObject enemyObject;
-    void Start()
+    public void Init(IWayPoint wayPoint)
     {
-        target = Waypoints.waypoints[0];
+        this.wayPoint = wayPoint.GetNextWayPoint();
     }
 
     void Update()
     {
-        Vector3 dir = target.position - transform.position;
+        Vector3 dir = target - transform.position;
         transform.Translate(dir.normalized * enemyObject.speed * Time.deltaTime, Space.World);
-        if (Vector3.Distance(transform.position, target.position) <= 0.1f)
+        if (Vector3.Distance(transform.position, target) <= 0.1f)
         {
             GetNextWaypoint();
-            transform.LookAt(target.position);
+            transform.LookAt(target);
         }
     }
 
     void GetNextWaypoint()
     {
-        if (waypointIndex >= Waypoints.waypoints.Length - 1)
+        IWayPoint newWayPoint = wayPoint.GetNextWayPoint();
+        if(wayPoint == newWayPoint)
         {
             EndPath();
             return;
         }
-        waypointIndex++;
-        target = Waypoints.waypoints[waypointIndex];
+        wayPoint = newWayPoint; 
     }
 
     void EndPath()
