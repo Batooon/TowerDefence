@@ -22,7 +22,6 @@ public class WaveSpawner : MonoBehaviour
 
     //public Transform enemyPrefab;
 
-    public Transform spawnPoint;
 
     public bool isWaveIncoming;
 
@@ -78,7 +77,12 @@ public class WaveSpawner : MonoBehaviour
     {
         GameObject newEnemy = waves[waveNumber].GetNextEnemy(index);
 
-        Instantiate(newEnemy, spawnPoint.position, spawnPoint.rotation);
+        Transform spawnPoint = waves[waveNumber].StartWayPoints[0].transform;
+
+        GameObject spawnedBuddy = Instantiate(newEnemy, spawnPoint);
+        Enemy enemy = spawnedBuddy.GetComponent<Enemy>();
+        enemy.Init(waves[waveNumber].StartWayPoints[0]);
+
         EnemiesAlive++;
     }
 
@@ -95,4 +99,8 @@ public class Wave
     public GameObject[] waveData;
 
     public GameObject GetNextEnemy(int index) => waveData[index];
+
+    public WaypointBase[] StartWayPoints;
+
+
 }
