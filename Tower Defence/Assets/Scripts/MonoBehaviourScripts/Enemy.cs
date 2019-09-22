@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
 
     void EndPath()
     {
-        BuildManager.singleton.UpdateLives();
+        BuildManager.singleton.OnUpdateLives();
         Destroy(gameObject);
     }
 }

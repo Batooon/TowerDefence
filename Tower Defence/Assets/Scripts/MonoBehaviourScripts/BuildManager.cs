@@ -8,8 +8,6 @@ public class BuildManager : MonoBehaviour
     public event Action<Transform> TurretAlert;
     public event Action MoneyUpdate;
     public event Action LivesUpdate;
-    /*public event Action ActivateShopUI;
-    public event Action DeactivateShopUI;*/
     public event Action<TurretObject[]> InitTurretsEvent;
 
     public void TurretError(Transform t) { TurretAlert.Invoke(t); }
@@ -36,10 +34,6 @@ public class BuildManager : MonoBehaviour
         singleton = this;
     }
 
-    public void InitTurrets()
-    {
-        InitTurretsEvent?.Invoke(turrets);
-    }
 
     public void TrySelectPlatform(Platform platform)
     {
@@ -125,11 +119,8 @@ public class BuildManager : MonoBehaviour
         InitTurretsEvent = null;
     }
 
-    internal void UpdateLives() => LivesUpdate?.Invoke();
+    internal void OnUpdateLives() => LivesUpdate?.Invoke();
 
-    //public void ActivateShopButton() => ActivateShopUI?.Invoke();
-
-    //public void DeactivateShopButton() => DeactivateShopUI?.Invoke();
 
     public void ExtractMoney(int amount)
     {
