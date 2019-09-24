@@ -3,17 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TrajectoryType
-{
-    DEFAULT,
-    MISSILE
-}
-
 public class Bullet : MonoBehaviour
 {
     BuildManager buildManager;
-
-    private TrajectoryType trajectoryType;
 
     private GameObject target;
     private Enemy enemy;
@@ -23,21 +15,20 @@ public class Bullet : MonoBehaviour
     public GameObject impactEffect;
 
     private float TotalLifetime;
-    private float Lifetime;
+    //private float Lifetime;
     private Vector3 A, B;
     private float explosionRadius;
 
     void Awake()
     {
-        Lifetime = 0;
+        //Lifetime = 0;
         buildManager = BuildManager.singleton;
     }
 
-    public void FindTarget(GameObject _target, TrajectoryType type, float explR)
+    public void FindTarget(GameObject _target, float explR)
     {
         explosionRadius = explR;
         target = _target;
-        SetTrajectoryType(type);
 
         enemy = target.GetComponent<Enemy>();
 
@@ -53,16 +44,14 @@ public class Bullet : MonoBehaviour
         enemy = target.GetComponent<Enemy>();*/
     }
 
-    private void CalculateTotalLifetime() => TotalLifetime = Vector3.Distance(transform.position, target.transform.position) / speed;
+    //private void CalculateTotalLifetime() => TotalLifetime = Vector3.Distance(transform.position, target.transform.position) / speed;
 
-    private void UpdateMissileData()
+    /*private void UpdateMissileData()
     {
         //TotalLifetime = Vector3.Distance(transform.position, target.transform.position) / speed;
         A = Vector3.Lerp(transform.position, target.transform.position, 0.3f);
         B = Vector3.Lerp(transform.position, target.transform.position, 0.6f);
-    }
-
-    public void SetTrajectoryType(TrajectoryType type) => trajectoryType = type;
+    }*/
 
     void Fly(Vector3 direction)
     {
@@ -113,14 +102,17 @@ public class Bullet : MonoBehaviour
 
     private void HitTarget()
     {
-            GameObject effect = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
-            Destroy(effect, 2f);
+        GameObject effect = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
+        Destroy(effect, 2f);
 
+        if (explosionRadius > 0)
+            Explode();
+        else
             Damage(target.transform);
 
-            Destroy(gameObject);
+        Destroy(gameObject);
 
-            buildManager.AddMoney(enemy.enemyObject.moneyBonus);
+        buildManager.AddMoney(enemy.enemyObject.moneyBonus);
 
         //Сделать проверку на смерть
         if (enemy.enemyObject.Hp <= 0)//Перенести в Enemy

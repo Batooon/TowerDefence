@@ -8,7 +8,7 @@ public class TurretObject : ScriptableObject
     [Range(2f, 4f)]
     public float range;
 
-    [Range(1f, 5f)]
+    [Range(0.1f, 5f)]
     public float fireRate;
 
     public float speedRotation;
@@ -25,8 +25,6 @@ public class TurretObject : ScriptableObject
 
     //Нужно было распределить, но пофиг
     public GameObject TurretPrefab;
-
-    public TrajectoryType bulletTrajectory;
 
     [Header("Only if Area Damage")]
     public float area;

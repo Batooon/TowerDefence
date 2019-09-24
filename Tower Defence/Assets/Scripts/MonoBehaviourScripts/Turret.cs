@@ -104,7 +104,7 @@ public class Turret : MonoBehaviour
 
         if (bullet != null)
         {
-            bullet.FindTarget(target, turret.bulletTrajectory, turret.area);
+            bullet.FindTarget(target, turret.area);
         }
     }
 
