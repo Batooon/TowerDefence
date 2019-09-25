@@ -97,7 +97,15 @@ public class Turret : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject bulletGO = Instantiate(bulletPrefab, GetFirePointTransform());
+        GameObject bulletGO = ObjectPooler.singleton.GetPooledObjects("Bullet");
+        if (bulletGO != null)
+        {
+            bulletGO.transform.position = GetFirePointTransform().position;
+            bulletGO.transform.rotation = GetFirePointTransform().rotation;
+            bulletGO.SetActive(true);
+        }
+
+        //GameObject bulletGO = Instantiate(bulletPrefab, GetFirePointTransform());
         bulletGO.transform.parent = null;
         bulletGO.transform.localScale = bulletPrefab.transform.localScale;
         Bullet bullet = bulletGO.GetComponent<Bullet>();

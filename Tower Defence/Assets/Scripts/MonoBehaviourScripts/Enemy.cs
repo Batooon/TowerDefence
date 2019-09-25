@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour
     void EndPath()
     {
         BuildManager.singleton.OnUpdateLives();
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

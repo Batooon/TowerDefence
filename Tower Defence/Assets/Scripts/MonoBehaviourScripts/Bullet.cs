@@ -102,7 +102,7 @@ public class Bullet : MonoBehaviour
 
     private void HitTarget()
     {
-        GameObject effect = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
+        GameObject effect = Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(effect, 2f);
 
         if (explosionRadius > 0)
@@ -110,7 +110,8 @@ public class Bullet : MonoBehaviour
         else
             Damage(target.transform);
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        //Destroy(gameObject);
 
         buildManager.AddMoney(enemy.enemyObject.moneyBonus);
 
@@ -123,19 +124,18 @@ public class Bullet : MonoBehaviour
 
     void Damage(Transform enemy)
     {
-        Destroy(enemy.gameObject);
+        //Destroy(enemy.gameObject);
+        enemy.gameObject.SetActive(false);
     }
 
     void Explode()
     {
         Collider[] hitObjects= Physics.OverlapSphere(transform.position, explosionRadius);
 
-        foreach(Collider collider in hitObjects)
+        for (int i = 0; i < hitObjects.Length; i++)
         {
-            if (collider.CompareTag("Enemy"))
-            {
-                Damage(collider.transform);
-            }
+            if (hitObjects[i].CompareTag("Enemy"))
+                Damage(hitObjects[i].transform);
         }
     }
 }
