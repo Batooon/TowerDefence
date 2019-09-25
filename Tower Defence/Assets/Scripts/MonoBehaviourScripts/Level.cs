@@ -15,6 +15,7 @@ public class Level : MonoBehaviour
     public BuildManager buildManager;
     public WaveSpawner waveSpawner;
 
+    public string telegramAccountUrl;
     public string instagramAccountUrl;
     public GameObject GameOverScreen;
 
@@ -113,6 +114,11 @@ public class Level : MonoBehaviour
     public void OpenInstagram()
     {
         Application.OpenURL(instagramAccountUrl);
+    }
+
+    public void OpenTelegram()
+    {
+        Application.OpenURL(telegramAccountUrl);
     }
 
     public void DecreaseHp()
