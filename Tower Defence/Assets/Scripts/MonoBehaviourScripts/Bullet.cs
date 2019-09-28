@@ -110,8 +110,7 @@ public class Bullet : MonoBehaviour
         else
             Damage(target.transform);
 
-        gameObject.SetActive(false);
-        //Destroy(gameObject);
+        Destroy(gameObject);
 
         buildManager.AddMoney(enemy.enemyObject.moneyBonus);
 
@@ -124,8 +123,7 @@ public class Bullet : MonoBehaviour
 
     void Damage(Transform enemy)
     {
-        //Destroy(enemy.gameObject);
-        enemy.gameObject.SetActive(false);
+        Destroy(enemy.gameObject);
     }
 
     void Explode()

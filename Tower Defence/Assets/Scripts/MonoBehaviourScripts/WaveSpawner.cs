@@ -79,14 +79,14 @@ public class WaveSpawner : MonoBehaviour
 
         Transform spawnPoint = waves[waveNumber].StartWayPoints[0].transform;
 
-        //GameObject spawnedBuddy = Instantiate(newEnemy, spawnPoint);
-        GameObject spawnedBuddy = ObjectPooler.singleton.GetPooledObjects(newEnemy.tag);
+        GameObject spawnedBuddy = Instantiate(newEnemy, spawnPoint);
+        /*GameObject spawnedBuddy = ObjectPooler.singleton.GetPooledObjects(newEnemy.tag);
         if (spawnedBuddy != null)
         {
             spawnedBuddy.transform.position = spawnPoint.position;
             spawnedBuddy.transform.rotation = spawnPoint.rotation;
             spawnedBuddy.SetActive(true);
-        }
+        }*/
         Enemy enemy = spawnedBuddy.GetComponent<Enemy>();
         enemy.Init(waves[waveNumber].StartWayPoints[0]);
 
