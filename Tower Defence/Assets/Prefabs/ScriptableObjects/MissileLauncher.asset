@@ -13,14 +13,13 @@ MonoBehaviour:
   m_Name: MissileLauncher
   m_EditorClassIdentifier: 
   range: 3
-  fireRate: 1
+  fireRate: 0.42
   speedRotation: 5
-  fireCountdown: 0
+  fireCountdown: 0.8309687
   damage: 25
   cost: 250
   selectedTurretUI: {fileID: 21300000, guid: 9d6f52f4008de954b94a77e36c82a0c8, type: 3}
   deselectedTurretUI: {fileID: 21300000, guid: c327b78425e5fd8458e256893dfa4e93, type: 3}
   TurretPrefab: {fileID: 3618956641553043313, guid: f2c44463811543b4b87b2774ea7e368a,
     type: 3}
-  bulletTrajectory: 1
   area: 2
