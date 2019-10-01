@@ -37,13 +37,16 @@ public class Enemy : MonoBehaviour
 
     void GetNextWaypoint()
     {
+        if (wayPoint is IInteractableWayPoint)
+            ((IInteractableWayPoint)wayPoint).OnEnemyComesIn(this);
+
         IWayPoint newWayPoint = wayPoint.GetNextWayPoint();
         if(wayPoint == newWayPoint)
         {
             EndPath();
             return;
         }
-        wayPoint = newWayPoint; 
+        wayPoint = newWayPoint;
     }
 
     void EndPath()
