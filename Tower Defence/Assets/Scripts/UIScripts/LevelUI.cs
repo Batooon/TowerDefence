@@ -63,7 +63,7 @@ public class LevelUI : MonoBehaviour
                 waveText.text = "!WARNING! Wave incoming!";
                 break;
             case State.END:
-                Destroy(gameObject);
+                Debug.Log("YOU WIN!");
                 level.waveSpawner.onWaveStateChanged -= ChangeWaveText;
                 break;
         }

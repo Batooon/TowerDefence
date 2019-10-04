@@ -15,9 +15,13 @@ public class Level : MonoBehaviour
     public BuildManager buildManager;
     public WaveSpawner waveSpawner;
 
-    public string telegramAccountUrl;
-    public string instagramAccountUrl;
+    [SerializeField]
+    private string telegramAccountUrl;
+    [SerializeField]
+    private string instagramAccountUrl;
     public GameObject GameOverScreen;
+    public GameObject PauseMenu;
+    public GameObject ExitWindow;
 
     private GlobalState _state;
     public GlobalState state
@@ -36,6 +40,42 @@ public class Level : MonoBehaviour
     {
         Hp = (int)Mathf.Clamp(Hp, 0f, Mathf.Infinity);
         buildManager.LivesUpdate += DecreaseHp;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            ExitWindowProcessing();
+    }
+
+    public void ExitWindowProcessing()
+    {
+        if (!ExitWindow.gameObject.activeInHierarchy)
+            OpenExitWindow();
+        else
+            CloseExitWindow();
+    }
+
+    private void OpenExitWindow()
+    {
+        if (PauseMenu.gameObject.activeInHierarchy)
+            ExitWindow.SetActive(true);
+        else
+        {
+            state = GlobalState.PAUSE;
+            ExitWindow.SetActive(true);
+        }
+    }
+
+    private void CloseExitWindow()
+    {
+        if (PauseMenu.gameObject.activeInHierarchy)
+            ExitWindow.SetActive(false);
+        else
+        {
+            state = GlobalState.GAME;
+            ExitWindow.SetActive(false);
+        }
     }
 
     private void Start()
@@ -83,7 +123,7 @@ public class Level : MonoBehaviour
         menu.SetActive(false);
     }
 
-    public void PauseProcessing(GameObject PauseMenu)
+    public void PauseProcessing()
     {
         switch (state)
         {

@@ -30,6 +30,7 @@ public class ShopButtonUI : MonoBehaviour
 
         Button turretButton = GetComponent<Button>();
         turretButton.onClick.AddListener(() => shop.TurretPressed(turretPrefab, this));
+        turretButton.GetComponent<RectTransform>().localScale = Vector3.one;
     }
 
     public void Select()
