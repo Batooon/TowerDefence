@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2782600333220264953}
   - component: {fileID: -8990831971197873484}
+  - component: {fileID: -8278950143868634939}
   - component: {fileID: 1927848882244546179}
   - component: {fileID: 6252943258476848657}
   m_Layer: 0
@@ -48,6 +49,21 @@ MonoBehaviour:
   speed: 20
   impactEffect: {fileID: 558065259583643701, guid: 367135ed9ef5e6844bc4789ccae7ba71,
     type: 3}
+--- !u!114 &-8278950143868634939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4852800682188333554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72529ef45ce60c4c80916259bc37012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
+  DistanceThisFrame: 0
+  direction: {x: 0, y: 0, z: 0}
 --- !u!33 &1927848882244546179
 MeshFilter:
   m_ObjectHideFlags: 0

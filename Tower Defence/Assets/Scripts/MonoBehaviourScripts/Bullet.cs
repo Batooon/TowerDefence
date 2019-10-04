@@ -6,6 +6,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     BuildManager buildManager;
+    Aiming aiming;
 
     private GameObject target;
     private Enemy enemy;
@@ -23,6 +24,7 @@ public class Bullet : MonoBehaviour
     {
         //Lifetime = 0;
         buildManager = BuildManager.singleton;
+        aiming = gameObject.GetComponent<Aiming>();
     }
 
     public void FindTarget(GameObject _target, float explR)
@@ -53,7 +55,7 @@ public class Bullet : MonoBehaviour
         B = Vector3.Lerp(transform.position, target.transform.position, 0.6f);
     }*/
 
-    void Fly(Vector3 direction)
+    /*void Fly(Vector3 direction)
     {
         float distanceThisFrame = speed * Time.deltaTime;
 
@@ -63,7 +65,7 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        transform.Translate(direction.normalized * distanceThisFrame, Space.World);
+        transform.Translate(direction.normalized * distanceThisFrame, Space.World);*/
         //transform.LookAt(target.transform);
 
         /*
@@ -87,7 +89,7 @@ public class Bullet : MonoBehaviour
 
         Vector3 SABT = Vector3.Lerp(SAB, ABT, t);
         transform.position = SABT;*/
-    }
+    //}
 
     void Update()
     {
@@ -96,8 +98,14 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        Vector3 dir = target.transform.position - transform.position;
-        Fly(dir);
+        if (aiming.direction.magnitude <= aiming.DistanceThisFrame)
+        {
+            HitTarget();
+            return;
+        }
+        aiming.FlyTo(target);
+        /*Vector3 dir = target.transform.position - transform.position;
+        Fly(dir);*/
     }
 
     private void HitTarget()
