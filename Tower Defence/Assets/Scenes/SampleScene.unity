@@ -306,6 +306,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints:
   - {fileID: 1644054949}
+  trailEffect: {fileID: 4361822990082288872, guid: abf0ee42e64d84d49855770b2d66387a,
+    type: 3}
 --- !u!1 &175028256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,35 +1442,230 @@ MonoBehaviour:
   state: 0
   waves:
   - countdown: 5
-    waveData: []
-    StartWayPoints: []
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
   - countdown: 5
-    waveData: []
-    StartWayPoints: []
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
   - countdown: 5
-    waveData: []
-    StartWayPoints: []
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
   - countdown: 5
-    waveData: []
-    StartWayPoints: []
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
   - countdown: 5
-    waveData: []
-    StartWayPoints: []
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
   - countdown: 5
-    waveData: []
-    StartWayPoints: []
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
   - countdown: 5
-    waveData: []
-    StartWayPoints: []
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
   - countdown: 5
-    waveData: []
-    StartWayPoints: []
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
   - countdown: 5
-    waveData: []
-    StartWayPoints: []
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
   - countdown: 5
-    waveData: []
-    StartWayPoints: []
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
+  - countdown: 5
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
+  - countdown: 5
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
+  - countdown: 5
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
+  - countdown: 5
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
+  - countdown: 5
+    Enemies:
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    - {fileID: 7495207690617410423, guid: 7a77f947d1d112c42ac798e2fae988c4, type: 3}
+    SpawnBetweenEnemies: 0.5
+    StartWaypoints:
+    - {fileID: 7806489740912491111}
   isWaveIncoming: 0
   countdown: 5
 --- !u!114 &589487239
@@ -1819,6 +2016,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints:
   - {fileID: 939421316}
+  trailEffect: {fileID: 4361822990082288872, guid: abf0ee42e64d84d49855770b2d66387a,
+    type: 3}
 --- !u!1001 &939421314
 PrefabInstance:
   m_ObjectHideFlags: 0
