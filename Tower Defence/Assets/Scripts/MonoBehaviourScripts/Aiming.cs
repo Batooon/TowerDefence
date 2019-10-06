@@ -11,7 +11,7 @@ public class Aiming : MonoBehaviour
     [HideInInspector]
     public Vector3 direction;
 
-    public void FlyTo(GameObject target)
+    public void FlyTo(Transform target)
     {
         DistanceThisFrame = speed * Time.deltaTime;
         direction = target.transform.position - transform.position;

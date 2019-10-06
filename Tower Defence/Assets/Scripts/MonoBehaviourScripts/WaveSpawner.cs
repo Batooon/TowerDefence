@@ -80,6 +80,7 @@ public class WaveSpawner : MonoBehaviour
         Transform spawnPoint = waves[waveNumber].StartWayPoints[0].transform;
 
         GameObject spawnedBuddy = Instantiate(newEnemy, spawnPoint);
+        spawnedBuddy.transform.parent = null;
         /*GameObject spawnedBuddy = ObjectPooler.singleton.GetPooledObjects(newEnemy.tag);
         if (spawnedBuddy != null)
         {

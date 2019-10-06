@@ -103,7 +103,7 @@ public class Bullet : MonoBehaviour
             HitTarget();
             return;
         }
-        aiming.FlyTo(target);
+        aiming.FlyTo(target.transform);
         /*Vector3 dir = target.transform.position - transform.position;
         Fly(dir);*/
     }

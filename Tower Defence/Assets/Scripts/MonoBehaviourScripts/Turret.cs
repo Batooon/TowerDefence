@@ -97,7 +97,6 @@ public class Turret : MonoBehaviour
 
     private void Shoot()
     {
-
         GameObject bulletGO = Instantiate(bulletPrefab, GetFirePointTransform());
         bulletGO.transform.parent = null;
         bulletGO.transform.localScale = bulletPrefab.transform.localScale;
