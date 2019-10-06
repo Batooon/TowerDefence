@@ -15,5 +15,5 @@ public abstract class WaypointBase : MonoBehaviour, IWayPoint
     }
 
     public abstract IWayPoint GetNextWayPoint();
-    public Vector3 GetWayPointLocation() => transform.position;
+    public Transform GetWaypointTransform() => transform;
 }

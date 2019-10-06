@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IWayPoint 
 {
     IWayPoint GetNextWayPoint();
-    Vector3 GetWayPointLocation();
+    Transform GetWaypointTransform();
 }

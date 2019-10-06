@@ -10,29 +10,31 @@ public enum State
     SPAWN,
     END
 }
-public class WaveSpawner : MonoBehaviour
+public class WaveSpawner : MonoBehaviour , IEnemySpawn
 {
     public event Action onWaveStateChanged;
 
     public int EnemiesAlive = 0;
 
     public State state;
-    public Wave[] waves;
-    private int waveNumber = 0;
+    public WaveData[] waves;
+    private int nextWaveNumber = 0;
+    private Wave _wave;
 
-    //public Transform enemyPrefab;
-
+    public Wave GetIncomingWave()
+    {
+        return _wave = GenerateWave();
+    }
 
     public bool isWaveIncoming;
 
-    public float countdown;
-    private float spawnBetweenEnemies = 0.5f;
-
+    private float countdown;
 
     void Start()
     {
         countdown = waves[0].countdown;
     }
+
     void Update()
     {
         onWaveStateChanged?.Invoke();
@@ -43,43 +45,35 @@ public class WaveSpawner : MonoBehaviour
             countdown -= Time.deltaTime;
             countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
 
-            if (waveNumber < waves.Length && countdown <= 0)
+            if (nextWaveNumber < waves.Length && countdown <= 0)
             {
                 state = State.SPAWN;
                 isWaveIncoming = true;
-                StartCoroutine(SpawnWave());
+                SpawnWave();
             }
         }
         else
             countdown = 0f;
     }
 
-    private IEnumerator SpawnWave()
+    private void SpawnWave()
     {
-        for (int i = 0; i < waves[waveNumber].amountOfEnemies; i++)
+        Wave incomingWave = GetIncomingWave();
+
+        StartCoroutine(incomingWave.SpawnEnemies());
+
+        /*for (int i = 0; i < incomingWave.amountOfEnemies; i++)
         {
-            SpawnEnemy(i);
+            //SpawnEnemy();
             yield return new WaitForSeconds(spawnBetweenEnemies);
-        }
-
-        waveNumber++;
-
-        if (waveNumber < waves.Length)
-        {
-            countdown = waves[waveNumber].countdown;
-            isWaveIncoming = false;
-        }
-        else
-            state = State.END;
+        }*/
     }
 
-    private void SpawnEnemy(int index)
+    public void SpawnEnemy(WaveSpawnData waveSpawnData)
     {
-        GameObject newEnemy = waves[waveNumber].GetNextEnemy(index);
+        (GameObject newEnemy, IWayPoint spawnWaypoint) = waveSpawnData;
 
-        Transform spawnPoint = waves[waveNumber].StartWayPoints[0].transform;
-
-        GameObject spawnedBuddy = Instantiate(newEnemy, spawnPoint);
+        GameObject spawnedBuddy = Instantiate(newEnemy, spawnWaypoint.GetWaypointTransform());
         spawnedBuddy.transform.parent = null;
         /*GameObject spawnedBuddy = ObjectPooler.singleton.GetPooledObjects(newEnemy.tag);
         if (spawnedBuddy != null)
@@ -89,26 +83,25 @@ public class WaveSpawner : MonoBehaviour
             spawnedBuddy.SetActive(true);
         }*/
         Enemy enemy = spawnedBuddy.GetComponent<Enemy>();
-        enemy.Init(waves[waveNumber].StartWayPoints[0]);
-
-        EnemiesAlive++;
+        enemy.Init(spawnWaypoint);
     }
 
-}
-
-[Serializable]
-public class Wave
-{
-    public float countdown;
-    public int amountOfEnemies
+    public void PrepareNextWave()
     {
-        get => waveData.Length;
+        nextWaveNumber++;
+
+        if (nextWaveNumber < waves.Length)
+        {
+            countdown = _wave.Countdown;
+            isWaveIncoming = false;
+        }
+        else
+            state = State.END;
     }
-    public GameObject[] waveData;
 
-    public GameObject GetNextEnemy(int index) => waveData[index];
-
-    public WaypointBase[] StartWayPoints;
-
-
+    public Wave GenerateWave()
+    {
+        return new Wave(waves[0], SpawnEnemy, PrepareNextWave);
+    }
 }
+

@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
         set
         {
             _nextWaypoint = value;
-            target = _nextWaypoint.GetWayPointLocation();
+            target = _nextWaypoint.GetWaypointTransform().position;
         }
     }
 
