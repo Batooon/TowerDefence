@@ -28,7 +28,7 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn
 
     public bool isWaveIncoming;
 
-    private float countdown;
+    public float countdown;
 
     void Start()
     {
