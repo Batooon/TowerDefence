@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TeleportWaypoint : WaypointBase, IInteractableWayPoint
 {
-    public GameObject trailEffect;
+    public GameObject teleportEffect;
 
 #if UNITY_EDITOR
     bool bWasShowTrail = false;
@@ -25,11 +25,13 @@ public class TeleportWaypoint : WaypointBase, IInteractableWayPoint
             Debug.Log(waypoints[0].transform.position);
         }
 #endif
-
-        GameObject TeleportEffect = Instantiate(trailEffect, transform.position, Quaternion.identity);
-        TeleportEffect.transform.parent = null;
-        TeleportEffect.GetComponent<TrailEffect>().SetTarget(waypoints[0].transform);
+        GameObject teleportStart = Instantiate(teleportEffect, transform.position, Quaternion.identity);
+        teleportStart.transform.parent = null;
 
         enemy.transform.position = waypoints[0].transform.position;
+
+        GameObject teleportFinish = Instantiate(teleportEffect, enemy.transform.position, Quaternion.identity);
+        teleportFinish.transform.parent = null;
+
     }
 }

@@ -47,7 +47,6 @@ public class Wave : MonoBehaviour, IWave
         return new WaveSpawnData(waveData.Enemies[index++], waveData.StartWaypoints[0]);
     }
 
-
     public IEnumerator SpawnEnemies()
     {
         for(int i = 0; i < amountOfEnemies; i++)
