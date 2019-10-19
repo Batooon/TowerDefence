@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 677fef06e6b644347aec3d1f0ef052e7, type: 3}
   m_Name: defaultTurret
   m_EditorClassIdentifier: 
-  range: 2
+  range: 3
   fireRate: 1.5
   speedRotation: 10
   fireCountdown: 0.13088074

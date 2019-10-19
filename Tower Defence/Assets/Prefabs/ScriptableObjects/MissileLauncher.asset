@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 677fef06e6b644347aec3d1f0ef052e7, type: 3}
   m_Name: MissileLauncher
   m_EditorClassIdentifier: 
-  range: 3
+  range: 3.5
   fireRate: 0.42
   speedRotation: 5
   fireCountdown: 0.8309687
