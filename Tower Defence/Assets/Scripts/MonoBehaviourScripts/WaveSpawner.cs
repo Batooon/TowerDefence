@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum State
 {
@@ -10,20 +9,23 @@ public enum State
     SPAWN,
     END
 }
-public class WaveSpawner : MonoBehaviour , IEnemySpawn
+public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
 {
+    public WaypointBase[] spawnWaypoints;
+
+    public GameObject[] defaultEnemies;
+
     public event Action onWaveStateChanged;
 
-    public int EnemiesAlive = 0;
+    //private int EnemiesAlive = 0;
 
     public State state;
-    public WaveData[] waves;
-    private int nextWaveNumber = 0;
+    private int nextWaveIndex = 0;
     private Wave _wave;
 
     public Wave GetIncomingWave()
     {
-        return _wave = GenerateWave();
+        return _wave = GenerateWave(nextWaveIndex);
     }
 
     public bool isWaveIncoming;
@@ -32,7 +34,8 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn
 
     void Start()
     {
-        countdown = waves[0].countdown;
+        _wave = GenerateWave(nextWaveIndex);
+        countdown = _wave.Countdown;//waves[0].countdown;
     }
 
     void Update()
@@ -45,7 +48,7 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn
             countdown -= Time.deltaTime;
             countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
 
-            if (nextWaveNumber < waves.Length && countdown <= 0)
+            if (countdown <= 0)
             {
                 state = State.SPAWN;
                 isWaveIncoming = true;
@@ -88,20 +91,42 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn
 
     public void PrepareNextWave()
     {
-        nextWaveNumber++;
+        nextWaveIndex++;
 
-        if (nextWaveNumber < waves.Length)
-        {
-            countdown = _wave.Countdown;
-            isWaveIncoming = false;
-        }
-        else
-            state = State.END;
+        countdown = _wave.Countdown;
+        isWaveIncoming = false;
     }
 
-    public Wave GenerateWave()
+    public Wave GenerateWave(int waveNumber)
     {
-        return new Wave(waves[0], SpawnEnemy, PrepareNextWave);
+        return new Wave(WaveFabric.UsualWave(nextWaveIndex, defaultEnemies, spawnWaypoints), SpawnEnemy, PrepareNextWave);
     }
+}
+
+public static class WaveFabric
+{
+    public static WaveData UsualWave(int waveNumber, GameObject[] enemies, WaypointBase[] spawnWaypoints)
+    {
+        WaveData usualWave = new WaveData();
+
+        //Создаем массив врагов, длина которого зависит от номера волны
+        usualWave.Enemies = new GameObject[2 * (waveNumber + 1) + 3];
+        for (int i = 0; i < usualWave.Enemies.Length; i++)
+            usualWave.Enemies[i] = enemies[UnityEngine.Random.Range(0, enemies.Length)];
+
+        //отсчет до волны. Тоже зависит от номера волны
+        usualWave.countdown = waveNumber + 5;
+
+        usualWave.SpawnBetweenEnemies = 0.5f;
+
+        usualWave.StartWaypoints = spawnWaypoints;
+
+        return usualWave;
+    }
+
+    /*public WaveData BuildBossWave()
+    {
+
+    }*/
 }
 
