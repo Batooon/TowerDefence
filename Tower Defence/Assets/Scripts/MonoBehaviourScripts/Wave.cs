@@ -16,7 +16,7 @@ public struct WaveData
 }
 
 [Serializable]
-public class Wave : MonoBehaviour, IWave
+public class Wave : IWave
 {
     public Wave(WaveData data, Action<WaveSpawnData> spawnEnemyCallbackFunction, Action prepareNextWaveCallback)
     {

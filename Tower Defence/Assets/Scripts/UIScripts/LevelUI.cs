@@ -31,6 +31,9 @@ public class LevelUI : MonoBehaviour
     public Color startColor;
     public Color loseLifeColor;
 
+    [Header("Enemies Counter Text")]
+    public TextMeshProUGUI scoreText;
+
     [Space(20)]
 
     public Level level;
@@ -48,6 +51,12 @@ public class LevelUI : MonoBehaviour
         level.waveSpawner.onWaveStateChanged += ChangeWaveText;
         level.buildManager.TurretAlert += ShowTurretAlertText;
         level.buildManager.LivesUpdate += OnLivesUpdate;
+        Level.singleton.EnemiesCounterChange += OnScoreUpdate;
+    }
+
+    public void OnScoreUpdate()
+    {
+        scoreText.text = "Score: " + level.EnemiesCounter;
     }
 
     public void ChangeWaveText()

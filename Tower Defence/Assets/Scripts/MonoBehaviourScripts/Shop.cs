@@ -18,17 +18,13 @@ public class Shop : MonoBehaviour
             turretButtons.Add(child.GetComponent<ShopButtonUI>());
         }
         buildManager = BuildManager.singleton;
-        //buildManager.InitTurrets();
         SetTurrets(buildManager.turrets);
     }
 
     public void SetTurrets(TurretObject[] turrets)
     {
-        //int i = 0;
         foreach(TurretObject t in turrets)
         {
-            /*turretButtons[i].Init(t);
-            i++;*/
             GameObject newTurretButton = Instantiate(TurretButton);
             newTurretButton.transform.SetParent(transform);
 

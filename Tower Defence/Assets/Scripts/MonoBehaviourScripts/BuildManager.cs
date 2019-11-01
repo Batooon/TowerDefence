@@ -39,7 +39,7 @@ public class BuildManager : MonoBehaviour
 
     public void TrySelectPlatform(Platform platform)
     {
-        if (platform !=null && platform.IsEmpty())
+        if (platform != null && platform.IsEmpty())
         {
             if (!CanBuild())
             {
@@ -59,7 +59,6 @@ public class BuildManager : MonoBehaviour
     {
         if (turretGO == selectedTurret) 
         {
-            //DeactivateShopUI?.Invoke();
             selectedButtonUI.Deselect();
             selectedTurret = null;
             button = null;
@@ -69,7 +68,6 @@ public class BuildManager : MonoBehaviour
         // 1) disselect turret
         if (selectedButtonUI != null)
             selectedButtonUI.Deselect();
-        //DeactivateShopUI?.Invoke();
 
         // 2) =
         selectedTurret = turretGO;
@@ -79,7 +77,6 @@ public class BuildManager : MonoBehaviour
         Turret turret = selectedTurret.GetComponent<Turret>();
         SetTurretData(turret?.turret);
         selectedButtonUI.Select();
-        //ActivateShopUI?.Invoke();
         
 
         void SetTurretData(TurretObject data) => turretData = data;

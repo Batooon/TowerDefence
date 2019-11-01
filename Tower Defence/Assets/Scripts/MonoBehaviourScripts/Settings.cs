@@ -8,7 +8,7 @@ public class Settings : MonoBehaviour
 
     void Awake()
     {
-        speed = 1;
+        speed = 1f;
         singletonSettings = this;
     }
 
@@ -17,6 +17,7 @@ public class Settings : MonoBehaviour
         private set;
         get;
     }
+
     public void SetSpeed(float _speed)
     {
         speed = _speed;

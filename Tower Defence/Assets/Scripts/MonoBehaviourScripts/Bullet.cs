@@ -131,6 +131,9 @@ public class Bullet : MonoBehaviour
 
     void Damage(Transform enemy)
     {
+        Level.singleton.EnemiesCounter += Level.singleton.Score;
+        Level.singleton.EnemiesCounterChange?.Invoke();
+        WaveSpawner.EnemiesAlive--;
         Destroy(enemy.gameObject);
     }
 

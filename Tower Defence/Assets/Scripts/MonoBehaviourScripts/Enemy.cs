@@ -26,13 +26,21 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        Vector3 dir = target - transform.position;
-        transform.Translate(dir.normalized * enemyObject.speed * Time.deltaTime, Space.World);
+        Move();
         if (Vector3.Distance(transform.position, target) <= 0.1f)
         {
             GetNextWaypoint();
             transform.LookAt(target);
         }
+    }
+
+    void Move()
+    {
+        Vector3 dir = target - transform.position;
+
+        transform.Translate(dir.normalized * enemyObject.speed * Time.deltaTime, Space.World);
+        //transform.rotation
+        //transform.position = Vector3.Lerp(transform.position, target, enemyObject.speed * Time.deltaTime);
     }
 
     void GetNextWaypoint()
@@ -51,8 +59,8 @@ public class Enemy : MonoBehaviour
 
     void EndPath()
     {
+        WaveSpawner.EnemiesAlive--;
         BuildManager.singleton.OnUpdateLives();
-        //Destroy(gameObject);
         gameObject.SetActive(false);
     }
 }

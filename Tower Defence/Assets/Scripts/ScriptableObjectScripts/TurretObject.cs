@@ -23,7 +23,7 @@ public class TurretObject : ScriptableObject
 
     public Sprite deselectedTurretUI;
 
-    //Нужно было распределить, но пофиг
+    //Нужно было распределить
     public GameObject TurretPrefab;
 
     [Header("Only if Area Damage")]

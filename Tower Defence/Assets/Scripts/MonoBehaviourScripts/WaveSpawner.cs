@@ -9,6 +9,13 @@ public enum State
     SPAWN,
     END
 }
+
+public enum WaveType
+{
+    TUTORIALWAVE,
+    USUALWAVE
+}
+
 public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
 {
     public WaypointBase[] spawnWaypoints;
@@ -17,8 +24,10 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
 
     public event Action onWaveStateChanged;
 
-    //private int EnemiesAlive = 0;
+    [HideInInspector]
+    public static int EnemiesAlive = 0;
 
+    public WaveType waveType;
     public State state;
     private int nextWaveIndex = 0;
     private Wave _wave;
@@ -35,12 +44,15 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
     void Start()
     {
         _wave = GenerateWave(nextWaveIndex);
-        countdown = _wave.Countdown;//waves[0].countdown;
+        countdown = _wave.Countdown;
     }
 
     void Update()
     {
         onWaveStateChanged?.Invoke();
+
+        if (EnemiesAlive > 0)
+            return;
 
         if (!isWaveIncoming)
         {
@@ -64,16 +76,12 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
         Wave incomingWave = GetIncomingWave();
 
         StartCoroutine(incomingWave.SpawnEnemies());
-
-        /*for (int i = 0; i < incomingWave.amountOfEnemies; i++)
-        {
-            //SpawnEnemy();
-            yield return new WaitForSeconds(spawnBetweenEnemies);
-        }*/
     }
 
     public void SpawnEnemy(WaveSpawnData waveSpawnData)
     {
+        EnemiesAlive++;
+
         (GameObject newEnemy, IWayPoint spawnWaypoint) = waveSpawnData;
 
         GameObject spawnedBuddy = Instantiate(newEnemy, spawnWaypoint.GetWaypointTransform());
@@ -99,7 +107,14 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
 
     public Wave GenerateWave(int waveNumber)
     {
-        return new Wave(WaveFabric.UsualWave(nextWaveIndex, defaultEnemies, spawnWaypoints), SpawnEnemy, PrepareNextWave);
+        switch (waveType)
+        {
+            case WaveType.USUALWAVE:
+                return new Wave(WaveFabric.UsualWave(nextWaveIndex, defaultEnemies, spawnWaypoints), SpawnEnemy, PrepareNextWave);
+            case WaveType.TUTORIALWAVE:
+                return new Wave(WaveFabric.TutorialWave(nextWaveIndex, defaultEnemies, spawnWaypoints), SpawnEnemy, PrepareNextWave);
+        }
+        return null;
     }
 }
 
@@ -124,9 +139,23 @@ public static class WaveFabric
         return usualWave;
     }
 
-    /*public WaveData BuildBossWave()
+    public static WaveData TutorialWave(int wavenumber,GameObject[] enemies,WaypointBase[] spawnWaypoints)
     {
+        WaveData tutorialWave = new WaveData();
 
-    }*/
+        tutorialWave.Enemies = new GameObject[5];
+        for (int i = 0; i < tutorialWave.Enemies.Length; i++)
+            tutorialWave.Enemies[i] = enemies[0];
+
+        tutorialWave.countdown = 5;
+
+        tutorialWave.SpawnBetweenEnemies = 1f;
+
+        tutorialWave.StartWaypoints = spawnWaypoints;
+
+        return tutorialWave;
+    }
+
+    //Тут ещё будет метод для спавна волны с боссом и т.п.
 }
 

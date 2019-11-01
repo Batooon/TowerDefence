@@ -12,8 +12,17 @@ public enum GlobalState
 }
 public class Level : MonoBehaviour
 {
+    public static Level singleton;
+
     public BuildManager buildManager;
     public WaveSpawner waveSpawner;
+
+    [HideInInspector]
+    public int EnemiesCounter = 0;
+    [Header("Сколько нужно засчитать очков за одно убийство")]
+    public int Score;
+    [Space(20)]
+    public Action EnemiesCounterChange;
 
     [SerializeField]
     private string telegramAccountUrl;
@@ -34,10 +43,16 @@ public class Level : MonoBehaviour
         }
     }
 
+    public void ChangeState(GlobalState State)
+    {
+        state = State;
+    }
+
     public int Hp;
 
     private void Awake()
     {
+        singleton = this;
         Hp = (int)Mathf.Clamp(Hp, 0f, Mathf.Infinity);
         buildManager.LivesUpdate += DecreaseHp;
     }
@@ -62,7 +77,8 @@ public class Level : MonoBehaviour
             ExitWindow.SetActive(true);
         else
         {
-            state = GlobalState.PAUSE;
+            ChangeState(GlobalState.PAUSE);
+            //state = GlobalState.PAUSE;
             ExitWindow.SetActive(true);
         }
     }
@@ -73,14 +89,16 @@ public class Level : MonoBehaviour
             ExitWindow.SetActive(false);
         else
         {
-            state = GlobalState.GAME;
+            //state = GlobalState.GAME;
+            ChangeState(GlobalState.GAME);
             ExitWindow.SetActive(false);
         }
     }
 
     private void Start()
     {
-        state = GlobalState.GAME;
+        //state = GlobalState.GAME;
+        ChangeState(GlobalState.GAME);
     }
 
     void OnStateChanged()
@@ -101,7 +119,8 @@ public class Level : MonoBehaviour
 
     public void GameOver(GameObject gameOverScreen)
     {
-        state = GlobalState.END;
+        ChangeState(GlobalState.END);
+        //state = GlobalState.END;
         gameOverScreen.SetActive(true);
     }
 
@@ -113,13 +132,15 @@ public class Level : MonoBehaviour
 
     void OnPause(GameObject menu)
     {
-        state = GlobalState.PAUSE;
+        ChangeState(GlobalState.PAUSE);
+        //state = GlobalState.PAUSE;
         menu.SetActive(true);
     }
 
     void OnPauseOff(GameObject menu)
     {
-        state = GlobalState.GAME;
+        ChangeState(GlobalState.GAME);
+        //state = GlobalState.GAME;
         menu.SetActive(false);
     }
 
@@ -172,7 +193,8 @@ public class Level : MonoBehaviour
 
     private void EndGame()
     {
-        state = GlobalState.END;
+        ChangeState(GlobalState.END);
+        //state = GlobalState.END;
         ActivateGameOverMenu();
         buildManager.ClearEvents();
     }

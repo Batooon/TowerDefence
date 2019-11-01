@@ -11,8 +11,6 @@ public class Platform : MonoBehaviour
     [Header("Optional")]
     public GameObject turret;
 
-    //public bool IsTurretActive = false;
-
     private Renderer rend;
     private Color startColor;
 
@@ -55,5 +53,16 @@ public class Platform : MonoBehaviour
     public bool IsEmpty()
     {
         return turret == null;
+    }
+
+    public IEnumerator Highlight()
+    {
+        rend.material.color = Color.Lerp(Color.white, Color.red, Mathf.Sin(Time.deltaTime));
+        yield return null;
+    }
+
+    public void StopHighlight()
+    {
+        rend.material.color = startColor;
     }
 }
