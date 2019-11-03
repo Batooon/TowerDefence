@@ -15,8 +15,6 @@ public class TurretObject : ScriptableObject
 
     public float fireCountdown;
 
-    public float damage;
-
     public int cost;
 
     public Sprite selectedTurretUI;
@@ -25,7 +23,4 @@ public class TurretObject : ScriptableObject
 
     //Нужно было распределить
     public GameObject TurretPrefab;
-
-    [Header("Only if Area Damage")]
-    public float area;
 }

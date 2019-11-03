@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public float Health;
+
     private Vector3 target;
     private IWayPoint _nextWaypoint;
     private IWayPoint wayPoint
@@ -24,6 +26,11 @@ public class Enemy : MonoBehaviour
         this.wayPoint = wayPoint.GetNextWayPoint();
     }
 
+    private void Awake()
+    {
+        Health = enemyObject.Hp;
+    }
+
     void Update()
     {
         Move();
@@ -32,6 +39,24 @@ public class Enemy : MonoBehaviour
             GetNextWaypoint();
             transform.LookAt(target);
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        Health -= damage;
+        if (Health <= 0f)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+        Level.singleton.EnemiesCounter += Level.singleton.Score;
+        Level.singleton.EnemiesCounterChange?.Invoke();
+        WaveSpawner.EnemiesAlive--;
+        BuildManager.singleton.AddMoney(enemyObject.moneyBonus);
     }
 
     void Move()

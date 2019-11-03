@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    BuildManager buildManager;
+    [Header("Only if area damage!")]
+    public float areaDamage;
+
+    public float damage;
+
+    //public BulletObject bullet;
     Aiming aiming;
 
     private GameObject target;
@@ -23,7 +28,6 @@ public class Bullet : MonoBehaviour
     void Awake()
     {
         //Lifetime = 0;
-        buildManager = BuildManager.singleton;
         aiming = gameObject.GetComponent<Aiming>();
     }
 
@@ -119,22 +123,13 @@ public class Bullet : MonoBehaviour
             Damage(target.transform);
 
         Destroy(gameObject);
-
-        buildManager.AddMoney(enemy.enemyObject.moneyBonus);
-
-        //Сделать проверку на смерть
-        if (enemy.enemyObject.Hp <= 0)//Перенести в Enemy
-        {
-
-        }
     }
 
     void Damage(Transform enemy)
     {
-        Level.singleton.EnemiesCounter += Level.singleton.Score;
-        Level.singleton.EnemiesCounterChange?.Invoke();
-        WaveSpawner.EnemiesAlive--;
-        Destroy(enemy.gameObject);
+        Enemy e = enemy.GetComponent<Enemy>();
+        if (e != null)
+            e.TakeDamage(damage);
     }
 
     void Explode()
