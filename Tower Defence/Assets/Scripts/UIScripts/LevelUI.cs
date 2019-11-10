@@ -34,6 +34,13 @@ public class LevelUI : MonoBehaviour
     [Header("Enemies Counter Text")]
     public TextMeshProUGUI scoreText;
 
+    /*[Header("Game Win Data")]
+    public GameObject WinScreen;
+    public TextMeshProUGUI EnemiesKilledText;
+
+    [Header("Game Loose Data")]
+    public GameObject GameOverScreen;*/
+
     [Space(20)]
 
     public Level level;
@@ -52,6 +59,8 @@ public class LevelUI : MonoBehaviour
         level.buildManager.TurretAlert += ShowTurretAlertText;
         level.buildManager.LivesUpdate += OnLivesUpdate;
         Level.singleton.EnemiesCounterChange += OnScoreUpdate;
+        /*Level.singleton.OnWinGame += Win;
+        Level.singleton.OnLooseGame += Loose;*/
     }
 
     public void OnScoreUpdate()
@@ -102,6 +111,17 @@ public class LevelUI : MonoBehaviour
     {
         money.text = currency + level.buildManager.money.ToString();
     }
+
+    /*public void Win()
+    {
+        EnemiesKilledText.text = WaveSpawner.EnemiesKilled.ToString();
+        WinScreen.SetActive(true);
+    }*/
+
+    /*public void Loose()
+    {
+        GameOverScreen.SetActive(true);
+    }*/
 
     public void OnLivesUpdate()
     {
