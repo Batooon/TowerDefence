@@ -7,7 +7,8 @@ public class SnapScrolling : MonoBehaviour
 {
     public float Spacing;
 
-    public GameObject[] panels;
+    public GameObject panelPrefab;
+    public CampaignObject[] campaignCards;
     public ScrollRect scrollRect;
 
     public float snapSpeed;
@@ -16,7 +17,7 @@ public class SnapScrolling : MonoBehaviour
 
     GameObject[] instantiatedPanels;
     Vector2[] panelPositions;
-    Vector2[] panelScales;
+    Vector3[] panelScales;
 
     int selectedPanID;
 
@@ -29,26 +30,29 @@ public class SnapScrolling : MonoBehaviour
     private void Start()
     {
         contentRect = GetComponent<RectTransform>();
-        instantiatedPanels = new GameObject[panels.Length];
-        panelScales = new Vector2[panels.Length];
-        panelPositions = new Vector2[panels.Length];
-        for (int i = 0; i < panels.Length; i++)
+        instantiatedPanels = new GameObject[campaignCards.Length];
+        panelScales = new Vector3[campaignCards.Length];
+        panelPositions = new Vector2[campaignCards.Length];
+        for (int i = 0; i < campaignCards.Length; i++)
         {
-            instantiatedPanels[i] = Instantiate(panels[i], transform, false);
+            instantiatedPanels[i] = Instantiate(panelPrefab, transform, false);
+            instantiatedPanels[i].GetComponent<CampaignButtonUI>().Init(campaignCards[i]);
             if (i == 0) continue;
             instantiatedPanels[i].transform.localPosition = new Vector2(instantiatedPanels[i - 1].transform.localPosition.x +
-                panels[i].GetComponent<RectTransform>().sizeDelta.x + Spacing,
+                instantiatedPanels[i].GetComponent<RectTransform>().sizeDelta.x + Spacing,
                 instantiatedPanels[i].transform.localPosition.y);
             panelPositions[i] = -instantiatedPanels[i].transform.localPosition;
         }
     }
+
+
 
     void FixedUpdate()
     {
         if (contentRect.anchoredPosition.x >= panelPositions[0].x && !isScrolling || contentRect.anchoredPosition.x <= panelPositions[panelPositions.Length - 1].x && !isScrolling)
             scrollRect.inertia = false;
         float nearestPos = float.MaxValue;
-        for (int i = 0; i < panels.Length; i++)
+        for (int i = 0; i < campaignCards.Length; i++)
         {
             float distance = Mathf.Abs(contentRect.anchoredPosition.x - panelPositions[i].x);
             if (distance < nearestPos)
@@ -59,6 +63,7 @@ public class SnapScrolling : MonoBehaviour
             float scale = Mathf.Clamp(1 / (distance / Spacing) * scaleOffset, 0.5f, 1f);
             panelScales[i].x = Mathf.SmoothStep(instantiatedPanels[i].transform.localScale.x, scale, scaleSpeed * Time.fixedDeltaTime);
             panelScales[i].y = Mathf.SmoothStep(instantiatedPanels[i].transform.localScale.x, scale, scaleSpeed * Time.fixedDeltaTime);
+            panelScales[i].z = 1;
             instantiatedPanels[i].transform.localScale = panelScales[i];
         }
         float scrollVelocity = Mathf.Abs(scrollRect.velocity.x);
