@@ -4,7 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class TutorialLevel : Level
+
+public enum TutorialEnum
+{
+    TUTORIALPAUSE,
+    GAME
+}
+
+public class TutorialLevel : MonoBehaviour
 {
     [Header("Tutorial Objects")]
     [SerializeField]
@@ -16,11 +23,14 @@ public class TutorialLevel : Level
     [SerializeField]
     private TextMeshProUGUI nextStepButtonText;
 
+    public static TutorialEnum globalState;
+
     private int numberStep = 0;
 
     private void Start()
     {
-        ChangeState(GlobalState.PAUSE);
+        globalState = TutorialEnum.TUTORIALPAUSE;
+        //ChangeState(GlobalState.PAUSE);
     }
 
     public void NextStep()
@@ -82,7 +92,7 @@ public class TutorialLevel : Level
 
     private void SixthStep()
     {
-        ChangeState(GlobalState.GAME);
+        globalState = TutorialEnum.GAME;
         Game.singleton.TutorialPassed();
     }
 }
