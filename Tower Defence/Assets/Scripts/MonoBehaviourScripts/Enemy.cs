@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 {
     public float Health;
 
-    private Vector3 target;
+    protected Vector3 target;
     private IWayPoint _nextWaypoint;
     private IWayPoint wayPoint
     {
@@ -33,6 +33,9 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if (Level.singleton.state == GlobalState.TUTORIALPAUSE)
+            return;
+
         Move();
         if (Vector3.Distance(transform.position, target) <= 0.1f)
         {
@@ -52,6 +55,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        WaveSpawner.EnemiesKilled++;
         Destroy(gameObject);
         Level.singleton.EnemiesCounter += Level.singleton.Score;
         Level.singleton.EnemiesCounterChange?.Invoke();
@@ -59,7 +63,7 @@ public class Enemy : MonoBehaviour
         BuildManager.singleton.AddMoney(enemyObject.moneyBonus);
     }
 
-    void Move()
+    protected void Move()
     {
         Vector3 dir = target - transform.position;
 
@@ -68,7 +72,7 @@ public class Enemy : MonoBehaviour
         //transform.position = Vector3.Lerp(transform.position, target, enemyObject.speed * Time.deltaTime);
     }
 
-    void GetNextWaypoint()
+    protected void GetNextWaypoint()
     {
         if (wayPoint is IInteractableWayPoint)
             ((IInteractableWayPoint)wayPoint).OnEnemyComesIn(this);

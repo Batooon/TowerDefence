@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public enum GlobalState
 {
     GAME,
     PAUSE,
-    END
+    END,
+    TUTORIALPAUSE
 }
 public class Level : MonoBehaviour
 {
@@ -16,6 +16,9 @@ public class Level : MonoBehaviour
 
     public BuildManager buildManager;
     public WaveSpawner waveSpawner;
+
+    /*public event Action OnWinGame;
+    public event Action OnLooseGame;*/
 
     [HideInInspector]
     public int EnemiesCounter = 0;
@@ -28,15 +31,17 @@ public class Level : MonoBehaviour
     private string telegramAccountUrl;
     [SerializeField]
     private string instagramAccountUrl;
-    public GameObject GameOverScreen;
     public GameObject PauseMenu;
     public GameObject ExitWindow;
+    public GameObject GameOverScreen;
+    public GameObject GameWinScreen;
+    public TextMeshProUGUI EnemiesKilledText;
 
     private GlobalState _state;
     public GlobalState state
     {
         get => _state;
-        private set
+        protected set
         {
             _state = value;
             OnStateChanged();
@@ -78,7 +83,6 @@ public class Level : MonoBehaviour
         else
         {
             ChangeState(GlobalState.PAUSE);
-            //state = GlobalState.PAUSE;
             ExitWindow.SetActive(true);
         }
     }
@@ -89,7 +93,6 @@ public class Level : MonoBehaviour
             ExitWindow.SetActive(false);
         else
         {
-            //state = GlobalState.GAME;
             ChangeState(GlobalState.GAME);
             ExitWindow.SetActive(false);
         }
@@ -97,7 +100,6 @@ public class Level : MonoBehaviour
 
     private void Start()
     {
-        //state = GlobalState.GAME;
         ChangeState(GlobalState.GAME);
     }
 
@@ -120,7 +122,6 @@ public class Level : MonoBehaviour
     public void GameOver(GameObject gameOverScreen)
     {
         ChangeState(GlobalState.END);
-        //state = GlobalState.END;
         gameOverScreen.SetActive(true);
     }
 
@@ -133,14 +134,12 @@ public class Level : MonoBehaviour
     void OnPause(GameObject menu)
     {
         ChangeState(GlobalState.PAUSE);
-        //state = GlobalState.PAUSE;
         menu.SetActive(true);
     }
 
     void OnPauseOff(GameObject menu)
     {
         ChangeState(GlobalState.GAME);
-        //state = GlobalState.GAME;
         menu.SetActive(false);
     }
 
@@ -157,9 +156,16 @@ public class Level : MonoBehaviour
         }
     }
 
-    void ActivateGameOverMenu()
+    void ActivatGameOverScreen()
     {
         GameOverScreen.SetActive(true);
+        //OnLooseGame?.Invoke();
+    }
+    void ActivateWinGameScreen()
+    {
+        EnemiesKilledText.text = WaveSpawner.EnemiesKilled.ToString();
+        GameWinScreen.SetActive(true);
+        //OnWinGame?.Invoke();
     }
 
     public void ClickQuitButton()
@@ -191,11 +197,25 @@ public class Level : MonoBehaviour
         }
     }
 
-    private void EndGame()
+    public void EndGame()
     {
         ChangeState(GlobalState.END);
-        //state = GlobalState.END;
-        ActivateGameOverMenu();
+        ActivatGameOverScreen();
         buildManager.ClearEvents();
+        ClearEvents();
+    }
+
+    public void WinGame()
+    {
+        ChangeState(GlobalState.END);
+        ActivateWinGameScreen();
+        buildManager.ClearEvents();
+        ClearEvents();
+    }
+
+    public void ClearEvents()
+    {
+        /*OnWinGame = null;
+        OnLooseGame = null;*/
     }
 }

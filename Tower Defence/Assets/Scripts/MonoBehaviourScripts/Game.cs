@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +7,8 @@ public class Game : MonoBehaviour
     public static Game singleton;
 
     private bool IsTutorialPassed;
+
+    public event Action<int> ChangeLevel;
 
     void Awake()
     {
@@ -19,18 +19,16 @@ public class Game : MonoBehaviour
     public void OpenCampaignMenu(GameObject CampaignMenu)
     {
         if (IsTutorialPassed)
-        {
             CampaignMenu.SetActive(true);
-        }
         else
-        {
-            LevelManager.ActivateLevel(0);
-        }
+            ChangeLevel?.Invoke(0);
+            //SceneManager.LoadScene(0);
     }
 
     public void GoToLevel(int index)
     {
-        LevelManager.ActivateLevel(index);
+        ChangeLevel?.Invoke(index);
+        //SceneManager.LoadScene(index);
     }
 
     public void TutorialPassed()
