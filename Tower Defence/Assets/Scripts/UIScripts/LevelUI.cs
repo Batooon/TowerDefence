@@ -12,6 +12,7 @@ public class LevelUI : MonoBehaviour
     [Space(20)]
     public GameObject turretAlertText;
     public GameObject notEnoughMoneyText;
+    public GameObject maxTurretLevelText;
     public Vector3 turretAllertOffset;
 
     [Space(20)]
@@ -45,6 +46,8 @@ public class LevelUI : MonoBehaviour
 
     public Level level;
 
+    Vector3 pos2D;
+
     void Awake()
     {
         livesText.text = "HP " + level.Hp.ToString();
@@ -59,6 +62,7 @@ public class LevelUI : MonoBehaviour
         level.buildManager.TurretAlert += ShowTurretAlertText;
         level.buildManager.LivesUpdate += OnLivesUpdate;
         Level.singleton.EnemiesCounterChange += OnScoreUpdate;
+        level.buildManager.TurretMaxLevelAllert += ShowMaxTurretLevel;
         /*Level.singleton.OnWinGame += Win;
         Level.singleton.OnLooseGame += Loose;*/
     }
@@ -105,6 +109,15 @@ public class LevelUI : MonoBehaviour
             Text.transform.localScale = Vector3.one;
             return;
         }
+    }
+
+    public void ShowMaxTurretLevel(Transform position)
+    {
+        Vector3 pos2D = cam.WorldToScreenPoint(position.position);
+        GameObject text = Instantiate(maxTurretLevelText, pos2D + turretAllertOffset, Quaternion.identity);
+        text.transform.SetParent(transform);
+        text.transform.localScale = Vector3.one;
+        return;
     }
 
     public void OnMoneyUpdate()
