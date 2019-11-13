@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1919322428438552198}
   - component: {fileID: 5814246919064107332}
   m_Layer: 5
-  m_Name: TurretAlertText
+  m_Name: TurretmaxLevelAllert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,10 +64,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: No turret selected
+  m_text: Max level!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbe49dfac0daf2043a8a8365cf9b2ffd, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 8552514418837752039, guid: fbe49dfac0daf2043a8a8365cf9b2ffd,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -133,10 +134,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 1.256941, w: 0}
   m_textInfo:
     textComponent: {fileID: 1919322428438552198}
-    characterCount: 18
+    characterCount: 10
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -144,7 +145,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
   - {fileID: 0}

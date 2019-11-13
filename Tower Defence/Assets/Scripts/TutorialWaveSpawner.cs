@@ -2,42 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialWaveSpawner : WaveSpawner
+public class TutorialWaveSpawner : MonoBehaviour
 {
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
     void Update()
     {
-        /*if (TutorialLevel.IsPause)
-            return;*/
-
-        if (TutorialLevel.globalState == TutorialEnum.TUTORIALPAUSE)
-            return;
-
-        //onWaveStateChanged?.Invoke();
-        ActivateWaveStateChangedEvent();
-
-        if (EnemiesAlive > 0)
-            return;
-
-        if (waveIndex == amountOfWaves)
-        {
-            Level.singleton.WinGame();
-            return;
-        }
-
-        if (!isWaveIncoming)
-        {
-            state = State.COUNTDOWN;
-            countdown -= Time.deltaTime;
-            countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-
-            if (countdown <= 0)
-            {
-                state = State.SPAWN;
-                isWaveIncoming = true;
-                SpawnWave();
-            }
-        }
-        else
-            countdown = 0f;
+        
     }
 }

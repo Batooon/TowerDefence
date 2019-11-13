@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 677fef06e6b644347aec3d1f0ef052e7, type: 3}
-  m_Name: defaultTurret
+  m_Name: defaultTurret2
   m_EditorClassIdentifier: 
-  range: 3
+  range: 3.2
   fireRate: 1.5
-  speedRotation: 10
+  speedRotation: 9
   fireCountdown: 0
   cost: 100
+  sellCost: 55
+  UpgardeCost: 250
   selectedTurretUI: {fileID: 21300000, guid: 9d6f52f4008de954b94a77e36c82a0c8, type: 3}
   deselectedTurretUI: {fileID: 21300000, guid: c327b78425e5fd8458e256893dfa4e93, type: 3}
-  TurretPrefab: {fileID: 4537535527962091360, guid: 5da4159bdc9f29945ae70e8bca9c357c,
+  TurretPrefab: {fileID: 5679449595710828486, guid: 11164678fe36a9b45bb476e07fd3672f,
     type: 3}

@@ -8,8 +8,6 @@ public class Game : MonoBehaviour
 
     private bool IsTutorialPassed;
 
-    public event Action<int> ChangeLevel;
-
     void Awake()
     {
         singleton = this;
@@ -21,19 +19,20 @@ public class Game : MonoBehaviour
         if (IsTutorialPassed)
             CampaignMenu.SetActive(true);
         else
-            ChangeLevel?.Invoke(0);
-            //SceneManager.LoadScene(0);
+            SceneManager.LoadScene(0);
+            //LevelChanger.singleton.FadeToLevel(0);
     }
 
     public void GoToLevel(int index)
     {
-        ChangeLevel?.Invoke(index);
-        //SceneManager.LoadScene(index);
+        SceneManager.LoadScene(index);
+        //LevelChanger.singleton.FadeToLevel(index);
     }
 
     public void TutorialPassed()
     {
         IsTutorialPassed = true;
         PlayerPrefs.SetInt("IsTutorialPassed", IsTutorialPassed.GetHashCode());
+        Time.timeScale = 1;
     }
 }

@@ -2,16 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Turret : MonoBehaviour
 {
+    int level;
+    public TurretObject[] TurretLevels;
+
     //Radius
     private int segments = 50;
     [HideInInspector]
     public LineRenderer line;
 
-    public TurretObject turret;
+    public GameObject TurretUI;
+
+    public TurretObject CurrentTurret;
+
     private float fireCountdown;
 
     private GameObject target;
@@ -27,16 +34,27 @@ public class Turret : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
 
+    public TextMeshProUGUI SellText;
+    public TextMeshProUGUI UpgradeText;
+
     private Vector3 enemyPosition;
 
     void Awake()
     {
+        level = 0;
         line = gameObject.GetComponent<LineRenderer>();
 
         line.positionCount = segments + 1;
         line.useWorldSpace = false;
         CreateRadius();
-        fireCountdown = turret.fireCountdown;
+        fireCountdown = CurrentTurret.fireCountdown;
+        InitText();
+    }
+
+    void InitText()
+    {
+        SellText.text = "Sell ₴" + CurrentTurret.sellCost.ToString();
+        UpgradeText.text = "Upgrade ₴" + CurrentTurret.UpgardeCost.ToString();
     }
 
     public void CreateRadius()
@@ -47,8 +65,8 @@ public class Turret : MonoBehaviour
 
         for (int i = 0; i < (segments+1); i++)
         {
-            x = Mathf.Sin(Mathf.Deg2Rad * angle) * turret.range;
-            z = Mathf.Cos(Mathf.Deg2Rad * angle) * turret.range;
+            x = Mathf.Sin(Mathf.Deg2Rad * angle) * CurrentTurret.range;
+            z = Mathf.Cos(Mathf.Deg2Rad * angle) * CurrentTurret.range;
 
             line.SetPosition(i, new Vector3(x, 0, z));
 
@@ -79,7 +97,7 @@ public class Turret : MonoBehaviour
             }
         }
 
-        if (nearestEnemy != null && shortestDistance <= turret.range)
+        if (nearestEnemy != null && shortestDistance <= CurrentTurret.range)
         {
             target = nearestEnemy;
             enemyPosition = nearestEnemy.transform.position;
@@ -98,7 +116,7 @@ public class Turret : MonoBehaviour
         if (fireCountdown <= 0f)
         {
             Shoot();
-            fireCountdown = 1f / turret.fireRate;
+            fireCountdown = 1f / CurrentTurret.fireRate;
         }
         fireCountdown -= Time.deltaTime;
     }
@@ -119,11 +137,13 @@ public class Turret : MonoBehaviour
     public void Activate()
     {
         line.enabled = true;
+        TurretUI.SetActive(true);
     }
 
     public void Deactivate()
     {
         line.enabled = false;
+        TurretUI.SetActive(false);
     }
 
     public virtual Transform GetFirePointTransform() => firePoint;
@@ -132,13 +152,36 @@ public class Turret : MonoBehaviour
     {
         Vector3 dir = target.transform.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
-        Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turret.speedRotation).eulerAngles;
+        Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * CurrentTurret.speedRotation).eulerAngles;
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+    }
+
+    public void SellTurret()
+    {
+        BuildManager.singleton.SellTurretOn(transform.GetComponentInParent<Platform>());
+    }
+
+    public void UpgradeTurret()
+    {
+        if (level == TurretLevels.Length)
+        {
+            BuildManager.singleton.TurretMaxLevelalert(gameObject.GetComponentInParent<Transform>());
+            return;
+        }
+        CurrentTurret = TurretLevels[level++];
+        BuildManager.singleton.UpgradeTurretOn(transform.GetComponentInParent<Platform>());
+        updateData();
+    }
+
+    private void updateData()
+    {
+        CreateRadius();
+        InitText();
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, turret.range);
+        Gizmos.DrawWireSphere(transform.position, CurrentTurret.range);
     }
 }

@@ -7,8 +7,7 @@ public class SnapScrolling : MonoBehaviour
 {
     public float Spacing;
 
-    public GameObject panelPrefab;
-    public CampaignObject[] campaignCards;
+    public CampaignButtonUI[] campaignCards;
     public ScrollRect scrollRect;
 
     public float snapSpeed;
@@ -18,6 +17,7 @@ public class SnapScrolling : MonoBehaviour
     GameObject[] instantiatedPanels;
     Vector2[] panelPositions;
     Vector3[] panelScales;
+    Button[] instantiatedPanelButtons;
 
     int selectedPanID;
 
@@ -31,12 +31,14 @@ public class SnapScrolling : MonoBehaviour
     {
         contentRect = GetComponent<RectTransform>();
         instantiatedPanels = new GameObject[campaignCards.Length];
+        instantiatedPanelButtons = new Button[instantiatedPanels.Length];
         panelScales = new Vector3[campaignCards.Length];
         panelPositions = new Vector2[campaignCards.Length];
         for (int i = 0; i < campaignCards.Length; i++)
         {
-            instantiatedPanels[i] = Instantiate(panelPrefab, transform, false);
-            instantiatedPanels[i].GetComponent<CampaignButtonUI>().Init(campaignCards[i]);
+            instantiatedPanels[i] = Instantiate(campaignCards[i].gameObject, transform, false);
+            instantiatedPanels[i].GetComponent<CampaignButtonUI>().Init();
+            instantiatedPanelButtons[i] = instantiatedPanels[i].gameObject.GetComponent<Button>();
             if (i == 0) continue;
             instantiatedPanels[i].transform.localPosition = new Vector2(instantiatedPanels[i - 1].transform.localPosition.x +
                 instantiatedPanels[i].GetComponent<RectTransform>().sizeDelta.x + Spacing,
@@ -44,8 +46,6 @@ public class SnapScrolling : MonoBehaviour
             panelPositions[i] = -instantiatedPanels[i].transform.localPosition;
         }
     }
-
-
 
     void FixedUpdate()
     {
@@ -74,6 +74,17 @@ public class SnapScrolling : MonoBehaviour
             return;
         contentVector.x = Mathf.SmoothStep(contentRect.anchoredPosition.x, panelPositions[selectedPanID].x, snapSpeed * Time.fixedDeltaTime);
         contentRect.anchoredPosition = contentVector;
+        for (int i = 0; i < instantiatedPanelButtons.Length; i++)
+        {
+            if (i == selectedPanID)
+            {
+                if (campaignCards[i].IsLocked)
+                    continue;
+                instantiatedPanelButtons[i].interactable = true;
+                continue;
+            }
+            instantiatedPanelButtons[i].interactable = false;
+        }
     }
 
     public void Scrolling(bool IsScrolling)

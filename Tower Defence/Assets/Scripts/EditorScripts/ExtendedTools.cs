@@ -14,6 +14,7 @@ public class ExtendedTools : EditorWindow
         if(GUILayout.Button("Reset PlayerPrefs"))
         {
             PlayerPrefs.DeleteAll();
+            Debug.Log("PlayerPrefs Resetted");
         }
     }
 }

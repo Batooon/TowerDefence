@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class TutorialEnemy : Enemy
 {
-
-    void Update()
+    /*void Update()
     {
-        if (TutorialLevel.globalState==TutorialEnum.TUTORIALPAUSE)
+        if (TutorialLevel.globalState == TutorialEnum.TUTORIALPAUSE)
             return;
 
         Move();
@@ -18,5 +15,5 @@ public class TutorialEnemy : Enemy
             GetNextWaypoint();
             transform.LookAt(target);
         }
-    }
+    }*/
 }

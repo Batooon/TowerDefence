@@ -6,10 +6,14 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public float Health;
+    float Health;
+
+    [SerializeField]
+    float rotationSpeed;
 
     protected Vector3 target;
     private IWayPoint _nextWaypoint;
+
     private IWayPoint wayPoint
     {
         get => _nextWaypoint;
@@ -36,11 +40,13 @@ public class Enemy : MonoBehaviour
         if (Level.singleton.state == GlobalState.TUTORIALPAUSE)
             return;
 
+        transform.rotation = Quaternion.Lerp(UnityEngine.Random.rotationUniform, UnityEngine.Random.rotationUniform, rotationSpeed * Time.deltaTime);
+
         Move();
         if (Vector3.Distance(transform.position, target) <= 0.1f)
         {
             GetNextWaypoint();
-            transform.LookAt(target);
+            //transform.LookAt(target);//Сейчас враги симметричные, поэтому нет смысла это делать
         }
     }
 
@@ -68,8 +74,6 @@ public class Enemy : MonoBehaviour
         Vector3 dir = target - transform.position;
 
         transform.Translate(dir.normalized * enemyObject.speed * Time.deltaTime, Space.World);
-        //transform.rotation
-        //transform.position = Vector3.Lerp(transform.position, target, enemyObject.speed * Time.deltaTime);
     }
 
     protected void GetNextWaypoint()

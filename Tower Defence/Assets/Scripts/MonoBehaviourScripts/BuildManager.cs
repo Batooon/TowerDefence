@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
+    public event Action<Transform> TurretMaxLevelAllert;
     public event Action<Transform> TurretAlert;
     public event Action MoneyUpdate;
     public event Action LivesUpdate;
     public event Action<TurretObject[]> InitTurretsEvent;
 
     public void TurretError(Transform t) { TurretAlert.Invoke(t); }
+    public void TurretMaxLevelalert(Transform t) { TurretMaxLevelAllert.Invoke(t); }
 
     public TurretObject[] turrets;
 
@@ -75,7 +77,7 @@ public class BuildManager : MonoBehaviour
 
         // select
         Turret turret = selectedTurret.GetComponent<Turret>();
-        SetTurretData(turret?.turret);
+        SetTurretData(turret?.CurrentTurret);
         selectedButtonUI.Select();
         
 
@@ -111,6 +113,19 @@ public class BuildManager : MonoBehaviour
         GameObject turret = Instantiate(selectedTurret, platform.GetBuildPosition(), Quaternion.identity);
         turret.transform.SetParent(platform.transform);
         platform.turret = turret;
+    }
+
+    public void SellTurretOn(Platform platform)
+    {
+        money += turretData.sellCost;
+        MoneyUpdate?.Invoke();
+        Destroy(platform.turret);
+    }
+
+    public void UpgradeTurretOn(Platform platform)
+    {
+        money -= turretData.UpgardeCost;
+        MoneyUpdate?.Invoke();
     }
 
     public void ClearEvents()

@@ -17,6 +17,10 @@ public class TurretObject : ScriptableObject
 
     public int cost;
 
+    public int sellCost;
+
+    public int UpgardeCost;
+
     public Sprite selectedTurretUI;
 
     public Sprite deselectedTurretUI;

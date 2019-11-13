@@ -35,7 +35,8 @@ public class Level : MonoBehaviour
     public GameObject ExitWindow;
     public GameObject GameOverScreen;
     public GameObject GameWinScreen;
-    public TextMeshProUGUI EnemiesKilledText;
+    public TextMeshProUGUI WinEnemiesKilledText;
+    public TextMeshProUGUI LooseEnemiesKilledText;
 
     private GlobalState _state;
     public GlobalState state
@@ -158,14 +159,13 @@ public class Level : MonoBehaviour
 
     void ActivatGameOverScreen()
     {
+        LooseEnemiesKilledText.text = WaveSpawner.EnemiesKilled.ToString();
         GameOverScreen.SetActive(true);
-        //OnLooseGame?.Invoke();
     }
     void ActivateWinGameScreen()
     {
-        EnemiesKilledText.text = WaveSpawner.EnemiesKilled.ToString();
+        WinEnemiesKilledText.text = WaveSpawner.EnemiesKilled.ToString();
         GameWinScreen.SetActive(true);
-        //OnWinGame?.Invoke();
     }
 
     public void ClickQuitButton()
@@ -213,9 +213,8 @@ public class Level : MonoBehaviour
         ClearEvents();
     }
 
-    public void ClearEvents()
+    void ClearEvents()
     {
-        /*OnWinGame = null;
-        OnLooseGame = null;*/
+        Time.timeScale = 1;
     }
 }
