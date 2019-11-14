@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 350bdda73b6bf7346b221c96d55a0d6c, type: 3}
-  m_Name: FirstCampaign
+  m_Name: FifthCampaign
   m_EditorClassIdentifier: 
-  SceneName: SampleScene
+  SceneName: Level 5
   Background: {fileID: 21300000, guid: 077964a9d9bc3184da6dbd265a868791, type: 3}
-  CampaignName: Level 1
+  CampaignName: Level 5
