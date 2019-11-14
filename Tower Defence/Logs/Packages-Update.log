@@ -37,3 +37,17 @@ Update Mode: updateDependencies
 
 The following packages were updated:
   com.unity.ide.vscode from version 1.0.7 to 1.1.0
+
+=== Wed Nov 13 23:04:34 2019
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were added:
+  com.unity.2d.tilemap@1.0.0
+  com.unity.analytics@3.3.2
+  com.unity.purchasing@2.0.6
+  com.unity.ads@2.0.8
+  com.unity.ide.rider@1.1.0
+  com.unity.multiplayer-hlapi@1.0.2
+  com.unity.xr.legacyinputhelpers@2.0.2
