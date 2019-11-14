@@ -14,6 +14,12 @@ public class Enemy : MonoBehaviour
     protected Vector3 target;
     private IWayPoint _nextWaypoint;
 
+    Quaternion startRotation;
+    Quaternion finalRotation;
+    Vector3 axis;
+
+    float lifeTime;
+
     private IWayPoint wayPoint
     {
         get => _nextWaypoint;
@@ -33,6 +39,11 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         Health = enemyObject.Hp;
+        startRotation = UnityEngine.Random.rotationUniform;
+        finalRotation = UnityEngine.Random.rotationUniform;
+        axis = UnityEngine.Random.onUnitSphere;
+
+        lifeTime = 0f;
     }
 
     void Update()
@@ -40,7 +51,9 @@ public class Enemy : MonoBehaviour
         if (Level.singleton.state == GlobalState.TUTORIALPAUSE)
             return;
 
-        transform.rotation = Quaternion.Lerp(UnityEngine.Random.rotationUniform, UnityEngine.Random.rotationUniform, rotationSpeed * Time.deltaTime);
+        lifeTime += Time.deltaTime;
+
+        transform.Rotate(axis, rotationSpeed * Time.deltaTime);
 
         Move();
         if (Vector3.Distance(transform.position, target) <= 0.1f)

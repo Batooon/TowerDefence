@@ -63,6 +63,7 @@ public class LevelUI : MonoBehaviour
         level.buildManager.LivesUpdate += OnLivesUpdate;
         Level.singleton.EnemiesCounterChange += OnScoreUpdate;
         level.buildManager.TurretMaxLevelAllert += ShowMaxTurretLevel;
+        level.buildManager.NotEnoughMoney += ShowNotEnoughMoneyText;
         /*Level.singleton.OnWinGame += Win;
         Level.singleton.OnLooseGame += Loose;*/
     }
@@ -77,15 +78,16 @@ public class LevelUI : MonoBehaviour
         switch (level.waveSpawner.state)
         {
             case State.COUNTDOWN:
-                waveText.color = Color.black;
+                //waveText.color = Color.black;
+                waveText.faceColor = Color.black;
                 waveText.text = string.Format("{0:00.00}", level.waveSpawner.countdown);
                 break;
             case State.SPAWN:
-                waveText.color = Color.red;
+                //waveText.color = Color.red;
+                waveText.faceColor = Color.red;
                 waveText.text = "!WARNING! Wave incoming!";
                 break;
             case State.END:
-                Debug.Log("YOU WIN!");
                 level.waveSpawner.onWaveStateChanged -= ChangeWaveText;
                 break;
         }
@@ -111,13 +113,20 @@ public class LevelUI : MonoBehaviour
         }
     }
 
+    public void ShowNotEnoughMoneyText(Transform position)
+    {
+        Vector3 pos2D = cam.WorldToScreenPoint(position.position);
+        GameObject AlertText = Instantiate(notEnoughMoneyText, pos2D + turretAllertOffset, Quaternion.identity);
+        AlertText.transform.SetParent(transform);
+        AlertText.transform.localScale = Vector3.one;
+    }
+
     public void ShowMaxTurretLevel(Transform position)
     {
         Vector3 pos2D = cam.WorldToScreenPoint(position.position);
         GameObject text = Instantiate(maxTurretLevelText, pos2D + turretAllertOffset, Quaternion.identity);
         text.transform.SetParent(transform);
         text.transform.localScale = Vector3.one;
-        return;
     }
 
     public void OnMoneyUpdate()

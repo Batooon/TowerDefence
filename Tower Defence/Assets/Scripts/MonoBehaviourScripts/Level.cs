@@ -17,6 +17,8 @@ public class Level : MonoBehaviour
     public BuildManager buildManager;
     public WaveSpawner waveSpawner;
 
+    public int levelIndex;
+
     /*public event Action OnWinGame;
     public event Action OnLooseGame;*/
 
@@ -207,6 +209,7 @@ public class Level : MonoBehaviour
 
     public void WinGame()
     {
+        PlayerPrefs.SetInt("levelReached", levelIndex + 1);
         ChangeState(GlobalState.END);
         ActivateWinGameScreen();
         buildManager.ClearEvents();
@@ -215,6 +218,6 @@ public class Level : MonoBehaviour
 
     void ClearEvents()
     {
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
     }
 }

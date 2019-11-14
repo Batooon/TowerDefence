@@ -27,7 +27,7 @@ public class SnapScrolling : MonoBehaviour
 
     Vector2 contentVector;
 
-    private void Start()
+    private void Awake()
     {
         contentRect = GetComponent<RectTransform>();
         instantiatedPanels = new GameObject[campaignCards.Length];
@@ -37,7 +37,7 @@ public class SnapScrolling : MonoBehaviour
         for (int i = 0; i < campaignCards.Length; i++)
         {
             instantiatedPanels[i] = Instantiate(campaignCards[i].gameObject, transform, false);
-            instantiatedPanels[i].GetComponent<CampaignButtonUI>().Init();
+            instantiatedPanels[i].GetComponent<CampaignButtonUI>().Init(i + 1);
             instantiatedPanelButtons[i] = instantiatedPanels[i].gameObject.GetComponent<Button>();
             if (i == 0) continue;
             instantiatedPanels[i].transform.localPosition = new Vector2(instantiatedPanels[i - 1].transform.localPosition.x +
@@ -78,7 +78,8 @@ public class SnapScrolling : MonoBehaviour
         {
             if (i == selectedPanID)
             {
-                if (campaignCards[i].IsLocked)
+                //Диииико извиняюсь, ДИИИКО
+                if (instantiatedPanels[i].GetComponent<CampaignButtonUI>().IsLocked)
                     continue;
                 instantiatedPanelButtons[i].interactable = true;
                 continue;

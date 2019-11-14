@@ -4,32 +4,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-/*public enum TutorialEnum
-{
-    TUTORIALPAUSE,
-    GAME
-}*/
-
 public class TutorialLevel : Level
 {
     [Header("Tutorial Objects")]
-    [SerializeField]
-    private GameObject topMenu;
-    [SerializeField]
-    private GameObject shop;
-    [SerializeField]
-    private GameObject scoreUI;
-    [SerializeField]
-    private TextMeshProUGUI nextStepButtonText;
+
+    public GameObject topMenu;
+    public GameObject shop;
+    public GameObject scoreUI;
+    public TextMeshProUGUI nextStepButtonText;
 
     private int numberStep = 0;
 
-    //public static TutorialEnum globalState;
+    private void Awake()
+    {
+        singleton = this;
+    }
 
     private void Start()
     {
         //globalState = TutorialEnum.TUTORIALPAUSE;
-        ChangeState(GlobalState.PAUSE);
+        ChangeState(GlobalState.TUTORIALPAUSE);
+        Debug.Log(Time.timeScale);
     }
 
     public void NextStep()
@@ -92,6 +87,7 @@ public class TutorialLevel : Level
     private void SixthStep()
     {
         //globalState = TutorialEnum.GAME;
+        ChangeState(GlobalState.GAME);
         Game.singleton.TutorialPassed();
     }
 }

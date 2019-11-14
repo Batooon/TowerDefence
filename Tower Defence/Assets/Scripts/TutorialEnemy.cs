@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TutorialEnemy : Enemy
 {
-    /*void Update()
+    void Update()
     {
-        if (TutorialLevel.globalState == TutorialEnum.TUTORIALPAUSE)
+        if (Level.singleton.state == GlobalState.TUTORIALPAUSE)
             return;
 
         Move();
@@ -15,5 +15,5 @@ public class TutorialEnemy : Enemy
             GetNextWaypoint();
             transform.LookAt(target);
         }
-    }*/
+    }
 }

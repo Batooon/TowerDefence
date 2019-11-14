@@ -166,8 +166,11 @@ public static class WaveFabric
         WaveData usualWave = new WaveData();
 
         usualWave.Enemies = new GameObject[amountOfEnemies];
+
+        int startIndex = 0;
+        int endIndex = Math.Min(numberWave + 1, enemies.Length);
         for (int i = 0; i < usualWave.Enemies.Length; i++)
-            usualWave.Enemies[i] = enemies[UnityEngine.Random.Range(0, numberWave)];
+            usualWave.Enemies[i] = enemies[UnityEngine.Random.Range(startIndex, endIndex)];
 
         usualWave.countdown = 5f;
 

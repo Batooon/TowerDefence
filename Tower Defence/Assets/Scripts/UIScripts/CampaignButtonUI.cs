@@ -7,24 +7,35 @@ using TMPro;
 
 public class CampaignButtonUI : MonoBehaviour
 {
-    public int CampaignId;
+    private AudioManager audioManager;
 
+    [HideInInspector]
     public bool IsLocked;
 
-    [SerializeField]
-    Image background;
-    [SerializeField]
-    TextMeshProUGUI CampaignName;
-    [SerializeField]
-    GameObject Lock;
+    public Image background;
+
+    public TextMeshProUGUI CampaignName;
+
+    public GameObject Lock;
 
     public CampaignObject campaign;
 
-    string sceneName;
-    Button button;
+    public string sceneName;
+    public Button button;
 
-    public void Init()
+    void Awake()
     {
+        audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager == null)
+            Debug.LogWarning("Can't find audio manager in the scene!");
+    }
+
+    public void Init(int levelIndex)
+    {
+        int levelReached = PlayerPrefs.GetInt("levelReached", 1);
+
+        IsLocked = levelIndex > levelReached;
+
         if (IsLocked)
             Lock.SetActive(true);
         else
@@ -33,7 +44,15 @@ public class CampaignButtonUI : MonoBehaviour
         sceneName = campaign.SceneName;
         background.sprite = campaign.Background;
         CampaignName.text = campaign.CampaignName;
-        button = GetComponent<Button>();
         button.onClick.AddListener(() => SceneManager.LoadScene(sceneName));
+        button.onClick.AddListener(() => audioManager.Play("ButtonSound"));
+    }
+
+    public void UpdateLock()
+    {
+        if (IsLocked)
+            return;
+        else
+            Lock.SetActive(false);
     }
 }

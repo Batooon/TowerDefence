@@ -7,12 +7,16 @@ public class BuildManager : MonoBehaviour
 {
     public event Action<Transform> TurretMaxLevelAllert;
     public event Action<Transform> TurretAlert;
+    public event Action<Transform> NotEnoughMoney;
+    public event Action<Transform> TurretAlreadyPlacedHere;
     public event Action MoneyUpdate;
     public event Action LivesUpdate;
     public event Action<TurretObject[]> InitTurretsEvent;
 
     public void TurretError(Transform t) { TurretAlert.Invoke(t); }
     public void TurretMaxLevelalert(Transform t) { TurretMaxLevelAllert.Invoke(t); }
+
+    public void ActivateNotEnoughMoneyEvent(Transform t) { NotEnoughMoney?.Invoke(t); }
 
     public TurretObject[] turrets;
 
@@ -55,6 +59,24 @@ public class BuildManager : MonoBehaviour
             }
         }
         SelectPlatform(platform);
+    }
+
+    public bool TryUpgradeTurret(Platform platform)
+    {
+        if (platform == null || platform.IsEmpty())
+            return false;
+
+        if (!IsEnoughMoneyToUpgrade())
+        {
+            ActivateNotEnoughMoneyEvent(platform.transform);
+            return false;
+        }
+
+        UpgradeTurretOn(platform);
+
+        return true;
+
+        //platform.turret.GetComponent<Turret>().UpgradeTurret();
     }
 
     public void SelectTurret(GameObject turretGO, ShopButtonUI button)
@@ -120,6 +142,7 @@ public class BuildManager : MonoBehaviour
         money += turretData.sellCost;
         MoneyUpdate?.Invoke();
         Destroy(platform.turret);
+        selectedPlatform = null;
     }
 
     public void UpgradeTurretOn(Platform platform)
@@ -150,4 +173,5 @@ public class BuildManager : MonoBehaviour
 
     public bool CanBuild() => selectedTurret != null;
     public bool IsEnoughMoney() => money >= turretData.cost;
+    public bool IsEnoughMoneyToUpgrade() => money >= turretData.UpgardeCost;
 }

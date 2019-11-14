@@ -54,15 +54,4 @@ public class Platform : MonoBehaviour
     {
         return turret == null;
     }
-
-    public IEnumerator Highlight()
-    {
-        rend.material.color = Color.Lerp(Color.white, Color.red, Mathf.Sin(Time.deltaTime));
-        yield return null;
-    }
-
-    public void StopHighlight()
-    {
-        rend.material.color = startColor;
-    }
 }

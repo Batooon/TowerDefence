@@ -14,6 +14,17 @@ public class Game : MonoBehaviour
         IsTutorialPassed = Convert.ToBoolean(PlayerPrefs.GetInt("IsTutorialPassed", 0));
     }
 
+    void Start()
+    {
+        ChangeGameSpeed(1f);
+    }
+
+    public static void ChangeGameSpeed(float speed)
+    {
+        Settings.singletonSettings.SetSpeed(speed);
+        Time.timeScale = speed;
+    }
+
     public void OpenCampaignMenu(GameObject CampaignMenu)
     {
         if (IsTutorialPassed)
@@ -25,6 +36,7 @@ public class Game : MonoBehaviour
 
     public void GoToLevel(int index)
     {
+        ChangeGameSpeed(1f);
         SceneManager.LoadScene(index);
         //LevelChanger.singleton.FadeToLevel(index);
     }
@@ -33,6 +45,6 @@ public class Game : MonoBehaviour
     {
         IsTutorialPassed = true;
         PlayerPrefs.SetInt("IsTutorialPassed", IsTutorialPassed.GetHashCode());
-        Time.timeScale = 1;
+        ChangeGameSpeed(1f);
     }
 }

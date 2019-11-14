@@ -168,12 +168,15 @@ public class Turret : MonoBehaviour
             BuildManager.singleton.TurretMaxLevelalert(gameObject.GetComponentInParent<Transform>());
             return;
         }
-        CurrentTurret = TurretLevels[level++];
-        BuildManager.singleton.UpgradeTurretOn(transform.GetComponentInParent<Platform>());
-        updateData();
+
+        if (BuildManager.singleton.TryUpgradeTurret(gameObject.GetComponentInParent<Platform>()))
+        {
+            CurrentTurret = TurretLevels[level++];
+            UpdateData();
+        }
     }
 
-    private void updateData()
+    void UpdateData()
     {
         CreateRadius();
         InitText();

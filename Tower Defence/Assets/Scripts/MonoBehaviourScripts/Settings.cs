@@ -8,8 +8,18 @@ public class Settings : MonoBehaviour
 
     void Awake()
     {
-        speed = 1f;
+        /*if (singletonSettings = null)
+            singletonSettings = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }*/
+
+        //DontDestroyOnLoad(gameObject);
+
         singletonSettings = this;
+        speed = 1f;
     }
 
     public float speed
