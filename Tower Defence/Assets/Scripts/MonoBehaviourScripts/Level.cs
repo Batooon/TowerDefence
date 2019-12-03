@@ -243,6 +243,15 @@ public class Level : MonoBehaviour
         ClearEvents();
     }
 
+    public void OnEnemyDied(EnemyDieEvent dieEvent)
+    {
+        WaveSpawner.EnemiesKilled++;
+        EnemiesCounter += Score;
+        EnemiesCounterChange?.Invoke();
+        waveSpawner.EnemiesAlive--;
+        buildManager.AddMoney(dieEvent.moneyBonus);
+    }
+
     void ClearEvents()
     {
         //Time.timeScale = 1;
