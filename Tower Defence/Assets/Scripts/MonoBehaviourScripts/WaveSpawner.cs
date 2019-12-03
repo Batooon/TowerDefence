@@ -47,7 +47,7 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
     public Wave _wave;
 
     [HideInInspector]
-    public static int EnemiesKilled;
+    public int EnemiesKilled;
 
     public Wave GetIncomingWave()
     {
