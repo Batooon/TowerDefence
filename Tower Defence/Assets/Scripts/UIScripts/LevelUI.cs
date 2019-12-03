@@ -22,6 +22,7 @@ public class LevelUI : MonoBehaviour
     [Header("Wave countdown text")]
     [Space(20)]
     public TextMeshProUGUI waveText;
+    public TextMeshProUGUI waveCounterText;
 
     [Header("Money Text")]
     [Space(20)]
@@ -34,6 +35,12 @@ public class LevelUI : MonoBehaviour
 
     [Header("Enemies Counter Text")]
     public TextMeshProUGUI scoreText;
+
+    [Header("Speed Button")]
+    public Image speedButton;
+    public Sprite firstSpeed;
+    public Sprite secondSpeed;
+    public Sprite thirdSpeed;
 
     /*[Header("Game Win Data")]
     public GameObject WinScreen;
@@ -50,13 +57,15 @@ public class LevelUI : MonoBehaviour
 
     void Awake()
     {
-        livesText.text = "HP " + level.Hp.ToString();
+        livesText.text = level.Hp.ToString();
         money.text = currency + level.buildManager.money.ToString();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        waveCounterText.text = $"{Level.singleton.waveSpawner.waveIndex + 1}/{Level.singleton.waveSpawner.amountOfWaves}";
+        Level.singleton.waveSpawner.WavePassed += UpdateWaveCounter;
         level.buildManager.MoneyUpdate += OnMoneyUpdate;
         level.waveSpawner.onWaveStateChanged += ChangeWaveText;
         level.buildManager.TurretAlert += ShowTurretAlertText;
@@ -64,6 +73,7 @@ public class LevelUI : MonoBehaviour
         Level.singleton.EnemiesCounterChange += OnScoreUpdate;
         level.buildManager.TurretMaxLevelAllert += ShowMaxTurretLevel;
         level.buildManager.NotEnoughMoney += ShowNotEnoughMoneyText;
+        Level.singleton.SpeedChange += ChangeSpeedUI;
         /*Level.singleton.OnWinGame += Win;
         Level.singleton.OnLooseGame += Loose;*/
     }
@@ -147,6 +157,30 @@ public class LevelUI : MonoBehaviour
 
     public void OnLivesUpdate()
     {
-        livesText.text = "HP " + level.Hp.ToString();
+        livesText.text = level.Hp.ToString();
+    }
+
+    public void ChangeSpeedUI(int speedIndex)
+    {
+        switch (speedIndex)
+        {
+            case 0:
+                speedButton.sprite = firstSpeed;
+                break;
+            case 1:
+                speedButton.sprite = secondSpeed;
+                break;
+            case 2:
+                speedButton.sprite = thirdSpeed;
+                break;
+            default:
+                speedButton.sprite = firstSpeed;
+                break;
+        }
+    }
+
+    public void UpdateWaveCounter()
+    {
+        waveCounterText.text = $"{Level.singleton.waveSpawner.waveIndex + 1}/{Level.singleton.waveSpawner.amountOfWaves}";
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -14,10 +16,14 @@ public class Level : MonoBehaviour
 {
     public static Level singleton;
 
+    public float[] speeds = new float[3];
+
     public BuildManager buildManager;
     public WaveSpawner waveSpawner;
 
     public int levelIndex;
+
+    int speedIndex = 0;
 
     /*public event Action OnWinGame;
     public event Action OnLooseGame;*/
@@ -39,6 +45,8 @@ public class Level : MonoBehaviour
     public GameObject GameWinScreen;
     public TextMeshProUGUI WinEnemiesKilledText;
     public TextMeshProUGUI LooseEnemiesKilledText;
+
+    public Action<int> SpeedChange;
 
     private GlobalState _state;
     public GlobalState state
@@ -122,16 +130,27 @@ public class Level : MonoBehaviour
         }
     }
 
+    private void OnLevelWasLoaded(int level)
+    {
+        if (level == SceneManager.GetActiveScene().buildIndex)
+        ChangeState(GlobalState.GAME);
+    }
+
     public void GameOver(GameObject gameOverScreen)
     {
         ChangeState(GlobalState.END);
         gameOverScreen.SetActive(true);
     }
 
-    public void ChangeGameSpeed(float speed)
+    public void ChangeGameSpeed()
     {
-        Settings.singletonSettings.SetSpeed(speed);
-        Time.timeScale = speed;
+        if (speedIndex >= 2)
+            speedIndex = 0;
+        else
+            speedIndex += 1;
+        Settings.singletonSettings.SetSpeed(speeds[speedIndex]);
+        Time.timeScale = speeds[speedIndex];
+        SpeedChange?.Invoke(speedIndex);
     }
 
     void OnPause(GameObject menu)
@@ -177,7 +196,15 @@ public class Level : MonoBehaviour
 
     public void RetryButton()
     {
-        SceneManager.LoadScene(0);
+        Unpause();
+        //ChangeState(GlobalState.GAME);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    void Unpause()
+    {
+        Settings.singletonSettings.SetSpeed(speeds[speedIndex]);
+        Time.timeScale = speeds[speedIndex];
     }
 
     public void OpenInstagram()

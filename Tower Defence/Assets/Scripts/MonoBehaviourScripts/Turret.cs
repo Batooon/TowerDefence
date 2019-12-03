@@ -10,7 +10,6 @@ public class Turret : MonoBehaviour
     int level;
     public TurretObject[] TurretLevels;
 
-    //Radius
     private int segments = 50;
     [HideInInspector]
     public LineRenderer line;
@@ -19,9 +18,10 @@ public class Turret : MonoBehaviour
 
     public TurretObject CurrentTurret;
 
-    private float fireCountdown;
+    protected float fireCountdown;
 
-    private GameObject target;
+    protected GameObject target;
+    protected Enemy targetEnemy;
 
     public int index;
 
@@ -100,10 +100,14 @@ public class Turret : MonoBehaviour
         if (nearestEnemy != null && shortestDistance <= CurrentTurret.range)
         {
             target = nearestEnemy;
+            targetEnemy = nearestEnemy.GetComponent<Enemy>();
             enemyPosition = nearestEnemy.transform.position;
         }
         else
+        {
             target = null;
+            targetEnemy = null;
+        }
     }
 
     void Update()
@@ -121,7 +125,7 @@ public class Turret : MonoBehaviour
         fireCountdown -= Time.deltaTime;
     }
 
-    private void Shoot()
+    protected void Shoot()
     {
         GameObject bulletGO = Instantiate(bulletPrefab, GetFirePointTransform());
         bulletGO.transform.parent = null;
@@ -148,7 +152,7 @@ public class Turret : MonoBehaviour
 
     public virtual Transform GetFirePointTransform() => firePoint;
 
-    private void RotateToEnemy()
+    protected void RotateToEnemy()
     {
         Vector3 dir = target.transform.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);

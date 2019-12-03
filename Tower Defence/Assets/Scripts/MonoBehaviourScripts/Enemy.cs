@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
         transform.Rotate(axis, rotationSpeed * Time.deltaTime);
 
         Move();
-        if (Vector3.Distance(transform.position, target) <= 0.1f)
+        if (Vector3.Distance(transform.position, target) <= 0.2f)
         {
             GetNextWaypoint();
             //transform.LookAt(target);//Сейчас враги симметричные, поэтому нет смысла это делать

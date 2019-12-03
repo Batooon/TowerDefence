@@ -18,6 +18,7 @@ public struct WaveData
 [Serializable]
 public class Wave : IWave
 {
+    int i;
     public Wave(WaveData data, Action<WaveSpawnData> spawnEnemyCallbackFunction, Action prepareNextWaveCallback)
     {
         waveData = data;
@@ -44,7 +45,8 @@ public class Wave : IWave
 
     public WaveSpawnData GetNextEnemySpawnData()
     {
-        return new WaveSpawnData(waveData.Enemies[index++], waveData.StartWaypoints[0]);
+        i = UnityEngine.Random.Range(0, waveData.StartWaypoints.Length);
+        return new WaveSpawnData(waveData.Enemies[index++], waveData.StartWaypoints[i]);
     }
 
     public IEnumerator SpawnEnemies()

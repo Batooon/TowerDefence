@@ -13,7 +13,8 @@ public enum State
 public enum WaveType
 {
     TUTORIALWAVE,
-    USUALWAVE
+    USUALWAVE,
+    INFINITYWAVE
 }
 
 public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
@@ -27,6 +28,7 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
     public GameObject[] defaultEnemies;
 
     public event Action onWaveStateChanged;
+    public event Action WavePassed;
 
     protected void ActivateWaveStateChangedEvent()
     {
@@ -34,7 +36,7 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
     }
 
     public int amountOfWaves;
-    protected int waveIndex;
+    public int waveIndex;
     public WaveType waveType;
 
     [HideInInspector]
@@ -42,7 +44,7 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
 
     public State state;
     private int nextWaveIndex = 0;
-    private Wave _wave;
+    public Wave _wave;
 
     [HideInInspector]
     public static int EnemiesKilled;
@@ -58,6 +60,7 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
 
     void Start()
     {
+        EnemiesAlive = 0;
         EnemiesKilled = 0;
         waveIndex = 0;
         _wave = GenerateWave(nextWaveIndex);
@@ -74,7 +77,7 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
         if (EnemiesAlive > 0)
             return;
 
-        if (waveIndex == amountOfWaves)
+        if (waveIndex == amountOfWaves && waveType != WaveType.INFINITYWAVE)
         {
             Level.singleton.WinGame();
             return;
@@ -102,6 +105,7 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
         Wave incomingWave = GetIncomingWave();
 
         StartCoroutine(incomingWave.SpawnEnemies());
+        WavePassed?.Invoke();
     }
 
     public void SpawnEnemy(WaveSpawnData waveSpawnData)
@@ -134,14 +138,16 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
 
     public Wave GenerateWave(int waveNumber)
     {
-            switch (waveType)
-            {
-                case WaveType.USUALWAVE:
+        switch (waveType)
+        {
+            case WaveType.USUALWAVE:
                 return new Wave(WaveFabric.UsualWave(nextWaveIndex, defaultEnemies, spawnWaypoints, currentAmountOfEnemies + EnemyIncreaser++, waveIndex), SpawnEnemy, PrepareNextWave);
-                case WaveType.TUTORIALWAVE:
+            case WaveType.TUTORIALWAVE:
                 return new Wave(WaveFabric.TutorialWave(nextWaveIndex, defaultEnemies, spawnWaypoints, currentAmountOfEnemies + EnemyIncreaser++), SpawnEnemy, PrepareNextWave);
-            }
-            return null;
+            case WaveType.INFINITYWAVE:
+                return new Wave(WaveFabric.InfinityWave(nextWaveIndex, defaultEnemies, spawnWaypoints, currentAmountOfEnemies + EnemyIncreaser++), SpawnEnemy, PrepareNextWave);
+        }
+        return null;
     }
 }
 

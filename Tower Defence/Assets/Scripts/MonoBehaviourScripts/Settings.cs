@@ -8,18 +8,9 @@ public class Settings : MonoBehaviour
 
     void Awake()
     {
-        /*if (singletonSettings = null)
-            singletonSettings = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }*/
-
-        //DontDestroyOnLoad(gameObject);
-
         singletonSettings = this;
         speed = 1f;
+        volume = PlayerPrefs.GetFloat("Volume", 1);
     }
 
     public float speed
@@ -31,5 +22,17 @@ public class Settings : MonoBehaviour
     public void SetSpeed(float _speed)
     {
         speed = _speed;
+    }
+
+    public float volume
+    {
+        private set;
+        get;
+    }
+
+    public void SetVolume(float _volume)
+    {
+        volume = _volume;
+        PlayerPrefs.SetFloat("Volume", _volume);
     }
 }

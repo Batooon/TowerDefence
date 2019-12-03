@@ -23,7 +23,7 @@ public class ShopButtonUI : MonoBehaviour
         turretPrefab = t.TurretPrefab;
         selectedSprite = t.selectedTurretUI;
         deselectedSprite = t.deselectedTurretUI;
-        cost.text = "₴" + t.cost.ToString();
+        cost.text = "$" + t.cost.ToString();
         image.sprite = deselectedSprite;
 
         Shop shop = transform.parent.GetComponent<Shop>();

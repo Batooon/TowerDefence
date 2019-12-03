@@ -78,9 +78,11 @@ public class SnapScrolling : MonoBehaviour
         {
             if (i == selectedPanID)
             {
+#if UNITY_ANDROID
                 //Диииико извиняюсь, ДИИИКО
                 if (instantiatedPanels[i].GetComponent<CampaignButtonUI>().IsLocked)
                     continue;
+#endif
                 instantiatedPanelButtons[i].interactable = true;
                 continue;
             }

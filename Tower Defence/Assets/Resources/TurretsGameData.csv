@@ -1,0 +1,4 @@
+id;range;fireRate;speedRotation;fireCountdown;turretGameObject
+1,00;3,00;1,50;10,00;0,00;1,00
+2,00;3,50;0,28;5,00;0,00;2,00
+3,00;3,20;1,50;10,00;0,00;3,00

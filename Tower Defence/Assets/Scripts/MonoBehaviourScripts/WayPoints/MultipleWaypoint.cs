@@ -5,8 +5,7 @@ using UnityEngine;
 public enum MultipleWaypointForkType
 {
     Semafor,
-    Random,
-    Fibonachi
+    Random
 }
 
 public class MultipleWaypoint : WaypointBase
@@ -32,17 +31,6 @@ public class MultipleWaypoint : WaypointBase
 
             case MultipleWaypointForkType.Random:
                 index = Random.Range(0, waypoints.Length);
-                break;
-            case MultipleWaypointForkType.Fibonachi:
-                if (i == 0)
-                {
-                    number += 1;
-                    number += preNumber;
-                    i = number;
-                    index = 1;
-                }
-                index = 0;
-                i -= 1;
                 break;
 
             default:

@@ -147,7 +147,7 @@ public class BuildManager : MonoBehaviour
 
     public void UpgradeTurretOn(Platform platform)
     {
-        money -= turretData.UpgardeCost;
+        money -= platform.turret.GetComponent<Turret>().CurrentTurret.UpgardeCost;
         MoneyUpdate?.Invoke();
     }
 

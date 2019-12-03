@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4632250666680911749}
   - component: {fileID: 2531380866436300684}
   - component: {fileID: 9146485543056075131}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,8 +67,7 @@ MonoBehaviour:
   m_text: "Upgrade \u20B4100"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbe49dfac0daf2043a8a8365cf9b2ffd, type: 2}
-  m_sharedMaterial: {fileID: 8552514418837752039, guid: fbe49dfac0daf2043a8a8365cf9b2ffd,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: e41718553056d454696ef59c37069690, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -169,7 +168,7 @@ GameObject:
   - component: {fileID: 4503955497940744275}
   - component: {fileID: 8969516285283267438}
   - component: {fileID: 4771826122522099919}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SellButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +297,7 @@ GameObject:
   - component: {fileID: 657846062839027235}
   - component: {fileID: 111183813977760389}
   - component: {fileID: 8729215889791571835}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +395,7 @@ GameObject:
   - component: {fileID: 7262555963920814521}
   - component: {fileID: 5330550630509512212}
   - component: {fileID: 9143173896827419275}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TMP SubMeshUI [Lexend Deca Material + LiberationSans SDF Atlas]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -468,7 +467,7 @@ GameObject:
   - component: {fileID: 8543385459975726978}
   - component: {fileID: 2687400444353248089}
   - component: {fileID: 4678163257790337074}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -524,8 +523,7 @@ MonoBehaviour:
   m_text: "Sell \u20B450"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbe49dfac0daf2043a8a8365cf9b2ffd, type: 2}
-  m_sharedMaterial: {fileID: 8552514418837752039, guid: fbe49dfac0daf2043a8a8365cf9b2ffd,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: e41718553056d454696ef59c37069690, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -625,7 +623,7 @@ GameObject:
   - component: {fileID: 8137358009037305179}
   - component: {fileID: 1356337494631286798}
   - component: {fileID: 9193589983648221197}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -700,7 +698,7 @@ GameObject:
   - component: {fileID: 5831443569584368432}
   - component: {fileID: 6531767534061383646}
   - component: {fileID: 2046417054020643744}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TMP SubMeshUI [Lexend Deca Material + LiberationSans SDF Atlas]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -770,7 +768,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 24271778992343643}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TurretUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -804,7 +802,7 @@ GameObject:
   - component: {fileID: 8914876613308977345}
   - component: {fileID: 1512388074241786095}
   - component: {fileID: 9061354572286125232}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: UpgradeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}

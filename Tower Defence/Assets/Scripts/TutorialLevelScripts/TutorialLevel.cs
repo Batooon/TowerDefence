@@ -24,7 +24,6 @@ public class TutorialLevel : Level
     {
         //globalState = TutorialEnum.TUTORIALPAUSE;
         ChangeState(GlobalState.TUTORIALPAUSE);
-        Debug.Log(Time.timeScale);
     }
 
     public void NextStep()
@@ -56,6 +55,9 @@ public class TutorialLevel : Level
             case 6:
                 SixthStep();
                 break;
+            case 7:
+                SeventhStep();
+                break;
         }
     }
 
@@ -81,10 +83,15 @@ public class TutorialLevel : Level
 
     private void FifthStep()
     {
-        nextStepButtonText.text = "Let's go!";
+
     }
 
     private void SixthStep()
+    {
+        nextStepButtonText.text = "Let's go!";
+    }
+
+    private void SeventhStep()
     {
         //globalState = TutorialEnum.GAME;
         ChangeState(GlobalState.GAME);

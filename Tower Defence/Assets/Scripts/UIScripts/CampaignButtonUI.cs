@@ -36,10 +36,12 @@ public class CampaignButtonUI : MonoBehaviour
 
         IsLocked = levelIndex > levelReached;
 
+#if UNITY_ANDROID
         if (IsLocked)
             Lock.SetActive(true);
         else
             Lock.SetActive(false);
+#endif
 
         sceneName = campaign.SceneName;
         background.sprite = campaign.Background;
