@@ -8,6 +8,7 @@ using UnityEngine.AI;
 public struct EnemyDieEvent
 {
     public int moneyBonus;
+    public Vector3 position;
 }
 
 public class Enemy : MonoBehaviour
@@ -83,6 +84,7 @@ public class Enemy : MonoBehaviour
     {
         EnemyDieEvent enemyDieEvent;
         enemyDieEvent.moneyBonus = enemyObject.moneyBonus;
+        enemyDieEvent.position = transform.position;
         Level.singleton.OnEnemyDied(enemyDieEvent);
         Destroy(gameObject);
     }
