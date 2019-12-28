@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public enum State
 {
@@ -19,6 +20,9 @@ public enum WaveType
 
 public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
 {
+    [Inject]
+    Level level;
+
     public int EnemyIncreaser;
 
     public int currentAmountOfEnemies;
@@ -69,7 +73,7 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
 
     void Update()
     {
-        if (Level.singleton.state == GlobalState.TUTORIALPAUSE)
+        if (level.state == GlobalState.TUTORIALPAUSE)
             return;
 
         onWaveStateChanged?.Invoke();

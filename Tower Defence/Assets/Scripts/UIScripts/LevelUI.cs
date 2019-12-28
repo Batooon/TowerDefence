@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Zenject;
 
 public class LevelUI : MonoBehaviour
 {
+    [Inject]
+    Level level;
+    [Inject]
+    BuildManager buildManager;
+    [Inject]
+    WaveSpawner waveSpawner;
+
     public Camera cam;
 
     [Header("Attributes for turret alert text")]
@@ -42,17 +50,6 @@ public class LevelUI : MonoBehaviour
     public Sprite secondSpeed;
     public Sprite thirdSpeed;
 
-    /*[Header("Game Win Data")]
-    public GameObject WinScreen;
-    public TextMeshProUGUI EnemiesKilledText;
-
-    [Header("Game Loose Data")]
-    public GameObject GameOverScreen;*/
-
-    [Space(20)]
-
-    public Level level;
-
     Vector3 pos2D;
 
     /*private void OnValidate()
@@ -66,24 +63,21 @@ public class LevelUI : MonoBehaviour
     void Awake()
     {
         livesText.text = level.Hp.ToString();
-        money.text = currency + level.buildManager.money.ToString();
+        money.text = currency + buildManager.money.ToString();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        waveCounterText.text = $"{Level.singleton.waveSpawner.waveIndex + 1}/{Level.singleton.waveSpawner.amountOfWaves}";
-        Level.singleton.waveSpawner.WavePassed += UpdateWaveCounter;
-        level.buildManager.MoneyUpdate += OnMoneyUpdate;
-        level.waveSpawner.onWaveStateChanged += ChangeWaveText;
-        level.buildManager.TurretAlert += ShowTurretAlertText;
-        level.buildManager.LivesUpdate += OnLivesUpdate;
-        Level.singleton.EnemiesCounterChange += OnScoreUpdate;
-        level.buildManager.TurretMaxLevelAllert += ShowMaxTurretLevel;
-        level.buildManager.NotEnoughMoney += ShowNotEnoughMoneyText;
-        Level.singleton.SpeedChange += ChangeSpeedUI;
-        /*Level.singleton.OnWinGame += Win;
-        Level.singleton.OnLooseGame += Loose;*/
+        waveCounterText.text = $"{waveSpawner.waveIndex + 1}/{waveSpawner.amountOfWaves}";
+        waveSpawner.WavePassed += UpdateWaveCounter;
+        buildManager.MoneyUpdate += OnMoneyUpdate;
+        waveSpawner.onWaveStateChanged += ChangeWaveText;
+        buildManager.TurretAlert += ShowTurretAlertText;
+        buildManager.LivesUpdate += OnLivesUpdate;
+        level.EnemiesCounterChange += OnScoreUpdate;
+        buildManager.TurretMaxLevelAllert += ShowMaxTurretLevel;
+        buildManager.NotEnoughMoney += ShowNotEnoughMoneyText;
+        level.SpeedChange += ChangeSpeedUI;
     }
 
     public void OnScoreUpdate()
@@ -93,20 +87,18 @@ public class LevelUI : MonoBehaviour
 
     public void ChangeWaveText()
     {
-        switch (level.waveSpawner.state)
+        switch (waveSpawner.state)
         {
             case State.COUNTDOWN:
-                //waveText.color = Color.black;
                 waveText.faceColor = Color.black;
-                waveText.text = string.Format("{0:00.00}", level.waveSpawner.countdown);
+                waveText.text = string.Format("{0:00.00}", waveSpawner.countdown);
                 break;
             case State.SPAWN:
-                //waveText.color = Color.red;
                 waveText.faceColor = Color.red;
                 waveText.text = "!WARNING! Wave incoming!";
                 break;
             case State.END:
-                level.waveSpawner.onWaveStateChanged -= ChangeWaveText;
+                waveSpawner.onWaveStateChanged -= ChangeWaveText;
                 break;
         }
     }
@@ -114,7 +106,7 @@ public class LevelUI : MonoBehaviour
     public void ShowTurretAlertText(Transform position)
     {
         Vector3 pos2D = cam.WorldToScreenPoint(position.position);
-        if (!level.buildManager.CanBuild())
+        if (!buildManager.CanBuild())
         {
             GameObject AlertText = Instantiate(turretAlertText, pos2D + turretAllertOffset, Quaternion.identity);
             AlertText.transform.SetParent(transform);
@@ -149,19 +141,8 @@ public class LevelUI : MonoBehaviour
 
     public void OnMoneyUpdate()
     {
-        money.text = currency + level.buildManager.money.ToString();
+        money.text = currency + buildManager.money.ToString();
     }
-
-    /*public void Win()
-    {
-        EnemiesKilledText.text = WaveSpawner.EnemiesKilled.ToString();
-        WinScreen.SetActive(true);
-    }*/
-
-    /*public void Loose()
-    {
-        GameOverScreen.SetActive(true);
-    }*/
 
     public void OnLivesUpdate()
     {
@@ -189,6 +170,6 @@ public class LevelUI : MonoBehaviour
 
     public void UpdateWaveCounter()
     {
-        waveCounterText.text = $"{Level.singleton.waveSpawner.waveIndex + 1}/{Level.singleton.waveSpawner.amountOfWaves}";
+        waveCounterText.text = $"{waveSpawner.waveIndex + 1}/{waveSpawner.amountOfWaves}";
     }
 }

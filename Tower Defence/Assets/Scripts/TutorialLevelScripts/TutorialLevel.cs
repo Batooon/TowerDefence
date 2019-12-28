@@ -15,10 +15,11 @@ public class TutorialLevel : Level
 
     private int numberStep = 0;
 
-    private void Awake()
+    //НЕТ синглтонам!
+    /*private void Awake()
     {
         singleton = this;
-    }
+    }*/
 
     private void Start()
     {

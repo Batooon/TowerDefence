@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class TutorialEnemy : Enemy
 {
+    [Inject]
+    Level level;
+
     void Update()
     {
-        if (Level.singleton.state == GlobalState.TUTORIALPAUSE)
+        if (level.state == GlobalState.TUTORIALPAUSE)
             return;
 
         Move();

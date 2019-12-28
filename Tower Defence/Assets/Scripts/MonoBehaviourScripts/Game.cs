@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 public class Game : MonoBehaviour
 {
@@ -95,11 +96,12 @@ public class Game : MonoBehaviour
         ChangeGameSpeed(1f);
     }
 
-    public void ClearSingletons()
+    //НЕТ синглтонам!
+    /*public void ClearSingletons()
     {
         BuildManager.singleton = null;
         Level.singleton = null;
-    }
+    }*/
 
     public void ResetData()
     {

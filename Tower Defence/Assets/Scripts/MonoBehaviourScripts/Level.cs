@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Zenject;
 
 public enum GlobalState
 {
@@ -14,12 +15,12 @@ public enum GlobalState
 }
 public class Level : MonoBehaviour
 {
-    public static Level singleton;
-
     public float[] speeds = new float[3];
 
-    public BuildManager buildManager;
-    public WaveSpawner waveSpawner;
+    [Inject]
+    BuildManager buildManager;
+    [Inject]
+    WaveSpawner waveSpawner;
 
     //public ItemsSpawner itemsSpawner;
 
@@ -70,7 +71,8 @@ public class Level : MonoBehaviour
 
     private void Awake()
     {
-        singleton = this;
+        //НЕТ синглтонам
+        //singleton = this;
         Hp = (int)Mathf.Clamp(Hp, 0f, Mathf.Infinity);
         buildManager.LivesUpdate += DecreaseHp;
     }
@@ -182,12 +184,13 @@ public class Level : MonoBehaviour
 
     void ActivatGameOverScreen()
     {
-        LooseEnemiesKilledText.text = Level.singleton.waveSpawner.EnemiesKilled.ToString();
+        LooseEnemiesKilledText.text = waveSpawner.EnemiesKilled.ToString();
         GameOverScreen.SetActive(true);
     }
+
     void ActivateWinGameScreen()
     {
-        WinEnemiesKilledText.text = Level.singleton.waveSpawner.EnemiesKilled.ToString();
+        WinEnemiesKilledText.text = waveSpawner.EnemiesKilled.ToString();
         GameWinScreen.SetActive(true);
     }
 

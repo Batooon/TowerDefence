@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using Zenject;
 
 public struct EnemyDieEvent
 {
@@ -13,6 +13,13 @@ public struct EnemyDieEvent
 
 public class Enemy : MonoBehaviour
 {
+    [Inject]
+    Level level;
+    [Inject]
+    BuildManager buildManager;
+    [Inject]
+    WaveSpawner waveSpawner;
+
     float Health;
 
     [SerializeField]
@@ -56,7 +63,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (Level.singleton.state == GlobalState.TUTORIALPAUSE)
+        if (level.state == GlobalState.TUTORIALPAUSE)
             return;
 
         lifeTime += Time.deltaTime;
@@ -85,7 +92,7 @@ public class Enemy : MonoBehaviour
         EnemyDieEvent enemyDieEvent;
         enemyDieEvent.moneyBonus = enemyObject.moneyBonus;
         enemyDieEvent.position = transform.position;
-        Level.singleton.OnEnemyDied(enemyDieEvent);
+        level.OnEnemyDied(enemyDieEvent);
         Destroy(gameObject);
     }
 
@@ -112,8 +119,8 @@ public class Enemy : MonoBehaviour
 
     void EndPath()
     {
-        Level.singleton.waveSpawner.EnemiesAlive--;
-        BuildManager.singleton.OnUpdateLives();
+        waveSpawner.EnemiesAlive--;
+        buildManager.OnUpdateLives();
         gameObject.SetActive(false);
     }
 }
