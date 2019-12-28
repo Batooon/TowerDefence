@@ -32,8 +32,6 @@ public class BuildManager : MonoBehaviour
 
     void Awake()
     {
-        Application.targetFrameRate = 60;
-
         if (singleton != null)
         {
             Debug.LogError("More than one BuildManager in scene!");
