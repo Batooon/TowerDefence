@@ -24,9 +24,6 @@ public class Platform : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
-
         if (buildManager.selectedPlatform != this)
             buildManager.TrySelectPlatform(this);
         else

@@ -40,11 +40,6 @@ public class Game : MonoBehaviour
                 turretsGameDataList.Add(turretGameData);
             }
         }
-
-        foreach(TurretGameData t in turretsGameDataList)
-        {
-            Debug.Log(t.FireRate);
-        }
     }
 
     public void ExitWindowProcessing(GameObject window)

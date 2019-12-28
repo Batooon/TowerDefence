@@ -47,7 +47,8 @@ public class CampaignButtonUI : MonoBehaviour
         background.sprite = campaign.Background;
         CampaignName.text = campaign.CampaignName;
         button.onClick.AddListener(() => SceneManager.LoadScene(sceneName));
-        button.onClick.AddListener(() => audioManager.Play("ButtonSound"));
+        //button.onClick.AddListener(() => audioManager.Play("ButtonSound"));
+        //Из-за отсутствия соответствующего звука, пока пришлось закоментить
     }
 
     public void UpdateLock()
