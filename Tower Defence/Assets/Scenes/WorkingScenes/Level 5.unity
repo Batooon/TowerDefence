@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -1726,16 +1726,16 @@ MonoBehaviour:
   turretAllertOffset: {x: 0, y: 45, z: 0}
   currency: 8372
   waveText: {fileID: 876583122}
-  waveCounterText: {fileID: 0}
+  waveCounterText: {fileID: 876583124}
   money: {fileID: 876583121}
   livesText: {fileID: 876583119}
   startColor: {r: 0, g: 0, b: 0, a: 0}
   loseLifeColor: {r: 1, g: 0, b: 0, a: 0}
   scoreText: {fileID: 1108375629}
-  speedButton: {fileID: 0}
-  firstSpeed: {fileID: 0}
-  secondSpeed: {fileID: 0}
-  thirdSpeed: {fileID: 0}
+  speedButton: {fileID: 876583123}
+  firstSpeed: {fileID: 21300000, guid: 68a6749ddf987354c95d51ac2fbbfc3f, type: 3}
+  secondSpeed: {fileID: 21300000, guid: 2717cbdca0707fd46997b7434eeef184, type: 3}
+  thirdSpeed: {fileID: 21300000, guid: f07b9f45517bebe4cba810f4b01b74ee, type: 3}
   level: {fileID: 1171957926}
 --- !u!114 &258438282
 MonoBehaviour:
@@ -2509,7 +2509,6 @@ GameObject:
   - component: {fileID: 371218289}
   - component: {fileID: 371218293}
   - component: {fileID: 371218292}
-  - component: {fileID: 371218291}
   - component: {fileID: 371218290}
   m_Layer: 0
   m_Name: Arch (4)
@@ -2546,18 +2545,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 678611936}
---- !u!114 &371218291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 371218288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8233d90336aea43098adf6dbabd606a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &371218292
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5473,6 +5460,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &876583123 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1445001644, guid: 4f4af74281ed6814a805a6cd09c2caa6,
+    type: 3}
+  m_PrefabInstance: {fileID: 876583118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &876583124 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 654545339, guid: 4f4af74281ed6814a805a6cd09c2caa6,
+    type: 3}
+  m_PrefabInstance: {fileID: 876583118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &903731969
 GameObject:
   m_ObjectHideFlags: 0
@@ -7267,7 +7278,9 @@ MonoBehaviour:
   amountOfWaves: 7
   waveIndex: 0
   waveType: 1
+  EnemiesAlive: 0
   state: 0
+  EnemiesKilled: 0
   isWaveIncoming: 0
   countdown: 5
 --- !u!114 &1171957929

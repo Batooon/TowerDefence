@@ -2422,16 +2422,16 @@ MonoBehaviour:
   turretAllertOffset: {x: 0, y: 45, z: 0}
   currency: 8372
   waveText: {fileID: 944125721}
-  waveCounterText: {fileID: 0}
+  waveCounterText: {fileID: 944125723}
   money: {fileID: 944125720}
   livesText: {fileID: 944125718}
   startColor: {r: 0, g: 0, b: 0, a: 0}
   loseLifeColor: {r: 1, g: 0, b: 0, a: 0}
   scoreText: {fileID: 14710002}
-  speedButton: {fileID: 0}
-  firstSpeed: {fileID: 0}
-  secondSpeed: {fileID: 0}
-  thirdSpeed: {fileID: 0}
+  speedButton: {fileID: 944125722}
+  firstSpeed: {fileID: 21300000, guid: 68a6749ddf987354c95d51ac2fbbfc3f, type: 3}
+  secondSpeed: {fileID: 21300000, guid: 2717cbdca0707fd46997b7434eeef184, type: 3}
+  thirdSpeed: {fileID: 21300000, guid: f07b9f45517bebe4cba810f4b01b74ee, type: 3}
   level: {fileID: 1298808092}
 --- !u!114 &736446289
 MonoBehaviour:
@@ -3771,6 +3771,30 @@ MonoBehaviour:
 --- !u!114 &944125721 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5729616089065931069, guid: 4f4af74281ed6814a805a6cd09c2caa6,
+    type: 3}
+  m_PrefabInstance: {fileID: 944125717}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &944125722 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1445001644, guid: 4f4af74281ed6814a805a6cd09c2caa6,
+    type: 3}
+  m_PrefabInstance: {fileID: 944125717}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &944125723 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 654545339, guid: 4f4af74281ed6814a805a6cd09c2caa6,
     type: 3}
   m_PrefabInstance: {fileID: 944125717}
   m_PrefabAsset: {fileID: 0}
@@ -5208,7 +5232,9 @@ MonoBehaviour:
   amountOfWaves: 4
   waveIndex: 0
   waveType: 1
+  EnemiesAlive: 0
   state: 0
+  EnemiesKilled: 0
   isWaveIncoming: 0
   countdown: 5
 --- !u!114 &1298808095
@@ -6533,7 +6559,6 @@ GameObject:
   - component: {fileID: 1591342055}
   - component: {fileID: 1591342059}
   - component: {fileID: 1591342058}
-  - component: {fileID: 1591342057}
   - component: {fileID: 1591342056}
   m_Layer: 0
   m_Name: Arch
@@ -6570,18 +6595,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 1801608287}
---- !u!114 &1591342057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1591342054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8233d90336aea43098adf6dbabd606a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &1591342058
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8416,7 +8429,6 @@ GameObject:
   - component: {fileID: 1942155447}
   - component: {fileID: 1942155451}
   - component: {fileID: 1942155450}
-  - component: {fileID: 1942155449}
   - component: {fileID: 1942155448}
   m_Layer: 0
   m_Name: Arch (1)
@@ -8453,18 +8465,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 995781289}
---- !u!114 &1942155449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942155446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8233d90336aea43098adf6dbabd606a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &1942155450
 MeshRenderer:
   m_ObjectHideFlags: 0

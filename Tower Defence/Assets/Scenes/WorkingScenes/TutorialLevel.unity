@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -1501,6 +1501,7 @@ MonoBehaviour:
   waveType: 0
   EnemiesAlive: 0
   state: 0
+  EnemiesKilled: 0
   isWaveIncoming: 0
   countdown: 5
 --- !u!4 &624548827 stripped
