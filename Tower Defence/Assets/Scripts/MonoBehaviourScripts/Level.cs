@@ -21,7 +21,7 @@ public class Level : MonoBehaviour
     public BuildManager buildManager;
     public WaveSpawner waveSpawner;
 
-    public ItemsSpawner itemsSpawner;
+    //public ItemsSpawner itemsSpawner;
 
     public int levelIndex;
 
@@ -253,7 +253,7 @@ public class Level : MonoBehaviour
         waveSpawner.EnemiesAlive--;
         buildManager.AddMoney(dieEvent.moneyBonus);
 
-        itemsSpawner.InitDrop(dieEvent);
+        //itemsSpawner.InitDrop(dieEvent);
     }
 
     void ClearEvents()
