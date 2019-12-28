@@ -3,10 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Zenject;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Turret : MonoBehaviour
 {
+    [Inject]
+    BuildManager buildManager;
+
     int level;
     public TurretObject[] TurretLevels;
 
@@ -162,18 +166,18 @@ public class Turret : MonoBehaviour
 
     public void SellTurret()
     {
-        BuildManager.singleton.SellTurretOn(transform.GetComponentInParent<Platform>());
+        buildManager.SellTurretOn(transform.GetComponentInParent<Platform>());
     }
 
     public void UpgradeTurret()
     {
         if (level == TurretLevels.Length)
         {
-            BuildManager.singleton.TurretMaxLevelalert(gameObject.GetComponentInParent<Transform>());
+            buildManager.TurretMaxLevelalert(gameObject.GetComponentInParent<Transform>());
             return;
         }
 
-        if (BuildManager.singleton.TryUpgradeTurret(gameObject.GetComponentInParent<Platform>()))
+        if (buildManager.TryUpgradeTurret(gameObject.GetComponentInParent<Platform>()))
         {
             CurrentTurret = TurretLevels[level++];
             UpdateData();

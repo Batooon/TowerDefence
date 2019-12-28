@@ -20,8 +20,6 @@ public class BuildManager : MonoBehaviour
 
     public TurretObject[] turrets;
 
-    public static BuildManager singleton;
-
     public int money = 400;
 
     private GameObject selectedTurret;
@@ -29,17 +27,6 @@ public class BuildManager : MonoBehaviour
     private ShopButtonUI selectedButtonUI;
 
     public Platform selectedPlatform { get; private set; }
-
-    void Awake()
-    {
-        if (singleton != null)
-        {
-            Debug.LogError("More than one BuildManager in scene!");
-            return;
-        }
-        singleton = this;
-    }
-
 
     public void TrySelectPlatform(Platform platform)
     {
@@ -73,8 +60,6 @@ public class BuildManager : MonoBehaviour
         UpgradeTurretOn(platform);
 
         return true;
-
-        //platform.turret.GetComponent<Turret>().UpgradeTurret();
     }
 
     public void SelectTurret(GameObject turretGO, ShopButtonUI button)

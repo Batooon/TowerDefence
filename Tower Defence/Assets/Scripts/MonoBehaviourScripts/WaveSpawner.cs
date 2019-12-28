@@ -83,7 +83,7 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
 
         if (waveIndex == amountOfWaves && waveType != WaveType.INFINITYWAVE)
         {
-            Level.singleton.WinGame();
+            level.WinGame();
             return;
         }
 

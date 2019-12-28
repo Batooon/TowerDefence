@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class Shop : MonoBehaviour
 {
+    [Inject]
     BuildManager buildManager;
 
     public GameObject TurretButton;
@@ -17,7 +19,6 @@ public class Shop : MonoBehaviour
         {
             turretButtons.Add(child.GetComponent<ShopButtonUI>());
         }
-        buildManager = BuildManager.singleton;
         SetTurrets(buildManager.turrets);
     }
 

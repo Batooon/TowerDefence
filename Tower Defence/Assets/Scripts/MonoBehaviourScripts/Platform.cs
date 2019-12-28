@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 public class Platform : MonoBehaviour
 {
@@ -14,10 +15,10 @@ public class Platform : MonoBehaviour
     private Renderer rend;
     private Color startColor;
 
+    [Inject]
     BuildManager buildManager;
     void Start()
     {
-        buildManager = BuildManager.singleton;
         rend = GetComponent<Renderer>();
         startColor = rend.material.color;
     }
