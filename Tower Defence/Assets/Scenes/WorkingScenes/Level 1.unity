@@ -1588,7 +1588,7 @@ MonoBehaviour:
   - 2
   buildManager: {fileID: 589487239}
   waveSpawner: {fileID: 589487238}
-  itemsSpawner: {fileID: 4523229092870688495}
+  itemsSpawner: {fileID: 0}
   levelIndex: 1
   EnemiesCounter: 0
   Score: 1
@@ -5200,7 +5200,6 @@ GameObject:
   - component: {fileID: 4523229092870688488}
   - component: {fileID: 4523229092870688489}
   - component: {fileID: 6672214818072550364}
-  - component: {fileID: 4523229092870688495}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5208,19 +5207,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &4523229092870688495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4523229092870688494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df01f01efcf7d5e40a4ced7e1b286041, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loot: {fileID: 771995356424681978, guid: 28aadaa30f76c794394fffd88e38994b, type: 3}
 --- !u!1001 &4617307773493325880
 PrefabInstance:
   m_ObjectHideFlags: 0
