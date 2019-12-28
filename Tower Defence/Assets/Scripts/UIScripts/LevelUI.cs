@@ -13,10 +13,10 @@ public class LevelUI : MonoBehaviour
     public GameObject turretAlertText;
     public GameObject notEnoughMoneyText;
     public GameObject maxTurretLevelText;
-    public Vector3 turretAllertOffset;
+    public Vector3 turretAllertOffset = new Vector3(0, 45, 0);
 
     [Space(20)]
-    public char currency;
+    public char currency = '₴';
 
 
     [Header("Wave countdown text")]
@@ -54,6 +54,14 @@ public class LevelUI : MonoBehaviour
     public Level level;
 
     Vector3 pos2D;
+
+    /*private void OnValidate()
+    {
+        cam = Camera.main;
+
+        waveText = transform.Find("WaveCountdown").GetComponent<TextMeshProUGUI>();
+        waveCounterText = transform.Find("WaveCounterText").GetComponent<TextMeshProUGUI>();
+    }*/
 
     void Awake()
     {
