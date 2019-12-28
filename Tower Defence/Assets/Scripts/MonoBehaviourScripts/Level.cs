@@ -21,6 +21,8 @@ public class Level : MonoBehaviour
     public BuildManager buildManager;
     public WaveSpawner waveSpawner;
 
+    public ItemsSpawner itemsSpawner;
+
     public int levelIndex;
 
     int speedIndex = 0;
@@ -180,12 +182,12 @@ public class Level : MonoBehaviour
 
     void ActivatGameOverScreen()
     {
-        LooseEnemiesKilledText.text = WaveSpawner.EnemiesKilled.ToString();
+        LooseEnemiesKilledText.text = Level.singleton.waveSpawner.EnemiesKilled.ToString();
         GameOverScreen.SetActive(true);
     }
     void ActivateWinGameScreen()
     {
-        WinEnemiesKilledText.text = WaveSpawner.EnemiesKilled.ToString();
+        WinEnemiesKilledText.text = Level.singleton.waveSpawner.EnemiesKilled.ToString();
         GameWinScreen.SetActive(true);
     }
 
@@ -241,6 +243,17 @@ public class Level : MonoBehaviour
         ActivateWinGameScreen();
         buildManager.ClearEvents();
         ClearEvents();
+    }
+
+    public void OnEnemyDied(EnemyDieEvent dieEvent)
+    {
+        waveSpawner.EnemiesKilled++;
+        EnemiesCounter += Score;
+        EnemiesCounterChange?.Invoke();
+        waveSpawner.EnemiesAlive--;
+        buildManager.AddMoney(dieEvent.moneyBonus);
+
+        itemsSpawner.InitDrop(dieEvent);
     }
 
     void ClearEvents()

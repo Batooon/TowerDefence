@@ -33,10 +33,8 @@ public class Game : MonoBehaviour
 
                 float.TryParse(row[1], out turretGameData.Range);
                 float.TryParse(row[2], out turretGameData.FireRate);
-                float.TryParse(row[3], out turretGameData.SpeedRotation);
+                float.TryParse(row[3], out turretGameData.SpeedRotation);//TODO: Проверять каждое поле на корректность, в ином случае - CONTINUE
                 float.TryParse(row[4], out turretGameData.FireCountdown);
-
-
                 turretsGameDataList.Add(turretGameData);
             }
         }

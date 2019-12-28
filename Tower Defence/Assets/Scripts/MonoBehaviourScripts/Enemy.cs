@@ -4,6 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
+public struct EnemyDieEvent
+{
+    public int moneyBonus;
+    public Vector3 position;
+}
+
 public class Enemy : MonoBehaviour
 {
     float Health;
@@ -18,6 +25,8 @@ public class Enemy : MonoBehaviour
     Quaternion finalRotation;
     Vector3 axis;
 
+    public EnemyObject enemyObject;
+
     float lifeTime;
 
     private IWayPoint wayPoint
@@ -30,7 +39,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public EnemyObject enemyObject;
     public void Init(IWayPoint wayPoint)
     {
         this.wayPoint = wayPoint.GetNextWayPoint();
@@ -74,12 +82,11 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        WaveSpawner.EnemiesKilled++;
+        EnemyDieEvent enemyDieEvent;
+        enemyDieEvent.moneyBonus = enemyObject.moneyBonus;
+        enemyDieEvent.position = transform.position;
+        Level.singleton.OnEnemyDied(enemyDieEvent);
         Destroy(gameObject);
-        Level.singleton.EnemiesCounter += Level.singleton.Score;
-        Level.singleton.EnemiesCounterChange?.Invoke();
-        WaveSpawner.EnemiesAlive--;
-        BuildManager.singleton.AddMoney(enemyObject.moneyBonus);
     }
 
     protected void Move()
@@ -105,7 +112,7 @@ public class Enemy : MonoBehaviour
 
     void EndPath()
     {
-        WaveSpawner.EnemiesAlive--;
+        Level.singleton.waveSpawner.EnemiesAlive--;
         BuildManager.singleton.OnUpdateLives();
         gameObject.SetActive(false);
     }

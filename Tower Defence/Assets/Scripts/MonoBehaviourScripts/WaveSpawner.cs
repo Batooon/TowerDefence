@@ -40,14 +40,14 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
     public WaveType waveType;
 
     [HideInInspector]
-    public static int EnemiesAlive = 0;
+    public int EnemiesAlive = 0;
 
     public State state;
     private int nextWaveIndex = 0;
     public Wave _wave;
 
     [HideInInspector]
-    public static int EnemiesKilled;
+    public int EnemiesKilled;
 
     public Wave GetIncomingWave()
     {
