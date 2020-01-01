@@ -95,6 +95,6 @@ public class TutorialLevel : Level
     {
         //globalState = TutorialEnum.GAME;
         ChangeState(GlobalState.GAME);
-        Game.singleton.TutorialPassed();
+        Settings.singletonSettings.TutorialPassed();
     }
 }

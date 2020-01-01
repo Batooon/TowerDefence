@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ExitWindow : MonoBehaviour
 {
-    public GameObject exitWindow;
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -14,7 +12,7 @@ public class ExitWindow : MonoBehaviour
 
     public void ExitWindowProcessing()
     {
-        if (!exitWindow.gameObject.activeInHierarchy)
+        if (!gameObject.activeInHierarchy)
             OpenExitWindow();
         else
             CloseExitWindow();
@@ -22,11 +20,11 @@ public class ExitWindow : MonoBehaviour
 
     private void OpenExitWindow()
     {
-        exitWindow.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     private void CloseExitWindow()
     {
-        exitWindow.SetActive(false);
+        gameObject.SetActive(false);
     }
 }
