@@ -124,10 +124,10 @@ public class Level : MonoBehaviour
                 Time.timeScale = Settings.singletonSettings.speed;
                 break;
             case GlobalState.PAUSE:
-                Time.timeScale = 0;
+                Settings.singletonSettings.SetSpeed(0f);
                 break;
             case GlobalState.END:
-                Time.timeScale = 0;
+                Settings.singletonSettings.SetSpeed(0f);
                 break;
         }
     }

@@ -27,7 +27,7 @@ public class SnapScrolling : MonoBehaviour
 
     Vector2 contentVector;
 
-    private void Awake()
+    private void Start()
     {
         contentRect = GetComponent<RectTransform>();
         instantiatedPanels = new GameObject[campaignCards.Length];
