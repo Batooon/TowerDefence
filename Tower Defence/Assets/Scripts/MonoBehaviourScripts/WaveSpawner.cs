@@ -65,6 +65,7 @@ public class WaveSpawner : MonoBehaviour , IEnemySpawn, IGenerateWave
         waveIndex = 0;
         _wave = GenerateWave(nextWaveIndex);
         countdown = _wave.Countdown;
+        Debug.Log("jegop[w");
     }
 
     void Update()

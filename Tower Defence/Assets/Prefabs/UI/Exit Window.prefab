@@ -325,6 +325,7 @@ GameObject:
   - component: {fileID: 7543774662421977247}
   - component: {fileID: 7543774662421977245}
   - component: {fileID: 7543774662421977244}
+  - component: {fileID: 8256552938490990835}
   m_Layer: 5
   m_Name: Exit Window
   m_TagString: Untagged
@@ -388,6 +389,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8256552938490990835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7543774662421977246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c095efc89cd4c8d48ad86528f5abfeac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoExit: {fileID: 7543774662805711509}
+  YesExit: {fileID: 7543774662644785503}
 --- !u!1 &7543774662500907176
 GameObject:
   m_ObjectHideFlags: 0

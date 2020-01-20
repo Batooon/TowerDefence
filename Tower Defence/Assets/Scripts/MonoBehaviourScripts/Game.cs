@@ -7,16 +7,14 @@ using UnityEngine.SceneManagement;
 public class Game : MonoBehaviour
 {
     public static Game singleton;
-    /*
+
     List<TurretGameData> turretsGameDataList = new List<TurretGameData>();
 
     public List<GameObject> turretsTakenOnLevel = new List<GameObject>();
 
-    private bool IsTutorialPassed;*/
+    private bool IsTutorialPassed;
 
-    /*public GameObject exitWindow;
-
-    /*void SerializeTurretsData()
+    void SerializeTurretsData()
     {
         TextAsset excelData = Resources.Load<TextAsset>("TurretsGameData");
 
@@ -25,6 +23,7 @@ public class Game : MonoBehaviour
         for (int i = 1; i < data.Length - 1; i++)
         {
             string[] row = data[i].Split(';');
+
 
             if (row[1] != "")
             {
@@ -37,21 +36,13 @@ public class Game : MonoBehaviour
                 turretsGameDataList.Add(turretGameData);
             }
         }
-    }*/
-
-    /*public void ExitWindowProcessing(GameObject window)
-    {
-        if (window.activeInHierarchy)
-            window.SetActive(false);
-        else
-            window.SetActive(true);
-    }*/
+    }
 
     void Awake()
     {
         singleton = this;
-        //IsTutorialPassed = Convert.ToBoolean(PlayerPrefs.GetInt("IsTutorialPassed", 0));
-        //SerializeTurretsData();
+        IsTutorialPassed = Convert.ToBoolean(PlayerPrefs.GetInt("IsTutorialPassed", 0));
+        SerializeTurretsData();
     }
 
     public static void ChangeGameSpeed(float speed)
@@ -60,37 +51,28 @@ public class Game : MonoBehaviour
         Time.timeScale = speed;
     }
 
-    /*public void OpenCampaignMenu(GameObject CampaignMenu)
+    public void OpenCampaignMenu(GameObject CampaignMenu)
     {
         if (IsTutorialPassed)
             CampaignMenu.SetActive(true);
         else
             SceneManager.LoadScene(1);
-    }*/
-
-    /*private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            ExitWindowProcessing(exitWindow);
-    }*/
+            //LevelChanger.singleton.FadeToLevel(0);
+    }
 
     public void GoToLevel(int index)
     {
         ChangeGameSpeed(1f);
         SceneManager.LoadScene(index);
+        //LevelChanger.singleton.FadeToLevel(index);
     }
 
-    public void Quit()
-    {
-        Application.Quit();
-    }
-
-    /*public void TutorialPassed()
+    public void TutorialPassed()
     {
         IsTutorialPassed = true;
         PlayerPrefs.SetInt("IsTutorialPassed", IsTutorialPassed.GetHashCode());
         ChangeGameSpeed(1f);
-    }*/
+    }
 
     public void ClearSingletons()
     {
